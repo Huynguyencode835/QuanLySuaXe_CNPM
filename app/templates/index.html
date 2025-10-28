@@ -1,0 +1,201 @@
+{%extends 'layout/base.html'%}
+<body>
+    {%block content%}
+        <div class="card-section">
+            <div class="credit-card">
+                <div class="card-balance">Balance</div>
+                <div class="card-amount">$5,756</div>
+                <div class="card-details">
+                    <div>
+                        <div style="font-size: 12px; opacity: 0.8;">CARD HOLDER</div>
+                        <div style="font-weight: 600;">Eddy Cusuma</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 12px; opacity: 0.8;">VALID THRU</div>
+                        <div style="font-weight: 600;">12/22</div>
+                    </div>
+                </div>
+                <div class="card-number">3778 **** **** 1234</div>
+                <i class="bi bi-credit-card-2-front card-icon"></i>
+            </div>
+
+            <div class="credit-card card-white">
+                <div class="card-balance">Balance</div>
+                <div class="card-amount">$5,756</div>
+                <div class="card-details">
+                    <div>
+                        <div style="font-size: 12px; opacity: 0.5;">CARD HOLDER</div>
+                        <div style="font-weight: 600;">Eddy Cusuma</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 12px; opacity: 0.5;">VALID THRU</div>
+                        <div style="font-weight: 600;">12/22</div>
+                    </div>
+                </div>
+                <div class="card-number">3778 **** **** 1234</div>
+                <i class="bi bi-credit-card-2-front card-icon"></i>
+            </div>
+        </div>
+
+        <div class="content-row">
+            <div class="widget">
+                <div class="widget-header">
+                    <h3 class="widget-title">Weekly Activity</h3>
+                </div>
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background: #00D4FF;"></div>
+                        <span>Deposit</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background: #4318FF;"></div>
+                        <span>Withdraw</span>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-day">
+                        <div class="chart-bars">
+                            <div class="bar bar-withdraw" style="height: 230px;"></div>
+                            <div class="bar bar-deposit" style="height: 140px;"></div>
+                        </div>
+                        <div style="font-size: 13px; color: #a0aec0;">Sat</div>
+                    </div>
+                    <div class="chart-day">
+                        <div class="chart-bars">
+                            <div class="bar bar-withdraw" style="height: 180px;"></div>
+                            <div class="bar bar-deposit" style="height: 80px;"></div>
+                        </div>
+                        <div style="font-size: 13px; color: #a0aec0;">Sun</div>
+                    </div>
+                    <div class="chart-day">
+                        <div class="chart-bars">
+                            <div class="bar bar-withdraw" style="height: 200px;"></div>
+                            <div class="bar bar-deposit" style="height: 120px;"></div>
+                        </div>
+                        <div style="font-size: 13px; color: #a0aec0;">Mon</div>
+                    </div>
+                    <div class="chart-day">
+                        <div class="chart-bars">
+                            <div class="bar bar-withdraw" style="height: 250px;"></div>
+                            <div class="bar bar-deposit" style="height: 180px;"></div>
+                        </div>
+                        <div style="font-size: 13px; color: #a0aec0;">Tue</div>
+                    </div>
+                    <div class="chart-day">
+                        <div class="chart-bars">
+                            <div class="bar bar-withdraw" style="height: 80px;"></div>
+                            <div class="bar bar-deposit" style="height: 130px;"></div>
+                        </div>
+                        <div style="font-size: 13px; color: #a0aec0;">Wed</div>
+                    </div>
+                    <div class="chart-day">
+                        <div class="chart-bars">
+                            <div class="bar bar-withdraw" style="height: 200px;"></div>
+                            <div class="bar bar-deposit" style="height: 110px;"></div>
+                        </div>
+                        <div style="font-size: 13px; color: #a0aec0;">Thu</div>
+                    </div>
+                    <div class="chart-day">
+                        <div class="chart-bars">
+                            <div class="bar bar-withdraw" style="height: 220px;"></div>
+                            <div class="bar bar-deposit" style="height: 150px;"></div>
+                        </div>
+                        <div style="font-size: 13px; color: #a0aec0;">Fri</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="widget">
+                <div class="widget-header">
+                    <h3 class="widget-title">Recent Transaction</h3>
+                    <a href="#" class="see-all">See All</a>
+                </div>
+                <div class="transaction-item">
+                    <div class="transaction-icon" style="background: #fff5e6; color: #ff9800;">
+                        <i class="bi bi-credit-card"></i>
+                    </div>
+                    <div class="transaction-info">
+                        <div class="transaction-title">Deposit from my Card</div>
+                        <div class="transaction-date">28 January 2021</div>
+                    </div>
+                    <div class="transaction-amount amount-negative">-$850</div>
+                </div>
+                <div class="transaction-item">
+                    <div class="transaction-icon" style="background: #e6f4ff; color: #1890ff;">
+                        <i class="bi bi-paypal"></i>
+                    </div>
+                    <div class="transaction-info">
+                        <div class="transaction-title">Deposit Paypal</div>
+                        <div class="transaction-date">25 January 2021</div>
+                    </div>
+                    <div class="transaction-amount amount-positive">+$2,500</div>
+                </div>
+                <div class="transaction-item">
+                    <div class="transaction-icon" style="background: #e6fff9; color: #00d4aa;">
+                        <i class="bi bi-currency-dollar"></i>
+                    </div>
+                    <div class="transaction-info">
+                        <div class="transaction-title">Jemi Wilson</div>
+                        <div class="transaction-date">21 January 2021</div>
+                    </div>
+                    <div class="transaction-amount amount-positive">+$5,400</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-row">
+            <div class="widget">
+                <div class="widget-header">
+                    <h3 class="widget-title">Quick Transfer</h3>
+                </div>
+                <div class="quick-transfer">
+                    <div class="contact-item">
+                        <div class="contact-avatar"></div>
+                        <div class="contact-name">Livia Bator</div>
+                        <div class="contact-role">CEO</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-avatar" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
+                        <div class="contact-name">Randy Press</div>
+                        <div class="contact-role">Director</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-avatar" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"></div>
+                        <div class="contact-name">Workman</div>
+                        <div class="contact-role">Designer</div>
+                    </div>
+                    <button style="border: none; background: white; cursor: pointer;">
+                        <i class="bi bi-chevron-right" style="font-size: 24px; color: #4318FF;"></i>
+                    </button>
+                </div>
+                <div class="transfer-input">
+                    <input type="text" placeholder="Write Amount" value="525.50">
+                    <button class="btn-send">
+                        Send <i class="bi bi-send-fill"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="widget">
+                <div class="widget-header">
+                    <h3 class="widget-title">Balance History</h3>
+                </div>
+                <div class="balance-chart">
+                    <svg width="100%" height="100%" style="position: absolute;">
+                        <path d="M 0 150 Q 50 80, 100 100 T 200 60 T 300 110 T 400 80 T 500 100" 
+                              stroke="#4318FF" stroke-width="3" fill="none"/>
+                    </svg>
+                </div>
+                <div class="chart-months">
+                    <span>Jul</span>
+                    <span>Aug</span>
+                    <span>Sep</span>
+                    <span>Oct</span>
+                    <span>Nov</span>
+                    <span>Dec</span>
+                    <span>Jan</span>
+                </div>
+            </div>
+        </div>
+    {%endblock%}
+</body>
