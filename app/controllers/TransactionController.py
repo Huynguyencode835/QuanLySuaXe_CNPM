@@ -1,11 +1,11 @@
 from flask import Flask, render_template
 
 
-class ComponentController:
+class TransactionController:
 
     # [GET] /components
     def index(self):
-        return render_template("components.html",page="Dashboard")
+        return render_template("components.html", page="Transactions")
     
 
     # [GET] /components/:slug
