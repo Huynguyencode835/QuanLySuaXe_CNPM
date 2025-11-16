@@ -1,4 +1,4 @@
-from controllers.componentController import ComponentController
+from app.controllers.componentController import ComponentController
 from flask import Blueprint
 
 components = ComponentController()

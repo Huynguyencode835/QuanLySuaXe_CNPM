@@ -1,4 +1,4 @@
-from controllers.TransactionController import TransactionController
+from app.controllers.TransactionController import TransactionController
 from flask import Blueprint
 
 Transaction = TransactionController()

@@ -1,4 +1,4 @@
-from controllers.siteController import SiteController
+from app.controllers.siteController import SiteController
 from flask import Blueprint
 
 sites = SiteController()

@@ -5,5 +5,5 @@ class SiteController:
 
     # [GET] /components
     def index(self):
-        return render_template("index.html")
+        return render_template("index.html" ,page="home")
     

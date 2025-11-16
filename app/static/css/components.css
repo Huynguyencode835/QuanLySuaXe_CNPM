@@ -1,0 +1,53 @@
+.card {
+    width: 100% !important;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.card-img {
+    padding: 10px;
+    overflow: hidden;
+}
+
+.card-img > img {
+    border-radius: 10px;
+    transition: 0.5s ease;
+}
+
+.card:hover img{
+    transform: scale(1.1);
+}
+
+.sort_Controls{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border-radius: 10px;
+    margin-bottom: 36px;
+}
+
+.sort_Controls-item{
+    margin-right: 30px;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.sort_Controls span {
+    color: var(--text-hover);
+    margin-right: 10px;
+    padding-right: 10px;
+    border-right: #acacac 2px solid;
+}
+
+.card .button-card a:last-child {
+    color: white;
+    background: var(--active-color);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.pagination a {
+    color: black;
+}
+
+.sort_Controls-button div {
+    background-color: #b8b8b8;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}

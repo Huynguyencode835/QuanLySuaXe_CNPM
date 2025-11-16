@@ -10,4 +10,4 @@ class TransactionController:
 
     # [GET] /components/:slug
     def show(self,slug):
-        return render_template("components.html",slug=slug)
+        return render_template("componentDetail.html",slug=slug)
