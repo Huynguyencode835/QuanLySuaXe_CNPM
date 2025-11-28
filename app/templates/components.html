@@ -1,296 +1,542 @@
-{%extends 'layout/base.html'%}
+{% extends 'layout/base.html' %}
 <body>
-    {%block content%}
+{% block content %}
 
-        <div class="sort_Controls">
-            <li class="nav-item dropdown">
-                <span>Lọc sản phẩm theo</span>
+    <div class="sort_Controls">
+        <li class="nav-item dropdown">
+            <span>Lọc sản phẩm theo</span>
 
-                <div class="btn sort_Controls-item">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Loại linh kiện</a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Xe máy</a></li>
-                        <li><a class="dropdown-item" href="#">Ô tô</a></li>
-                    </ul>
-                </div>
+            <div class="btn sort_Controls-item">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Loại linh kiện</a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Xe máy</a></li>
+                    <li><a class="dropdown-item" href="#">Ô tô</a></li>
+                </ul>
+            </div>
 
-                <div class="btn sort_Controls-item">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Hãng linh kiện</a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Honda</a></li>
-                        <li><a class="dropdown-item" href="#">Con Cặc</a></li>
-                    </ul>
-                </div>
+            <div class="btn sort_Controls-item">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Hãng linh kiện</a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Honda</a></li>
+                    <li><a class="dropdown-item" href="#">Con Cặc</a></li>
+                </ul>
+            </div>
 
-                <div class="sort_Controls-button d-flex justify-content-between ms-auto">
-                    <div class="btn "><a href=""><</a></div>
-                    <div class="btn ms-1"><a href="">></a></div>
-                </div>
-            </li>
-        </div>
+            <div class="sort_Controls-button d-flex justify-content-between ms-auto">
+                <div class="btn "><a href=""><</a></div>
+                <div class="btn ms-1"><a href="">></a></div>
+            </div>
+        </li>
+    </div>
 
+    <div class="product-card">
         <div class="row">
             <div class="col-md-3 col-6">
-                <div class="card" style="width:400px">
-                    <div class="card-img">
-                        <img class="card-img-top" src="https://shop2banh.vn/images/thumbs/2025/09/bo-cong-tac-den-sunfa-cho-sh350i-sh160i-2025-2492-slide-products-68d4af0777298.jpg" alt="Card image">
+                <div class="card">
+                    <div class="badge">HOT SALE</div>
+                    <div class="tilt">
+                        <div class="img"><img
+                                src="https://images.unsplash.com/photo-1544237526-cae15a57ed1e?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NDkwNDY5NjB8&ixlib=rb-4.1.0&q=85"
+                                alt="Premium Laptop">
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between">
-                            <h3 class="card-title">Tên sản phẩm</h3>
-                            <p style="color: var(--text-hover)">xe máy</p>
+                    <div class="info">
+                        <div class="cat">High-Performance Laptop</div>
+                        <h2 class="title">UltraBook Pro X</h2>
+                        <p class="desc">Cutting-edge performance with Intel Core i9, 32GB RAM, and a 1TB SSD in a sleek,
+                            lightweight design.
+                        </p>
+                        <div class="feats">
+                            <span class="feat">4K Display</span>
+                            <span class="feat">16-Hour Battery</span>
+                            <span class="feat">Thunderbolt 4</span>
                         </div>
-
-                        <div class="d-flex justify-content-between">
-                            <p class="card-text">Hãng: Honda</p>
-                            <p>10000000 vnd</p>
+                        <div class="bottom">
+                            <div class="price">
+                                <span class="old">$2,499</span>
+                                <span class="new">$1,999</span>
+                            </div>
+                            <button class="btn">
+                                <span>Add to Cart</span>
+                                <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                     stroke="currentColor" stroke-width="2">
+                                    <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4"/>
+                                    <line x1="3" y1="6" x2="21" y2="6"/>
+                                    <path d="M16 10a4 4 0 01-8 0"/>
+                                </svg>
+                            </button>
                         </div>
-
-                        <div class="button-card d-flex flex-wrap justify-content-between">
-                            <a href="#" class="btn btn-primary">xem chi tiết</a>
-                            <a href="#" class="btn">Đặt hàng</a>
+                        <div class="meta">
+                            <div class="rating">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
+                                     stroke-width="0.5">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
+                                     stroke-width="0.5">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
+                                     stroke-width="0.5">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700" stroke-width="0.5">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700" stroke-width="0.5">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                                <span class="rcount">245 Reviews</span>
+                            </div>
+                            <div class="stock">In Stock</div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-3 col-6">
-                    <div class="card" style="width:400px">
-                        <div class="card-img">
-                            <img class="card-img-top" src="https://shop2banh.vn/images/thumbs/2025/09/bo-cong-tac-den-sunfa-cho-sh350i-sh160i-2025-2492-slide-products-68d4af0777298.jpg" alt="Card image">
+                <div class="card">
+                    <div class="badge">HOT SALE</div>
+                    <div class="tilt">
+                        <div class="img"><img
+                                src="https://images.unsplash.com/photo-1544237526-cae15a57ed1e?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NDkwNDY5NjB8&ixlib=rb-4.1.0&q=85"
+                                alt="Premium Laptop">
                         </div>
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between">
-                                <h3 class="card-title">Tên sản phẩm</h3>
-                                <p style="color: var(--text-hover)">xe máy</p>
+                    </div>
+                    <div class="info">
+                        <div class="cat">High-Performance Laptop</div>
+                        <h2 class="title">UltraBook Pro X</h2>
+                        <p class="desc">Cutting-edge performance with Intel Core i9, 32GB RAM, and a 1TB SSD in a sleek,
+                            lightweight design.
+                        </p>
+                        <div class="feats">
+                            <span class="feat">4K Display</span>
+                            <span class="feat">16-Hour Battery</span>
+                            <span class="feat">Thunderbolt 4</span>
+                        </div>
+                        <div class="bottom">
+                            <div class="price">
+                                <span class="old">$2,499</span>
+                                <span class="new">$1,999</span>
                             </div>
-
-                            <div class="d-flex justify-content-between">
-                                <p class="card-text">Hãng: Honda</p>
-                                <p>10000000 vnd</p>
+                            <button class="btn">
+                                <span>Add to Cart</span>
+                                <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                     stroke="currentColor" stroke-width="2">
+                                    <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4"/>
+                                    <line x1="3" y1="6" x2="21" y2="6"/>
+                                    <path d="M16 10a4 4 0 01-8 0"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="meta">
+                            <div class="rating">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
+                                     stroke-width="0.5">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
+                                     stroke-width="0.5">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
+                                     stroke-width="0.5">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700" stroke-width="0.5">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700" stroke-width="0.5">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                                <span class="rcount">245 Reviews</span>
                             </div>
-
-                            <div class="button-card d-flex flex-wrap justify-content-between">
-                                <a href="#" class="btn btn-primary">xem chi tiết</a>
-                                <a href="#" class="btn">Đặt hàng</a>
-                            </div>
+                            <div class="stock">In Stock</div>
                         </div>
                     </div>
                 </div>
+            </div>
             <div class="col-md-3 col-6">
-                    <div class="card" style="width:400px">
-                        <div class="card-img">
-                            <img class="card-img-top" src="https://shop2banh.vn/images/thumbs/2025/09/bo-cong-tac-den-sunfa-cho-sh350i-sh160i-2025-2492-slide-products-68d4af0777298.jpg" alt="Card image">
+                <div class="card">
+                        <div class="badge">HOT SALE</div>
+                        <div class="tilt">
+                            <div class="img"><img
+                                    src="https://images.unsplash.com/photo-1544237526-cae15a57ed1e?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NDkwNDY5NjB8&ixlib=rb-4.1.0&q=85"
+                                    alt="Premium Laptop">
+                            </div>
                         </div>
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between">
-                                <h3 class="card-title">Tên sản phẩm</h3>
-                                <p style="color: var(--text-hover)">xe máy</p>
+                        <div class="info">
+                            <div class="cat">High-Performance Laptop</div>
+                            <h2 class="title">UltraBook Pro X</h2>
+                            <p class="desc">Cutting-edge performance with Intel Core i9, 32GB RAM, and a 1TB SSD in a sleek,
+                                lightweight design.
+                            </p>
+                            <div class="feats">
+                                <span class="feat">4K Display</span>
+                                <span class="feat">16-Hour Battery</span>
+                                <span class="feat">Thunderbolt 4</span>
                             </div>
-
-                            <div class="d-flex justify-content-between">
-                                <p class="card-text">Hãng: Honda</p>
-                                <p>10000000 vnd</p>
+                            <div class="bottom">
+                                <div class="price">
+                                    <span class="old">$2,499</span>
+                                    <span class="new">$1,999</span>
+                                </div>
+                                <button class="btn">
+                                    <span>Add to Cart</span>
+                                    <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                         stroke="currentColor" stroke-width="2">
+                                        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4"/>
+                                        <line x1="3" y1="6" x2="21" y2="6"/>
+                                        <path d="M16 10a4 4 0 01-8 0"/>
+                                    </svg>
+                                </button>
                             </div>
-
-                            <div class="button-card d-flex flex-wrap justify-content-between">
-                                <a href="#" class="btn btn-primary">xem chi tiết</a>
-                                <a href="#" class="btn">Đặt hàng</a>
+                            <div class="meta">
+                                <div class="rating">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
+                                         stroke-width="0.5">
+                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                    </svg>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
+                                         stroke-width="0.5">
+                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                    </svg>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
+                                         stroke-width="0.5">
+                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                    </svg>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700" stroke-width="0.5">
+                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                    </svg>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700" stroke-width="0.5">
+                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                    </svg>
+                                    <span class="rcount">245 Reviews</span>
+                                </div>
+                                <div class="stock">In Stock</div>
                             </div>
                         </div>
                     </div>
-                </div>
+            </div>
             <div class="col-md-3 col-6">
-                    <div class="card" style="width:400px">
-                        <div class="card-img">
-                            <img class="card-img-top" src="https://shop2banh.vn/images/thumbs/2025/09/bo-cong-tac-den-sunfa-cho-sh350i-sh160i-2025-2492-slide-products-68d4af0777298.jpg" alt="Card image">
+                <div class="card">
+                    <div class="badge">HOT SALE</div>
+                    <div class="tilt">
+                        <div class="img"><img
+                                src="https://images.unsplash.com/photo-1544237526-cae15a57ed1e?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NDkwNDY5NjB8&ixlib=rb-4.1.0&q=85"
+                                alt="Premium Laptop">
                         </div>
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between">
-                                <h3 class="card-title">Tên sản phẩm</h3>
-                                <p style="color: var(--text-hover)">xe máy</p>
+                    </div>
+                    <div class="info">
+                        <div class="cat">High-Performance Laptop</div>
+                        <h2 class="title">UltraBook Pro X</h2>
+                        <p class="desc">Cutting-edge performance with Intel Core i9, 32GB RAM, and a 1TB SSD in a sleek,
+                            lightweight design.
+                        </p>
+                        <div class="feats">
+                            <span class="feat">4K Display</span>
+                            <span class="feat">16-Hour Battery</span>
+                            <span class="feat">Thunderbolt 4</span>
+                        </div>
+                        <div class="bottom">
+                            <div class="price">
+                                <span class="old">$2,499</span>
+                                <span class="new">$1,999</span>
                             </div>
-
-                            <div class="d-flex justify-content-between">
-                                <p class="card-text">Hãng: Honda</p>
-                                <p>10000000 vnd</p>
+                            <button class="btn">
+                                <span>Add to Cart</span>
+                                <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                     stroke="currentColor" stroke-width="2">
+                                    <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4"/>
+                                    <line x1="3" y1="6" x2="21" y2="6"/>
+                                    <path d="M16 10a4 4 0 01-8 0"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="meta">
+                            <div class="rating">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
+                                     stroke-width="0.5">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
+                                     stroke-width="0.5">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
+                                     stroke-width="0.5">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700" stroke-width="0.5">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700" stroke-width="0.5">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                                <span class="rcount">245 Reviews</span>
                             </div>
-
-                            <div class="button-card d-flex flex-wrap justify-content-between">
-                                <a href="#" class="btn btn-primary">xem chi tiết</a>
-                                <a href="#" class="btn">Đặt hàng</a>
-                            </div>
+                            <div class="stock">In Stock</div>
                         </div>
                     </div>
                 </div>
+            </div>
             <div class="col-md-3 col-6">
-                    <div class="card" style="width:400px">
-                        <div class="card-img">
-                            <img class="card-img-top" src="https://shop2banh.vn/images/thumbs/2025/09/bo-cong-tac-den-sunfa-cho-sh350i-sh160i-2025-2492-slide-products-68d4af0777298.jpg" alt="Card image">
+                <div class="card">
+                    <div class="badge">HOT SALE</div>
+                    <div class="tilt">
+                        <div class="img"><img
+                                src="https://images.unsplash.com/photo-1544237526-cae15a57ed1e?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NDkwNDY5NjB8&ixlib=rb-4.1.0&q=85"
+                                alt="Premium Laptop">
                         </div>
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between">
-                                <h3 class="card-title">Tên sản phẩm</h3>
-                                <p style="color: var(--text-hover)">xe máy</p>
+                    </div>
+                    <div class="info">
+                        <div class="cat">High-Performance Laptop</div>
+                        <h2 class="title">UltraBook Pro X</h2>
+                        <p class="desc">Cutting-edge performance with Intel Core i9, 32GB RAM, and a 1TB SSD in a sleek,
+                            lightweight design.
+                        </p>
+                        <div class="feats">
+                            <span class="feat">4K Display</span>
+                            <span class="feat">16-Hour Battery</span>
+                            <span class="feat">Thunderbolt 4</span>
+                        </div>
+                        <div class="bottom">
+                            <div class="price">
+                                <span class="old">$2,499</span>
+                                <span class="new">$1,999</span>
                             </div>
-
-                            <div class="d-flex justify-content-between">
-                                <p class="card-text">Hãng: Honda</p>
-                                <p>10000000 vnd</p>
+                            <button class="btn">
+                                <span>Add to Cart</span>
+                                <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                     stroke="currentColor" stroke-width="2">
+                                    <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4"/>
+                                    <line x1="3" y1="6" x2="21" y2="6"/>
+                                    <path d="M16 10a4 4 0 01-8 0"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="meta">
+                            <div class="rating">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
+                                     stroke-width="0.5">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
+                                     stroke-width="0.5">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
+                                     stroke-width="0.5">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700" stroke-width="0.5">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700" stroke-width="0.5">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                                <span class="rcount">245 Reviews</span>
                             </div>
-
-                            <div class="button-card d-flex flex-wrap justify-content-between">
-                                <a href="#" class="btn btn-primary">xem chi tiết</a>
-                                <a href="#" class="btn">Đặt hàng</a>
-                            </div>
+                            <div class="stock">In Stock</div>
                         </div>
                     </div>
                 </div>
+            </div>
             <div class="col-md-3 col-6">
-                    <div class="card" style="width:400px">
-                        <div class="card-img">
-                            <img class="card-img-top" src="https://shop2banh.vn/images/thumbs/2025/09/bo-cong-tac-den-sunfa-cho-sh350i-sh160i-2025-2492-slide-products-68d4af0777298.jpg" alt="Card image">
+                <div class="card">
+                    <div class="badge">HOT SALE</div>
+                    <div class="tilt">
+                        <div class="img"><img
+                                src="https://images.unsplash.com/photo-1544237526-cae15a57ed1e?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NDkwNDY5NjB8&ixlib=rb-4.1.0&q=85"
+                                alt="Premium Laptop">
                         </div>
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between">
-                                <h3 class="card-title">Tên sản phẩm</h3>
-                                <p style="color: var(--text-hover)">xe máy</p>
+                    </div>
+                    <div class="info">
+                        <div class="cat">High-Performance Laptop</div>
+                        <h2 class="title">UltraBook Pro X</h2>
+                        <p class="desc">Cutting-edge performance with Intel Core i9, 32GB RAM, and a 1TB SSD in a sleek,
+                            lightweight design.
+                        </p>
+                        <div class="feats">
+                            <span class="feat">4K Display</span>
+                            <span class="feat">16-Hour Battery</span>
+                            <span class="feat">Thunderbolt 4</span>
+                        </div>
+                        <div class="bottom">
+                            <div class="price">
+                                <span class="old">$2,499</span>
+                                <span class="new">$1,999</span>
                             </div>
-
-                            <div class="d-flex justify-content-between">
-                                <p class="card-text">Hãng: Honda</p>
-                                <p>10000000 vnd</p>
+                            <button class="btn">
+                                <span>Add to Cart</span>
+                                <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                     stroke="currentColor" stroke-width="2">
+                                    <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4"/>
+                                    <line x1="3" y1="6" x2="21" y2="6"/>
+                                    <path d="M16 10a4 4 0 01-8 0"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="meta">
+                            <div class="rating">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
+                                     stroke-width="0.5">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
+                                     stroke-width="0.5">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
+                                     stroke-width="0.5">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700" stroke-width="0.5">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700" stroke-width="0.5">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                                <span class="rcount">245 Reviews</span>
                             </div>
-
-                            <div class="button-card d-flex flex-wrap justify-content-between">
-                                <a href="#" class="btn btn-primary">xem chi tiết</a>
-                                <a href="#" class="btn">Đặt hàng</a>
-                            </div>
+                            <div class="stock">In Stock</div>
                         </div>
                     </div>
                 </div>
+            </div>
             <div class="col-md-3 col-6">
-                    <div class="card" style="width:400px">
-                        <div class="card-img">
-                            <img class="card-img-top" src="https://shop2banh.vn/images/thumbs/2025/09/bo-cong-tac-den-sunfa-cho-sh350i-sh160i-2025-2492-slide-products-68d4af0777298.jpg" alt="Card image">
+                <div class="card">
+                        <div class="badge">HOT SALE</div>
+                        <div class="tilt">
+                            <div class="img"><img
+                                    src="https://images.unsplash.com/photo-1544237526-cae15a57ed1e?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NDkwNDY5NjB8&ixlib=rb-4.1.0&q=85"
+                                    alt="Premium Laptop">
+                            </div>
                         </div>
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between">
-                                <h3 class="card-title">Tên sản phẩm</h3>
-                                <p style="color: var(--text-hover)">xe máy</p>
+                        <div class="info">
+                            <div class="cat">High-Performance Laptop</div>
+                            <h2 class="title">UltraBook Pro X</h2>
+                            <p class="desc">Cutting-edge performance with Intel Core i9, 32GB RAM, and a 1TB SSD in a sleek,
+                                lightweight design.
+                            </p>
+                            <div class="feats">
+                                <span class="feat">4K Display</span>
+                                <span class="feat">16-Hour Battery</span>
+                                <span class="feat">Thunderbolt 4</span>
                             </div>
-
-                            <div class="d-flex justify-content-between">
-                                <p class="card-text">Hãng: Honda</p>
-                                <p>10000000 vnd</p>
+                            <div class="bottom">
+                                <div class="price">
+                                    <span class="old">$2,499</span>
+                                    <span class="new">$1,999</span>
+                                </div>
+                                <button class="btn">
+                                    <span>Add to Cart</span>
+                                    <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                         stroke="currentColor" stroke-width="2">
+                                        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4"/>
+                                        <line x1="3" y1="6" x2="21" y2="6"/>
+                                        <path d="M16 10a4 4 0 01-8 0"/>
+                                    </svg>
+                                </button>
                             </div>
-
-                            <div class="button-card d-flex flex-wrap justify-content-between">
-                                <a href="#" class="btn btn-primary">xem chi tiết</a>
-                                <a href="#" class="btn">Đặt hàng</a>
+                            <div class="meta">
+                                <div class="rating">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
+                                         stroke-width="0.5">
+                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                    </svg>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
+                                         stroke-width="0.5">
+                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                    </svg>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
+                                         stroke-width="0.5">
+                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                    </svg>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700" stroke-width="0.5">
+                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                    </svg>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700" stroke-width="0.5">
+                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                    </svg>
+                                    <span class="rcount">245 Reviews</span>
+                                </div>
+                                <div class="stock">In Stock</div>
                             </div>
                         </div>
                     </div>
-                </div>
+            </div>
             <div class="col-md-3 col-6">
-                    <div class="card" style="width:400px">
-                        <div class="card-img">
-                            <img class="card-img-top" src="https://shop2banh.vn/images/thumbs/2025/09/bo-cong-tac-den-sunfa-cho-sh350i-sh160i-2025-2492-slide-products-68d4af0777298.jpg" alt="Card image">
+                <div class="card">
+                    <div class="badge">HOT SALE</div>
+                    <div class="tilt">
+                        <div class="img"><img
+                                src="https://images.unsplash.com/photo-1544237526-cae15a57ed1e?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NDkwNDY5NjB8&ixlib=rb-4.1.0&q=85"
+                                alt="Premium Laptop">
                         </div>
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between">
-                                <h3 class="card-title">Tên sản phẩm</h3>
-                                <p style="color: var(--text-hover)">xe máy</p>
+                    </div>
+                    <div class="info">
+                        <div class="cat">High-Performance Laptop</div>
+                        <h2 class="title">UltraBook Pro X</h2>
+                        <p class="desc">Cutting-edge performance with Intel Core i9, 32GB RAM, and a 1TB SSD in a sleek,
+                            lightweight design.
+                        </p>
+                        <div class="feats">
+                            <span class="feat">4K Display</span>
+                            <span class="feat">16-Hour Battery</span>
+                            <span class="feat">Thunderbolt 4</span>
+                        </div>
+                        <div class="bottom">
+                            <div class="price">
+                                <span class="old">$2,499</span>
+                                <span class="new">$1,999</span>
                             </div>
-
-                            <div class="d-flex justify-content-between">
-                                <p class="card-text">Hãng: Honda</p>
-                                <p>10000000 vnd</p>
+                            <button class="btn">
+                                <span>Add to Cart</span>
+                                <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                     stroke="currentColor" stroke-width="2">
+                                    <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4"/>
+                                    <line x1="3" y1="6" x2="21" y2="6"/>
+                                    <path d="M16 10a4 4 0 01-8 0"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="meta">
+                            <div class="rating">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
+                                     stroke-width="0.5">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
+                                     stroke-width="0.5">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
+                                     stroke-width="0.5">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700" stroke-width="0.5">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700" stroke-width="0.5">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                                <span class="rcount">245 Reviews</span>
                             </div>
-
-                            <div class="button-card d-flex flex-wrap justify-content-between">
-                                <a href="#" class="btn btn-primary">xem chi tiết</a>
-                                <a href="#" class="btn">Đặt hàng</a>
-                            </div>
+                            <div class="stock">In Stock</div>
                         </div>
                     </div>
                 </div>
-            <div class="col-md-3 col-6">
-                    <div class="card" style="width:400px">
-                        <div class="card-img">
-                            <img class="card-img-top" src="https://shop2banh.vn/images/thumbs/2025/09/bo-cong-tac-den-sunfa-cho-sh350i-sh160i-2025-2492-slide-products-68d4af0777298.jpg" alt="Card image">
-                        </div>
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between">
-                                <h3 class="card-title">Tên sản phẩm</h3>
-                                <p style="color: var(--text-hover)">xe máy</p>
-                            </div>
-
-                            <div class="d-flex justify-content-between">
-                                <p class="card-text">Hãng: Honda</p>
-                                <p>10000000 vnd</p>
-                            </div>
-
-                            <div class="button-card d-flex flex-wrap justify-content-between">
-                                <a href="#" class="btn btn-primary">xem chi tiết</a>
-                                <a href="#" class="btn">Đặt hàng</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            <div class="col-md-3 col-6">
-                    <div class="card" style="width:400px">
-                        <div class="card-img">
-                            <img class="card-img-top" src="https://shop2banh.vn/images/thumbs/2025/09/bo-cong-tac-den-sunfa-cho-sh350i-sh160i-2025-2492-slide-products-68d4af0777298.jpg" alt="Card image">
-                        </div>
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between">
-                                <h3 class="card-title">Tên sản phẩm</h3>
-                                <p style="color: var(--text-hover)">xe máy</p>
-                            </div>
-
-                            <div class="d-flex justify-content-between">
-                                <p class="card-text">Hãng: Honda</p>
-                                <p>10000000 vnd</p>
-                            </div>
-
-                            <div class="button-card d-flex flex-wrap justify-content-between">
-                                <a href="#" class="btn btn-primary">xem chi tiết</a>
-                                <a href="#" class="btn">Đặt hàng</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            <div class="col-md-3 col-6">
-                    <div class="card" style="width:400px">
-                        <div class="card-img">
-                            <img class="card-img-top" src="https://shop2banh.vn/images/thumbs/2025/09/bo-cong-tac-den-sunfa-cho-sh350i-sh160i-2025-2492-slide-products-68d4af0777298.jpg" alt="Card image">
-                        </div>
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between">
-                                <h3 class="card-title">Tên sản phẩm</h3>
-                                <p style="color: var(--text-hover)">xe máy</p>
-                            </div>
-
-                            <div class="d-flex justify-content-between">
-                                <p class="card-text">Hãng: Honda</p>
-                                <p>10000000 vnd</p>
-                            </div>
-
-                            <div class="button-card d-flex flex-wrap justify-content-between">
-                                <a href="#" class="btn btn-primary">xem chi tiết</a>
-                                <a href="#" class="btn">Đặt hàng</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            </div>
         </div>
+    </div>
 
-        <ul class="pagination d-flex justify-content-center">
-            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-            <li class="page-item "><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-        </ul>
-    {%endblock%}
+
+    <ul class="pagination d-flex justify-content-center">
+        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+        <li class="page-item "><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+    </ul>
+{% endblock %}
 </body>
