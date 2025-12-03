@@ -1,4 +1,4 @@
-from app.controllers.signupController import SignupController
+from app.controllers.SignupController import SignupController
 from flask import Blueprint
 
 Signup = SignupController()

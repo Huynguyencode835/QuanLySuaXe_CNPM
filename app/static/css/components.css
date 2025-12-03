@@ -31,8 +31,8 @@
 }
 
  body {
-  background: linear-gradient(135deg, rgba(226,226,226,1) 0%,rgba(219,219,219,1) 50%,rgba(209,209,209,1) 50%,rgba(209,209,209,1) 50%,rgba(254,254,254,1) 100%) center/cover no-repeat;
-  min-height:100vh;
+     background-color: white;
+    min-height:100vh;
 }
 
 .product-card .card{

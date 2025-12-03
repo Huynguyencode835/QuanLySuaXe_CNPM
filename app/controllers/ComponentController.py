@@ -5,7 +5,7 @@ class ComponentController:
 
     # [GET] /components
     def index(self):
-        return render_template("components.html",page="components")
+        return render_template("components.html",page="Linh kiện")
     
 
     # [GET] /components/:slug
