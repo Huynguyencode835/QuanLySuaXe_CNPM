@@ -42,16 +42,19 @@ class User(Base, UserMixin):
     )
     repair_form= relationship(
         'RepairForm',
+        foreign_keys='[RepairForm.technick_id]',
         backref='technick',
         lazy=True
     )
     receipts_as_customer = relationship(
         'Receipt',
+        foreign_keys='[Receipt.customer_id]',
         backref='customer',
         lazy=True
     )
     receipts_as_accountant = relationship(
         'Receipt',
+        foreign_keys='[Receipt.accountant_id]',
         backref='accountant',
         lazy=True
     )
