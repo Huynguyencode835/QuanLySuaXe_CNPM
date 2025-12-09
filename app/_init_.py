@@ -1,19 +1,34 @@
-from flask import Flask
+from flask import Flask,session
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 import cloudinary
 
+db = SQLAlchemy()
+login_manager = LoginManager()
 
-app = Flask(__name__)
 
-app.secret_key = "asjdahjsdaskdjahsd%#adsd"
-app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:Abc123@localhost/app?charset=utf8mb4"
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
-app.config["PAGE_SIZE"] = 2
-# cloudinary.config(cloud_name='dy1unykph',
-#                   api_key='238791983534257',
-#                   api_secret='_J2MkfDJ1DwRe1uAn5TKozXup0U')
+cloudinary.config(
+    cloud_name= 'dkatgavs4',
+    api_key='769513968994667',
+    api_secret= 'oNIu8AMfcmwLlkhANlyCYXI40B0'
+)
 
-db = SQLAlchemy(app)
+def create_app():
+    app = Flask(__name__)
 
-login = LoginManager(app)
+    app.secret_key = "asjdahjgưGƯEGgG4252#adsd"
+    app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:123456@localhost/app?charset=utf8mb4"
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+    db.init_app(app)
+
+    login_manager.init_app(app)
+
+    @app.context_processor
+    def inject_cart_stats():
+        import app.models.dao as dao
+        cart = session.get('cart', {})
+        return {'cart_stats': dao.count_cart(cart)}
+
+
+    return app

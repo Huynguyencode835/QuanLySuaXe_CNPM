@@ -1,23 +1,22 @@
-import json
+import json,hashlib
 from datetime import datetime
-from app._init_ import db, app
+from app._init_ import db,create_app
 from sqlalchemy import Column, Integer, String, Float, ForeignKey, Boolean, DateTime, Enum, Text
 from sqlalchemy.orm import relationship
 from flask_login import UserMixin
 from enum import Enum as RoleEnum
 
 class UserRole(RoleEnum):
-    CUSTOMER = 1
-    STAFF = 2
-    ACCOUNTANT = 3
-    TECHNICK = 4
-    ADMIN = 5
+    CUSTOMER = 2
+    STAFF = 3
+    ACCOUNTANT = 4
+    TECHNICK = 5
+    ADMIN = 1
 
 class Base(db.Model):
     __abstract__=True
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(150), nullable=False)
-    active = Column(Boolean, default=True)
 
     def __str__(self):
         return self.name
@@ -27,6 +26,8 @@ class User(Base, UserMixin):
     password = Column(String(150), nullable=False)
     avatar = Column(String(300), default="https://res.cloudinary.com/dy1unykph/image/upload/v1740037805/apple-iphone-16-pro-natural-titanium_lcnlu2.webp")
     role = Column(Enum(UserRole), default=UserRole.CUSTOMER)
+    joined = Column(DateTime, default=datetime.now)
+    active = Column(Boolean, default=True)
     reception_forms_as_customer = relationship(
         'ReceptionForm',
         foreign_keys='ReceptionForm.customer_id',
@@ -51,14 +52,22 @@ class User(Base, UserMixin):
     )
 
 class Vehicletype(Base):
+    __tablename__ = "Vehicletype"
     components = relationship('Component', backref="vehicletype", lazy=True)
     reception_forms = relationship('ReceptionForm', backref="vehicletype", lazy=True)
 
+class BrandVehicle(Base):
+    __tablename__ = "BrandVehicle"
+    components = relationship('Component', backref="brand", lazy=True)
+
 class Component(Base):
+    __tablename__ = "Component"
+    name = Column(String(150), nullable=False)
     price = Column(Float, default=0.0)
-    image = Column(String(300),default="https://res.cloudinary.com/dy1unykph/image/upload/v1741254148/aa0aawermmvttshzvjhc.png")
-    description = Column(Text)
-    veType_id = Column(Integer, ForeignKey(Vehicletype.id), nullable=False)
+    image = Column(String(300), default="")
+    vehicle_id = Column(Integer, ForeignKey(Vehicletype.id), nullable=False)
+    brand_id = Column(Integer, ForeignKey(BrandVehicle.id), nullable=False)
+
 
 class Form_status(RoleEnum):
     WAIT_APPROVAL = 1
@@ -102,12 +111,47 @@ class RepairForm(db.Model):
     )
 
 class RepairForms_Components(db.Model):
+    __tablename__ = "repair_forms_components"
     id_repair_form = Column(Integer, ForeignKey(RepairForm.id), nullable=False,primary_key=True)
     id_component = Column(Integer, ForeignKey(Component.id), nullable=False,primary_key=True)
     quantity = Column(Integer, default=1)
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
+    app = create_app()
     with app.app_context():
-        db.create_all()
+        # db.drop_all()
+        # db.create_all()
+        # c1 = Vehicletype(name="Moto")
+        # c2 = Vehicletype(name="Oto")
+        # db.session.add_all([c1, c2])
+        #
+        # b1 = BrandVehicle(name="Honda")
+        # b2 = BrandVehicle(name="Yamaha")
+        # b3 = BrandVehicle(name="Toyota")
+        # b4 = BrandVehicle(name="Mercedes")
+        # db.session.add_all([b1, b2,b3,b4])
+        #
+        # db.session.commit()
 
 
+        with open("../data/component.json", encoding="utf-8") as f:
+            components = json.load(f)
+
+            for c in components:
+                comp = Component(**c)
+                db.session.add(comp)
+
+        db.session.commit()
+
+        # admin_pass = str(hashlib.md5(("admin").encode('utf-8')).hexdigest())
+        # new_admin = User(
+        #     name="Quản trị viên",
+        #     username="admin",
+        #     password=admin_pass,
+        #     avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfjno7hGrNNuPZwaFZ8U8Mhr_Yq39rzd_p0YN_HVYk6KFmMETjtgd9bwl0UhU6g4xDDGg&usqp=CAU",
+        #     role=UserRole.ADMIN
+        #
+        # )
+        # db.session.add(new_admin)
+        # db.session.commit()

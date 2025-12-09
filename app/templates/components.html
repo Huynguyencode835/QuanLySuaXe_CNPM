@@ -1,542 +1,143 @@
 {% extends 'layout/base.html' %}
+{% block title %}Linh kiện{% endblock %}
 <body>
 {% block content %}
 
-    <div class="sort_Controls">
-        <li class="nav-item dropdown">
-            <span>Lọc sản phẩm theo</span>
-
-            <div class="btn sort_Controls-item">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Loại linh kiện</a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Xe máy</a></li>
-                    <li><a class="dropdown-item" href="#">Ô tô</a></li>
-                </ul>
-            </div>
-
-            <div class="btn sort_Controls-item">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Hãng linh kiện</a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Honda</a></li>
-                    <li><a class="dropdown-item" href="#">Con Cặc</a></li>
-                </ul>
-            </div>
-
-            <div class="sort_Controls-button d-flex justify-content-between ms-auto">
-                <div class="btn "><a href=""><</a></div>
-                <div class="btn ms-1"><a href="">></a></div>
-            </div>
-        </li>
-    </div>
-
-    <div class="product-card">
-        <div class="row">
-            <div class="col-md-3 col-6">
-                <div class="card">
-                    <div class="badge">HOT SALE</div>
-                    <div class="tilt">
-                        <div class="img"><img
-                                src="https://images.unsplash.com/photo-1544237526-cae15a57ed1e?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NDkwNDY5NjB8&ixlib=rb-4.1.0&q=85"
-                                alt="Premium Laptop">
-                        </div>
-                    </div>
-                    <div class="info">
-                        <div class="cat">High-Performance Laptop</div>
-                        <h2 class="title">UltraBook Pro X</h2>
-                        <p class="desc">Cutting-edge performance with Intel Core i9, 32GB RAM, and a 1TB SSD in a sleek,
-                            lightweight design.
-                        </p>
-                        <div class="feats">
-                            <span class="feat">4K Display</span>
-                            <span class="feat">16-Hour Battery</span>
-                            <span class="feat">Thunderbolt 4</span>
-                        </div>
-                        <div class="bottom">
-                            <div class="price">
-                                <span class="old">$2,499</span>
-                                <span class="new">$1,999</span>
-                            </div>
-                            <button class="btn">
-                                <span>Add to Cart</span>
-                                <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                                     stroke="currentColor" stroke-width="2">
-                                    <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4"/>
-                                    <line x1="3" y1="6" x2="21" y2="6"/>
-                                    <path d="M16 10a4 4 0 01-8 0"/>
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="meta">
-                            <div class="rating">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
-                                     stroke-width="0.5">
-                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                </svg>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
-                                     stroke-width="0.5">
-                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                </svg>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
-                                     stroke-width="0.5">
-                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                </svg>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700" stroke-width="0.5">
-                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                </svg>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700" stroke-width="0.5">
-                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                </svg>
-                                <span class="rcount">245 Reviews</span>
-                            </div>
-                            <div class="stock">In Stock</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-6">
-                <div class="card">
-                    <div class="badge">HOT SALE</div>
-                    <div class="tilt">
-                        <div class="img"><img
-                                src="https://images.unsplash.com/photo-1544237526-cae15a57ed1e?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NDkwNDY5NjB8&ixlib=rb-4.1.0&q=85"
-                                alt="Premium Laptop">
-                        </div>
-                    </div>
-                    <div class="info">
-                        <div class="cat">High-Performance Laptop</div>
-                        <h2 class="title">UltraBook Pro X</h2>
-                        <p class="desc">Cutting-edge performance with Intel Core i9, 32GB RAM, and a 1TB SSD in a sleek,
-                            lightweight design.
-                        </p>
-                        <div class="feats">
-                            <span class="feat">4K Display</span>
-                            <span class="feat">16-Hour Battery</span>
-                            <span class="feat">Thunderbolt 4</span>
-                        </div>
-                        <div class="bottom">
-                            <div class="price">
-                                <span class="old">$2,499</span>
-                                <span class="new">$1,999</span>
-                            </div>
-                            <button class="btn">
-                                <span>Add to Cart</span>
-                                <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                                     stroke="currentColor" stroke-width="2">
-                                    <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4"/>
-                                    <line x1="3" y1="6" x2="21" y2="6"/>
-                                    <path d="M16 10a4 4 0 01-8 0"/>
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="meta">
-                            <div class="rating">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
-                                     stroke-width="0.5">
-                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                </svg>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
-                                     stroke-width="0.5">
-                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                </svg>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
-                                     stroke-width="0.5">
-                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                </svg>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700" stroke-width="0.5">
-                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                </svg>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700" stroke-width="0.5">
-                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                </svg>
-                                <span class="rcount">245 Reviews</span>
-                            </div>
-                            <div class="stock">In Stock</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-6">
-                <div class="card">
-                        <div class="badge">HOT SALE</div>
-                        <div class="tilt">
-                            <div class="img"><img
-                                    src="https://images.unsplash.com/photo-1544237526-cae15a57ed1e?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NDkwNDY5NjB8&ixlib=rb-4.1.0&q=85"
-                                    alt="Premium Laptop">
-                            </div>
-                        </div>
-                        <div class="info">
-                            <div class="cat">High-Performance Laptop</div>
-                            <h2 class="title">UltraBook Pro X</h2>
-                            <p class="desc">Cutting-edge performance with Intel Core i9, 32GB RAM, and a 1TB SSD in a sleek,
-                                lightweight design.
-                            </p>
-                            <div class="feats">
-                                <span class="feat">4K Display</span>
-                                <span class="feat">16-Hour Battery</span>
-                                <span class="feat">Thunderbolt 4</span>
-                            </div>
-                            <div class="bottom">
-                                <div class="price">
-                                    <span class="old">$2,499</span>
-                                    <span class="new">$1,999</span>
-                                </div>
-                                <button class="btn">
-                                    <span>Add to Cart</span>
-                                    <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                                         stroke="currentColor" stroke-width="2">
-                                        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4"/>
-                                        <line x1="3" y1="6" x2="21" y2="6"/>
-                                        <path d="M16 10a4 4 0 01-8 0"/>
-                                    </svg>
-                                </button>
-                            </div>
-                            <div class="meta">
-                                <div class="rating">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
-                                         stroke-width="0.5">
-                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                    </svg>
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
-                                         stroke-width="0.5">
-                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                    </svg>
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
-                                         stroke-width="0.5">
-                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                    </svg>
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700" stroke-width="0.5">
-                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                    </svg>
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700" stroke-width="0.5">
-                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                    </svg>
-                                    <span class="rcount">245 Reviews</span>
-                                </div>
-                                <div class="stock">In Stock</div>
-                            </div>
-                        </div>
-                    </div>
-            </div>
-            <div class="col-md-3 col-6">
-                <div class="card">
-                    <div class="badge">HOT SALE</div>
-                    <div class="tilt">
-                        <div class="img"><img
-                                src="https://images.unsplash.com/photo-1544237526-cae15a57ed1e?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NDkwNDY5NjB8&ixlib=rb-4.1.0&q=85"
-                                alt="Premium Laptop">
-                        </div>
-                    </div>
-                    <div class="info">
-                        <div class="cat">High-Performance Laptop</div>
-                        <h2 class="title">UltraBook Pro X</h2>
-                        <p class="desc">Cutting-edge performance with Intel Core i9, 32GB RAM, and a 1TB SSD in a sleek,
-                            lightweight design.
-                        </p>
-                        <div class="feats">
-                            <span class="feat">4K Display</span>
-                            <span class="feat">16-Hour Battery</span>
-                            <span class="feat">Thunderbolt 4</span>
-                        </div>
-                        <div class="bottom">
-                            <div class="price">
-                                <span class="old">$2,499</span>
-                                <span class="new">$1,999</span>
-                            </div>
-                            <button class="btn">
-                                <span>Add to Cart</span>
-                                <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                                     stroke="currentColor" stroke-width="2">
-                                    <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4"/>
-                                    <line x1="3" y1="6" x2="21" y2="6"/>
-                                    <path d="M16 10a4 4 0 01-8 0"/>
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="meta">
-                            <div class="rating">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
-                                     stroke-width="0.5">
-                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                </svg>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
-                                     stroke-width="0.5">
-                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                </svg>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
-                                     stroke-width="0.5">
-                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                </svg>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700" stroke-width="0.5">
-                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                </svg>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700" stroke-width="0.5">
-                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                </svg>
-                                <span class="rcount">245 Reviews</span>
-                            </div>
-                            <div class="stock">In Stock</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-6">
-                <div class="card">
-                    <div class="badge">HOT SALE</div>
-                    <div class="tilt">
-                        <div class="img"><img
-                                src="https://images.unsplash.com/photo-1544237526-cae15a57ed1e?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NDkwNDY5NjB8&ixlib=rb-4.1.0&q=85"
-                                alt="Premium Laptop">
-                        </div>
-                    </div>
-                    <div class="info">
-                        <div class="cat">High-Performance Laptop</div>
-                        <h2 class="title">UltraBook Pro X</h2>
-                        <p class="desc">Cutting-edge performance with Intel Core i9, 32GB RAM, and a 1TB SSD in a sleek,
-                            lightweight design.
-                        </p>
-                        <div class="feats">
-                            <span class="feat">4K Display</span>
-                            <span class="feat">16-Hour Battery</span>
-                            <span class="feat">Thunderbolt 4</span>
-                        </div>
-                        <div class="bottom">
-                            <div class="price">
-                                <span class="old">$2,499</span>
-                                <span class="new">$1,999</span>
-                            </div>
-                            <button class="btn">
-                                <span>Add to Cart</span>
-                                <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                                     stroke="currentColor" stroke-width="2">
-                                    <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4"/>
-                                    <line x1="3" y1="6" x2="21" y2="6"/>
-                                    <path d="M16 10a4 4 0 01-8 0"/>
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="meta">
-                            <div class="rating">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
-                                     stroke-width="0.5">
-                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                </svg>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
-                                     stroke-width="0.5">
-                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                </svg>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
-                                     stroke-width="0.5">
-                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                </svg>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700" stroke-width="0.5">
-                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                </svg>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700" stroke-width="0.5">
-                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                </svg>
-                                <span class="rcount">245 Reviews</span>
-                            </div>
-                            <div class="stock">In Stock</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-6">
-                <div class="card">
-                    <div class="badge">HOT SALE</div>
-                    <div class="tilt">
-                        <div class="img"><img
-                                src="https://images.unsplash.com/photo-1544237526-cae15a57ed1e?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NDkwNDY5NjB8&ixlib=rb-4.1.0&q=85"
-                                alt="Premium Laptop">
-                        </div>
-                    </div>
-                    <div class="info">
-                        <div class="cat">High-Performance Laptop</div>
-                        <h2 class="title">UltraBook Pro X</h2>
-                        <p class="desc">Cutting-edge performance with Intel Core i9, 32GB RAM, and a 1TB SSD in a sleek,
-                            lightweight design.
-                        </p>
-                        <div class="feats">
-                            <span class="feat">4K Display</span>
-                            <span class="feat">16-Hour Battery</span>
-                            <span class="feat">Thunderbolt 4</span>
-                        </div>
-                        <div class="bottom">
-                            <div class="price">
-                                <span class="old">$2,499</span>
-                                <span class="new">$1,999</span>
-                            </div>
-                            <button class="btn">
-                                <span>Add to Cart</span>
-                                <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                                     stroke="currentColor" stroke-width="2">
-                                    <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4"/>
-                                    <line x1="3" y1="6" x2="21" y2="6"/>
-                                    <path d="M16 10a4 4 0 01-8 0"/>
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="meta">
-                            <div class="rating">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
-                                     stroke-width="0.5">
-                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                </svg>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
-                                     stroke-width="0.5">
-                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                </svg>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
-                                     stroke-width="0.5">
-                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                </svg>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700" stroke-width="0.5">
-                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                </svg>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700" stroke-width="0.5">
-                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                </svg>
-                                <span class="rcount">245 Reviews</span>
-                            </div>
-                            <div class="stock">In Stock</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-6">
-                <div class="card">
-                        <div class="badge">HOT SALE</div>
-                        <div class="tilt">
-                            <div class="img"><img
-                                    src="https://images.unsplash.com/photo-1544237526-cae15a57ed1e?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NDkwNDY5NjB8&ixlib=rb-4.1.0&q=85"
-                                    alt="Premium Laptop">
-                            </div>
-                        </div>
-                        <div class="info">
-                            <div class="cat">High-Performance Laptop</div>
-                            <h2 class="title">UltraBook Pro X</h2>
-                            <p class="desc">Cutting-edge performance with Intel Core i9, 32GB RAM, and a 1TB SSD in a sleek,
-                                lightweight design.
-                            </p>
-                            <div class="feats">
-                                <span class="feat">4K Display</span>
-                                <span class="feat">16-Hour Battery</span>
-                                <span class="feat">Thunderbolt 4</span>
-                            </div>
-                            <div class="bottom">
-                                <div class="price">
-                                    <span class="old">$2,499</span>
-                                    <span class="new">$1,999</span>
-                                </div>
-                                <button class="btn">
-                                    <span>Add to Cart</span>
-                                    <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                                         stroke="currentColor" stroke-width="2">
-                                        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4"/>
-                                        <line x1="3" y1="6" x2="21" y2="6"/>
-                                        <path d="M16 10a4 4 0 01-8 0"/>
-                                    </svg>
-                                </button>
-                            </div>
-                            <div class="meta">
-                                <div class="rating">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
-                                         stroke-width="0.5">
-                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                    </svg>
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
-                                         stroke-width="0.5">
-                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                    </svg>
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
-                                         stroke-width="0.5">
-                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                    </svg>
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700" stroke-width="0.5">
-                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                    </svg>
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700" stroke-width="0.5">
-                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                    </svg>
-                                    <span class="rcount">245 Reviews</span>
-                                </div>
-                                <div class="stock">In Stock</div>
-                            </div>
-                        </div>
-                    </div>
-            </div>
-            <div class="col-md-3 col-6">
-                <div class="card">
-                    <div class="badge">HOT SALE</div>
-                    <div class="tilt">
-                        <div class="img"><img
-                                src="https://images.unsplash.com/photo-1544237526-cae15a57ed1e?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NDkwNDY5NjB8&ixlib=rb-4.1.0&q=85"
-                                alt="Premium Laptop">
-                        </div>
-                    </div>
-                    <div class="info">
-                        <div class="cat">High-Performance Laptop</div>
-                        <h2 class="title">UltraBook Pro X</h2>
-                        <p class="desc">Cutting-edge performance with Intel Core i9, 32GB RAM, and a 1TB SSD in a sleek,
-                            lightweight design.
-                        </p>
-                        <div class="feats">
-                            <span class="feat">4K Display</span>
-                            <span class="feat">16-Hour Battery</span>
-                            <span class="feat">Thunderbolt 4</span>
-                        </div>
-                        <div class="bottom">
-                            <div class="price">
-                                <span class="old">$2,499</span>
-                                <span class="new">$1,999</span>
-                            </div>
-                            <button class="btn">
-                                <span>Add to Cart</span>
-                                <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                                     stroke="currentColor" stroke-width="2">
-                                    <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4"/>
-                                    <line x1="3" y1="6" x2="21" y2="6"/>
-                                    <path d="M16 10a4 4 0 01-8 0"/>
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="meta">
-                            <div class="rating">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
-                                     stroke-width="0.5">
-                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                </svg>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
-                                     stroke-width="0.5">
-                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                </svg>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
-                                     stroke-width="0.5">
-                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                </svg>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700" stroke-width="0.5">
-                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                </svg>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700" stroke-width="0.5">
-                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                </svg>
-                                <span class="rcount">245 Reviews</span>
-                            </div>
-                            <div class="stock">In Stock</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<div class="sort_Controls">
+    <li class="nav-item dropdown">
+        <span>Lọc sản phẩm theo</span>
+        <div class="btn sort_Controls-item">
+            <a class="nav-link dropdown-toggle" href="#" role="button"
+               data-bs-toggle="dropdown">{{ selected_vehicle_name }}</a>
+            <ul class="dropdown-menu">
+                {%for a in vehicles%}
+                <li>
+                    {# Tạo URL mới, giữ lại tất cả params cũ, chỉ thay đổi cate_id #}
+                    {% set new_args = current_args.copy() %}
+                    {% set updated = new_args.update({'cate_id': a.id}) %}
+                    <a class="dropdown-item" href="/components/?{{ new_args|urlencode }}">{{a.name}}</a>
+                </li>
+                {%endfor%}
+                <li>
+                    {% set new_args_clear = current_args.copy() %}
+                    {% set removed = new_args_clear.pop('cate_id', None) %}
+                    <a class="dropdown-item" href="/components/?{{ new_args_clear|urlencode }}"
+                       style="font-weight: bold; color: #e3342f;">— Bỏ lọc —</a>
+                </li>
+            </ul>
         </div>
+
+        <div class="btn sort_Controls-item">
+            <a class="nav-link dropdown-toggle" href="#" role="button"
+               data-bs-toggle="dropdown">{{selected_brand_name}}</a>
+            <ul class="dropdown-menu">
+                {%for b in brands%}
+                <li>
+                    {% set new_args = current_args.copy() %}
+                    {% set updated = new_args.update({'brand_id': b.id}) %}
+                    <a class="dropdown-item" href="/components/?{{ new_args|urlencode }}">{{b.name}}</a>
+                </li>
+                {%endfor%}
+                <li>
+                    {% set new_args_clear = current_args.copy() %}
+                    {% set removed = new_args_clear.pop('brand_id', None) %}
+                    <a class="dropdown-item" href="/components/?{{ new_args_clear|urlencode }}"
+                       style="font-weight: bold; color: #e3342f;">— Bỏ lọc —</a>
+                </li>
+            </ul>
+        </div>
+    </li>
+</div>
+
+<div class="container">
+    <div class="product-card">
+        {% if comps %}
+        <div class="row">
+            {%for c in comps%}
+            <div class="col-md-3 col-6">
+                <div class="card">
+                    <div class="badge">HOT SALE</div>
+                    <div class="tilt">
+                        <div class="img">
+                            <img src="{{c.image}}" alt="{{c.name}}">
+                        </div>
+                    </div>
+                    <div class="info">
+                        <h2 class="title">{{c.name}}</h2>
+                        <div class="meta">
+                            <div class="rating">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
+                                     stroke-width="0.5">
+                                    <polygon
+                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
+                                     stroke-width="0.5">
+                                    <polygon
+                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
+                                     stroke-width="0.5">
+                                    <polygon
+                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
+                                     stroke-width="0.5">
+                                    <polygon
+                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700"
+                                     stroke-width="0.5">
+                                    <polygon
+                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                                <span class="rcount">245 Reviews</span>
+                            </div>
+                            <div class="stock">In Stock</div>
+                        </div>
+                        <div class="bottom">
+                            <div class="price">
+                                <span class="old">$2,499</span>
+                                <span class="new">${{c.price}}</span>
+                            </div>
+                            <button class="btn" onclick="addToCart({{c.id}},'{{ c.name }}',{{ c.price }},'{{ c.image }}')">
+                                <span>Add to Cart</span>
+                                <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                     stroke="currentColor" stroke-width="2">
+                                    <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4"/>
+                                    <line x1="3" y1="6" x2="21" y2="6"/>
+                                    <path d="M16 10a4 4 0 01-8 0"/>
+                                </svg>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            {%endfor%}
+        </div>
+        <ul class="pagination d-flex justify-content-center">
+            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <li class="page-item "><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
+        {% else %}
+        <!-- HIỂN THỊ THÔNG BÁO (NẾU KHÔNG CÓ KẾT QUẢ) -->
+        <div class="text-center p-5 bg-white rounded-lg shadow-sm">
+            <h3 class="text-secondary mb-3">
+                Không tìm thấy sản phẩm nào
+            </h3>
+            <p class="text-muted">
+                Vui lòng thử điều chỉnh lại bộ lọc (Loại linh kiện, Hãng linh kiện) hoặc từ khóa tìm kiếm.
+            </p>
+            <a href="/components">Quay trở lại trang chủ</a>
+        </div>
+
+        {% endif %}
     </div>
-
-
-    <ul class="pagination d-flex justify-content-center">
-        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-        <li class="page-item "><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-    </ul>
+</div>
 {% endblock %}
 </body>

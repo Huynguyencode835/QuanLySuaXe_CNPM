@@ -1,22 +1,45 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+body .auth-page {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(90deg,#e2e2e2,#f9cba5);
+}
+
+.toast {
+    position: fixed;
+    top: 20px;
+    right: -300px; /* bắt đầu ngoài màn hình */
+    min-width: 250px;
+    padding: 15px;
+    border-radius: 5px;
+    color: white;
+    z-index: 9999;
+    opacity: 0.9;
+    transition: right 0.5s ease-in-out;
+}
+
+.toast.success { background-color: #4CAF50; } /* xanh lá */
+.toast.danger  { background-color: #f44336; } /* đỏ */
+@keyframes fadeinout {
+    0% { opacity: 0; top: 0; }
+    10% { opacity: 1; top: 20px; }
+    90% { opacity: 1; top: 20px; }
+    100% { opacity: 0; top: 0; }
+}
+
+.toast {
+    animation: fadeinout 4s forwards;
+}
+
 
 .auth-page * {
 	box-sizing: border-box;
 }
 
-.auth-page body {
-	background: #f6f5f7;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	font-family: 'Montserrat', sans-serif;
-	height: 100vh;
-	margin: -20px 0 50px;
-}
-
 .auth-page h1 {
-	font-weight: bold;
 	margin: 0;
 }
 
@@ -30,9 +53,6 @@
 	line-height: 20px;
 	letter-spacing: 0.5px;
 	margin: 20px 0 30px;
-}
-.auth-page{
-    margin-bottom: 50px;
 }
 
 .auth-page span {
