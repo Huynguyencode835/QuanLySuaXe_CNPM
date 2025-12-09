@@ -45,9 +45,14 @@ class User(Base, UserMixin):
         backref='technick',
         lazy=True
     )
-    receipts = relationship(
+    receipts_as_customer = relationship(
         'Receipt',
         backref='customer',
+        lazy=True
+    )
+    receipts_as_accountant = relationship(
+        'Receipt',
+        backref='accountant',
         lazy=True
     )
 
@@ -58,7 +63,7 @@ class Vehicletype(Base):
 
 class BrandVehicle(Base):
     __tablename__ = "BrandVehicle"
-    components = relationship('Component', backref="brand", lazy=True)
+    reception_forms = relationship('Component', backref="brandvehicle", lazy=True)
 
 class Component(Base):
     __tablename__ = "Component"
@@ -91,9 +96,11 @@ class SystemParameters(db.Model):
     VAT = Column(Float, default=0.0)
     limitcar=Column(Integer, default=30)
 
-class Receipt(Base):
+class Receipt(db.Model):
+    id = Column(Integer, primary_key=True, autoincrement=True)
     created_date = Column(DateTime, default=datetime.now)
     customer_id = Column(Integer, ForeignKey(User.id), nullable=False)
+    accountant_id = Column(Integer, ForeignKey(User.id), nullable=False)
     sys_id = Column(Integer, ForeignKey(SystemParameters.id), nullable=False)
     repair_forms = relationship('RepairForm', backref='receipt', lazy=True)
 
