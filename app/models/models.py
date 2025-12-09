@@ -44,9 +44,14 @@ class User(Base, UserMixin):
         backref='technick',
         lazy=True
     )
-    receipts = relationship(
+    receipts_as_customer = relationship(
         'Receipt',
         backref='customer',
+        lazy=True
+    )
+    receipts_as_accountant = relationship(
+        'Receipt',
+        backref='accountant',
         lazy=True
     )
 
@@ -54,11 +59,16 @@ class Vehicletype(Base):
     components = relationship('Component', backref="vehicletype", lazy=True)
     reception_forms = relationship('ReceptionForm', backref="vehicletype", lazy=True)
 
+class BrandVehicle(Base):
+    __tablename__ = "brandVehicle"
+    reception_forms = relationship('Component', backref="brandvehicle", lazy=True)
+
 class Component(Base):
     price = Column(Float, default=0.0)
     image = Column(String(300),default="https://res.cloudinary.com/dy1unykph/image/upload/v1741254148/aa0aawermmvttshzvjhc.png")
     description = Column(Text)
     veType_id = Column(Integer, ForeignKey(Vehicletype.id), nullable=False)
+    brand_id = Column(Integer, ForeignKey(BrandVehicle.id), nullable=False)
 
 class Form_status(RoleEnum):
     WAIT_APPROVAL = 1
@@ -82,9 +92,11 @@ class SystemParameters(db.Model):
     VAT = Column(Float, default=0.0)
     limitcar=Column(Integer, default=30)
 
-class Receipt(Base):
+class Receipt(db.Model):
+    id = Column(Integer, primary_key=True, autoincrement=True)
     created_date = Column(DateTime, default=datetime.now)
     customer_id = Column(Integer, ForeignKey(User.id), nullable=False)
+    accountant_id = Column(Integer, ForeignKey(User.id), nullable=False)
     sys_id = Column(Integer, ForeignKey(SystemParameters.id), nullable=False)
     repair_forms = relationship('RepairForm', backref='receipt', lazy=True)
 
@@ -108,6 +120,7 @@ class RepairForms_Components(db.Model):
 
 if __name__=="__main__":
     with app.app_context():
+        db.drop_all()
         db.create_all()
 
 
