@@ -44,12 +44,11 @@ def add_user(name, username, password, **kwargs):
 def get_user_by_username(username):
     return User.query.filter_by(username=username).first()
 
-def check_login(username, password,role=UserRole.CUSTOMER):
+def check_login(username, password):
     if username and password:
         password = str(hashlib.md5(password.strip().encode('utf-8')).hexdigest())
         return User.query.filter(User.username.__eq__(username.strip()),
-                                 User.password.__eq__(password.strip()),
-                                 User.role.__eq__(role)).first()
+                                 User.password.__eq__(password.strip())).first()
 
 
 def count_cart(cart):
