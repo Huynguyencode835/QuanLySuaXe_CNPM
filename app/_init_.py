@@ -24,11 +24,12 @@ def create_app():
 
     login_manager.init_app(app)
 
-    @app.context_processor
-    def inject_cart_stats():
-        import app.models.dao as dao
-        cart = session.get('cart', {})
-        return {'cart_stats': dao.count_cart(cart)}
+
+    @app.before_request
+    def check_maintenance():
+        # Ví dụ: chặn toàn bộ site nếu bật maintenance
+        if app.config.get("MAINTENANCE_MODE"):
+            return "Server đang bảo trì!", 503
 
 
     return app

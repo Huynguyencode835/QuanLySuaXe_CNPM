@@ -63,6 +63,8 @@ def count_cart(cart):
         'total_quantity': total_quantity,
         'total_amount': total_amount
     }
+
+
 if __name__ == '__main__':
     app = create_app()
     with app.app_context():

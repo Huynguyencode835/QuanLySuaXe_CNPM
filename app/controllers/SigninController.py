@@ -1,11 +1,7 @@
-import hashlib
-
 import cloudinary.uploader
 
-from app._init_ import db
-from flask import Flask, render_template,request,redirect,url_for,flash
-from app.models.model import User
-from app.models import dao
+from flask import render_template,request,redirect,url_for
+from app.dao import dao
 from flask_login import login_user, logout_user
 
 
@@ -35,7 +31,7 @@ class SigninController:
                 if avatar:
                     res=cloudinary.uploader.upload(avatar)
                     avatar_path = res["secure_url"]
-                dao.add_user(name=name, username=username, password=password,avatar=avatar_path)
+                dao.add_user(name=name, username=username, password=password, avatar=avatar_path)
                 return render_template("registerLogin.html",
                                        page="Đăng ký",
                                        alert_message="Đăng ký thành công! Mời bạn đăng nhập.",
@@ -53,14 +49,14 @@ class SigninController:
         if request.method == "POST":
             username = request.form.get('username')
             password = request.form.get('password')
-            user=dao.check_login(username, password)
+            user= dao.check_login(username, password)
 
             if user:
                 login_user(user=user)
                 next_page = request.args.get('next')
                 if next_page:
-                    return redirect(next_page)  # redirect URL trực tiếp
-                return redirect(url_for("site_bp.index"))  # sửa endpoint đúng
+                    return redirect(next_page)
+                return redirect(url_for("site_bp.index"))
             else:
                 return render_template("registerLogin.html",
                                        page="Đăng nhập",
@@ -70,4 +66,4 @@ class SigninController:
 
     def signout(self):
         logout_user()
-        return redirect(url_for("signin.signin_index"))
+        return redirect(url_for("site_bp.index"))

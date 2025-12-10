@@ -1,5 +1,5 @@
 from flask import request,session,jsonify
-import app.models.dao as dao
+import app.dao.dao as dao
 
 class CartController:
     def add_to_cart(self):

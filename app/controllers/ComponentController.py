@@ -1,5 +1,5 @@
-from flask import Flask, render_template, request
-from app.models import dao
+from flask import render_template, request
+from app.dao import dao
 
 
 class ComponentController:
@@ -10,9 +10,9 @@ class ComponentController:
         q=request.args.get('q')
         vehicle_id = request.args.get("vehicle_id")
         brand_id = request.args.get("brand_id")
-        comps=dao.load_component(q=q,vehicle_id=vehicle_id,brand_id=brand_id)
-        vehicles=dao.load_vehicletype()
-        brands=dao.load_brandveghicle()
+        comps= dao.load_component(q=q, vehicle_id=vehicle_id, brand_id=brand_id)
+        vehicles= dao.load_vehicletype()
+        brands= dao.load_brandveghicle()
         selected_vehicle_name = "Loại linh kiện"
         if vehicle_id and vehicle_id.isdigit():
             selected_vehicle = next((c for c in vehicles if c.id == int(vehicle_id)), None)
