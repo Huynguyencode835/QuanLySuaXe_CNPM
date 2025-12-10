@@ -3,7 +3,7 @@ from app.routes.index import route
 from app._init_ import create_app,login_manager
 from app.models.model import User
 
-import app.dao.dao as dao
+from app.utils.cart_util import count_cart
 
 app = create_app()
 route(app)
@@ -17,7 +17,7 @@ def load_user(user_id):
 def common_response():
     cart = session.get('cart', {})
     return {
-        'cart_stats': dao.count_cart(cart)
+        'cart_stats': count_cart(cart)
     }
 
 if __name__ == "__main__":

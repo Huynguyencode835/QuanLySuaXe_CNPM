@@ -3,6 +3,7 @@ import cloudinary.uploader
 from flask import render_template,request,redirect,url_for
 from app.dao import dao
 from flask_login import login_user, logout_user
+from app.middleware.authenticate import check_login
 
 
 class SigninController:
@@ -49,7 +50,7 @@ class SigninController:
         if request.method == "POST":
             username = request.form.get('username')
             password = request.form.get('password')
-            user= dao.check_login(username, password)
+            user= check_login(username, password)
 
             if user:
                 login_user(user=user)

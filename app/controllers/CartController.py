@@ -1,5 +1,5 @@
 from flask import request,session,jsonify
-import app.dao.dao as dao
+from app.utils.cart_util import count_cart
 
 class CartController:
     def add_to_cart(self):
@@ -23,4 +23,4 @@ class CartController:
             }
 
         session['cart'] = cart
-        return jsonify(dao.count_cart(cart=cart))
+        return jsonify(count_cart(cart=cart))

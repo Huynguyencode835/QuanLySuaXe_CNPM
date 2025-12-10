@@ -1,3 +1,5 @@
+import hashlib
+from app.models.model import User
 from functools import wraps
 
 from flask_login import current_user
@@ -18,4 +20,12 @@ def role_required(*roles):
             return f(*args, **kwargs)
         return wrapper
     return decorator
+
+
+
+def check_login(username, password):
+    if username and password:
+        password = str(hashlib.md5(password.strip().encode('utf-8')).hexdigest())
+        return User.query.filter(User.username.__eq__(username.strip()),
+                                 User.password.__eq__(password.strip())).first()
 

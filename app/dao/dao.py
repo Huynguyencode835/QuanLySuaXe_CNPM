@@ -44,25 +44,6 @@ def add_user(name, username, password, **kwargs):
 def get_user_by_username(username):
     return User.query.filter_by(username=username).first()
 
-def check_login(username, password):
-    if username and password:
-        password = str(hashlib.md5(password.strip().encode('utf-8')).hexdigest())
-        return User.query.filter(User.username.__eq__(username.strip()),
-                                 User.password.__eq__(password.strip())).first()
-
-
-def count_cart(cart):
-    total_quantity, total_amount = 0, 0
-
-    if cart:
-        for c in cart.values():
-            total_quantity += c['quantity']
-            total_amount += c['quantity'] * c['price']
-
-    return {
-        'total_quantity': total_quantity,
-        'total_amount': total_amount
-    }
 
 
 if __name__ == '__main__':
