@@ -3,9 +3,7 @@ from app.middleware import authenticate
 from app.middleware.authenticate import role_required
 from app.models.model import UserRole
 
-
 class AppointmentController:
-
     # [GET] /components
     # Chỉ CUSTOMER (role = 2)(CUSTOMER) mới được đặt lịch
     @role_required(UserRole.CUSTOMER,UserRole.STAFF)

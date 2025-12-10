@@ -3,7 +3,7 @@ from app.routes.index import route
 from app._init_ import create_app,login_manager
 from app.models.model import User
 
-import app.models.dao as dao
+import app.dao.dao as dao
 
 app = create_app()
 route(app)
