@@ -145,14 +145,14 @@ if __name__ == "__main__":
         # db.session.commit()
 
 
-        with open("../data/component.json", encoding="utf-8") as f:
-            components = json.load(f)
-
-            for c in components:
-                comp = Component(**c)
-                db.session.add(comp)
-
-        db.session.commit()
+        # with open("../data/component.json", encoding="utf-8") as f:
+        #     components = json.load(f)
+        #
+        #     for c in components:
+        #         comp = Component(**c)
+        #         db.session.add(comp)
+        #
+        # db.session.commit()
 
         # admin_pass = str(hashlib.md5(("admin").encode('utf-8')).hexdigest())
         # new_admin = User(
@@ -165,3 +165,37 @@ if __name__ == "__main__":
         # )
         # db.session.add(new_admin)
         # db.session.commit()
+
+        # staff_pass = str(hashlib.md5(("1").encode('utf-8')).hexdigest())
+        # new_staff = User(
+        #     name="Nhân viên tiếp nhận",
+        #     username="staff",
+        #     password=staff_pass,
+        #     avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfjno7hGrNNuPZwaFZ8U8Mhr_Yq39rzd_p0YN_HVYk6KFmMETjtgd9bwl0UhU6g4xDDGg&usqp=CAU",
+        #     role=UserRole.STAFF
+        # )
+        # db.session.add(new_staff)
+        # db.session.commit()
+
+        accountant_pass = str(hashlib.md5(("1").encode('utf-8')).hexdigest())
+        new_accountant = User(
+            name="Thu ngân",
+            username="accountant",
+            password=accountant_pass,
+            avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfjno7hGrNNuPZwaFZ8U8Mhr_Yq39rzd_p0YN_HVYk6KFmMETjtgd9bwl0UhU6g4xDDGg&usqp=CAU",
+            role=UserRole.ACCOUNTANT
+        )
+        db.session.add(new_accountant)
+
+        technick_pass = str(hashlib.md5(("1").encode('utf-8')).hexdigest())
+        new_technick = User(
+            name="Kỹ thuật viên",
+            username="technick",
+            password=technick_pass,
+            avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfjno7hGrNNuPZwaFZ8U8Mhr_Yq39rzd_p0YN_HVYk6KFmMETjtgd9bwl0UhU6g4xDDGg&usqp=CAU",
+            role=UserRole.TECHNICK
+        )
+        db.session.add(new_technick)
+
+
+        db.session.commit()

@@ -48,8 +48,7 @@ def check_login(username, password,role=UserRole.CUSTOMER):
     if username and password:
         password = str(hashlib.md5(password.strip().encode('utf-8')).hexdigest())
         return User.query.filter(User.username.__eq__(username.strip()),
-                                 User.password.__eq__(password.strip()),
-                                 User.role.__eq__(role)).first()
+                                 User.password.__eq__(password.strip())).first()
 
 
 def count_cart(cart):
@@ -64,6 +63,8 @@ def count_cart(cart):
         'total_quantity': total_quantity,
         'total_amount': total_amount
     }
+
+
 if __name__ == '__main__':
     app = create_app()
     with app.app_context():
