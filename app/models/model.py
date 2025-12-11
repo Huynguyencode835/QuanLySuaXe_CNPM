@@ -24,6 +24,7 @@ class Base(db.Model):
 class User(Base, UserMixin):
     username = Column(String(150), unique=True, nullable=False)
     password = Column(String(150), nullable=False)
+    phonenumber = Column(String(150), nullable=True)
     avatar = Column(String(300), default="https://res.cloudinary.com/dy1unykph/image/upload/v1740037805/apple-iphone-16-pro-natural-titanium_lcnlu2.webp")
     role = Column(Enum(UserRole), default=UserRole.CUSTOMER)
     joined = Column(DateTime, default=datetime.now)
@@ -86,13 +87,16 @@ class Form_status(RoleEnum):
 
 class ReceptionForm(db.Model):
     id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String(150), nullable=False)
+    phonenumber = Column(String(150), nullable=False)
     carnumber = Column(String(150), nullable=False)
     created_date = Column(DateTime, default=datetime.now)
+    appointment_date = Column(DateTime, default=datetime.now)
     description = Column(Text)
     status = Column(Enum(Form_status), default=Form_status.WAIT_APPROVAL)
-    veType_id = Column(Integer, ForeignKey(Vehicletype.id), nullable=False)
+    veType_id = Column(Integer, ForeignKey(Vehicletype.id), nullable=True)
     customer_id = Column(Integer, ForeignKey(User.id), nullable=False)
-    staff_id = Column(Integer, ForeignKey(User.id), nullable=True)
+    staff_id = Column(Integer, ForeignKey(User.id), nullable=False)
     repair_forms = relationship('RepairForm', backref='reception_form', lazy=True)
 
 class SystemParameters(db.Model):

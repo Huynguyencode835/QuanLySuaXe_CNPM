@@ -15,6 +15,7 @@ class SigninController:
     def signup(self):
         if request.method == "POST":
             name = request.form.get("name")
+            phonenumber = request.form.get("phonenumber")
             username = request.form.get("username")
             password = request.form.get("password")
             confirm_password = request.form.get("confirm_password")
@@ -32,7 +33,7 @@ class SigninController:
                 if avatar:
                     res=cloudinary.uploader.upload(avatar)
                     avatar_path = res["secure_url"]
-                dao.add_user(name=name, username=username, password=password, avatar=avatar_path)
+                dao.add_user(name=name,phonenumber=phonenumber, username=username, password=password, avatar=avatar_path)
                 return render_template("registerLogin.html",
                                        page="Đăng ký",
                                        alert_message="Đăng ký thành công! Mời bạn đăng nhập.",

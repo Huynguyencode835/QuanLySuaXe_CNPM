@@ -32,9 +32,10 @@ def load_component(q=None, vehicle_id=None, brand_id=None):
 
     return query.all()
 
-def add_user(name, username, password, **kwargs):
+def add_user(name, phonenumber,username, password, **kwargs):
     password = str(hashlib.md5(password.strip().encode('utf-8')).hexdigest())
     user = User(name=name.strip(),
+                phonenumber=phonenumber.strip(),
                 username=username.strip(),
                 password=password,
                 avatar=kwargs.get('avatar'))

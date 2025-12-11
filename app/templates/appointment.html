@@ -83,7 +83,15 @@
                     </div>
                 </div>
                 <div>
-                    <button class="formbold-btn">Đặt lịch</button>
+                    {% if current_user.is_authenticated and current_user.role.name == 'CUSTOMER' %}
+
+                    {% endif %}
+
+                    {% if current_user.is_authenticated and current_user.role.name == 'STAFF' %}
+
+                    {% endif %}
+                        <button class="formbold-btn" type="submit" name="action" value="customer">Đặt phiếu</button>
+                        <button class="formbold-btn" type="submit" name="action" value="staff">Tạo phiếu tiếp nhận</button>
                 </div>
             </form>
         </div>
