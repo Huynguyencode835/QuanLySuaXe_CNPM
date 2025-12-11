@@ -1,12 +1,15 @@
 from flask import session
-from app.routes.index import route
+from app.routes.index import route_web
+from app.routes.api.index import route_api
 from app._init_ import create_app,login_manager
 from app.models.model import User
 
 from app.utils.cart_util import count_cart
 
 app = create_app()
-route(app)
+
+route_web(app)
+route_api(app)
 
 
 @login_manager.user_loader

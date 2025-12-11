@@ -1,7 +1,7 @@
 import json,hashlib
 from datetime import datetime
 from app._init_ import db,create_app
-from sqlalchemy import Column, Integer, String, Float, ForeignKey, Boolean, DateTime, Enum, Text
+from sqlalchemy import Column, Integer, String, Float, ForeignKey, Boolean, DateTime, Enum, Text, false
 from sqlalchemy.orm import relationship
 from flask_login import UserMixin
 from enum import Enum as RoleEnum
@@ -94,9 +94,9 @@ class ReceptionForm(db.Model):
     appointment_date = Column(DateTime, default=datetime.now)
     description = Column(Text)
     status = Column(Enum(Form_status), default=Form_status.WAIT_APPROVAL)
-    veType_id = Column(Integer, ForeignKey(Vehicletype.id), nullable=True)
-    customer_id = Column(Integer, ForeignKey(User.id), nullable=False)
-    staff_id = Column(Integer, ForeignKey(User.id), nullable=False)
+    veType_id = Column(Integer, ForeignKey(Vehicletype.id), nullable=False)
+    customer_id = Column(Integer, ForeignKey(User.id), nullable=True)
+    staff_id = Column(Integer, ForeignKey(User.id), nullable=True)
     repair_forms = relationship('RepairForm', backref='reception_form', lazy=True)
 
 class SystemParameters(db.Model):
@@ -164,4 +164,5 @@ if __name__ == "__main__":
 
         )
         db.session.add(new_admin)
+        db.session.add(SystemParameters(VAT=20, limitcar=30))
         db.session.commit()
