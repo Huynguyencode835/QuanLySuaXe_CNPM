@@ -1,3 +1,5 @@
+let isDataLoaded = false;
+
 function checkLimitVehicle() {
     fetch('/api/appointment/limit', {
         method: 'GET'
@@ -10,5 +12,18 @@ function checkLimitVehicle() {
             alert("Hôm nay đã đủ số lượng xe tiếp nhận!");
         }
     });
-    return false;
+}
+
+function fillInfor() {
+    if(!isDataLoaded){
+        fetch('/api/appointment/info', {
+            method: 'GET'
+        })
+        .then(res => res.json())
+        .then(data => {
+            document.querySelector(".fill-info-name").value = data.name;
+            document.querySelector(".fill-info-phonenumber").value = data.phonenumber;
+            isDataLoaded = true;
+        });
+    }
 }

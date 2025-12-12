@@ -131,7 +131,6 @@ class RepairForms_Components(db.Model):
     id_component = Column(Integer, ForeignKey(Component.id), nullable=False,primary_key=True)
     quantity = Column(Integer, default=1)
 
-
 if __name__ == "__main__":
     app = create_app()
     with app.app_context():
@@ -163,6 +162,22 @@ if __name__ == "__main__":
             role=UserRole.ADMIN
 
         )
-        db.session.add(new_admin)
+
+        new_customer = User(
+            name="Customer",
+            username="customer",
+            password=str(hashlib.md5(("customer").encode('utf-8')).hexdigest()),
+            avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfjno7hGrNNuPZwaFZ8U8Mhr_Yq39rzd_p0YN_HVYk6KFmMETjtgd9bwl0UhU6g4xDDGg&usqp=CAU",
+            role=UserRole.CUSTOMER
+        )
+
+        new_staff = User(
+            name="Staff",
+            username="staff",
+            password=str(hashlib.md5(("staff").encode('utf-8')).hexdigest()),
+            avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfjno7hGrNNuPZwaFZ8U8Mhr_Yq39rzd_p0YN_HVYk6KFmMETjtgd9bwl0UhU6g4xDDGg&usqp=CAU",
+            role=UserRole.STAFF
+        )
+        db.session.add_all([new_admin,new_customer, new_staff])
         db.session.add(SystemParameters(VAT=20, limitcar=30))
         db.session.commit()
