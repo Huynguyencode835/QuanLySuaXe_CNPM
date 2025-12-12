@@ -114,7 +114,6 @@ class Receipt(db.Model):
 class RepairForm(db.Model):
     id = Column(Integer, primary_key=True, autoincrement=True)
     action = Column(Text)
-    cost = Column(Float, default=0.0)
     technick_id = Column(Integer, ForeignKey(User.id), nullable=False)
     receipt_id = Column(Integer, ForeignKey(Receipt.id), nullable=False)
     reception_form_id = Column(Integer, ForeignKey(ReceptionForm.id), nullable=False)
@@ -130,6 +129,7 @@ class RepairForms_Components(db.Model):
     id_repair_form = Column(Integer, ForeignKey(RepairForm.id), nullable=False,primary_key=True)
     id_component = Column(Integer, ForeignKey(Component.id), nullable=False,primary_key=True)
     quantity = Column(Integer, default=1)
+    cost = Column(Float, default=0.0)
 
 if __name__ == "__main__":
     app = create_app()
