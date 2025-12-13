@@ -6,6 +6,7 @@ from app.routes.Site import site_bp
 from app.routes.Signin import signin_bp
 from app.routes.Cart import cart_bp
 from app.routes.Appointment import appointment_bp
+from app.routes.Create_receipt import create_receipts_bp
 from app.routes.Receptions import receptions_bp
 
 def route_web(app):
@@ -15,6 +16,7 @@ def route_web(app):
     app.register_blueprint(cart_bp, url_prefix="/api")
     app.register_blueprint(Transaction_bp, url_prefix="/Transactions")
     app.register_blueprint(receptions_bp, url_prefix="/receptions")
+    app.register_blueprint(create_receipts_bp, url_prefix="/create_receipts")
     app.register_blueprint(site_bp, url_prefix="/")
     app.register_blueprint(repairform_bp, url_prefix="/repairform")
 
