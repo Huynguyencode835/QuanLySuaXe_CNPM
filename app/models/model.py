@@ -114,7 +114,6 @@ class Receipt(db.Model):
 class RepairForm(db.Model):
     id = Column(Integer, primary_key=True, autoincrement=True)
     action = Column(Text)
-    cost = Column(Float, default=0.0)
     technick_id = Column(Integer, ForeignKey(User.id), nullable=False)
     receipt_id = Column(Integer, ForeignKey(Receipt.id), nullable=False)
     reception_form_id = Column(Integer, ForeignKey(ReceptionForm.id), nullable=False)
@@ -130,7 +129,7 @@ class RepairForms_Components(db.Model):
     id_repair_form = Column(Integer, ForeignKey(RepairForm.id), nullable=False,primary_key=True)
     id_component = Column(Integer, ForeignKey(Component.id), nullable=False,primary_key=True)
     quantity = Column(Integer, default=1)
-
+    cost = Column(Float, default=0.0)
 
 if __name__ == "__main__":
     app = create_app()
@@ -163,6 +162,22 @@ if __name__ == "__main__":
             role=UserRole.ADMIN
 
         )
-        db.session.add(new_admin)
+
+        new_customer = User(
+            name="Customer",
+            username="customer",
+            password=str(hashlib.md5(("customer").encode('utf-8')).hexdigest()),
+            avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfjno7hGrNNuPZwaFZ8U8Mhr_Yq39rzd_p0YN_HVYk6KFmMETjtgd9bwl0UhU6g4xDDGg&usqp=CAU",
+            role=UserRole.CUSTOMER
+        )
+
+        new_staff = User(
+            name="Staff",
+            username="staff",
+            password=str(hashlib.md5(("staff").encode('utf-8')).hexdigest()),
+            avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfjno7hGrNNuPZwaFZ8U8Mhr_Yq39rzd_p0YN_HVYk6KFmMETjtgd9bwl0UhU6g4xDDGg&usqp=CAU",
+            role=UserRole.STAFF
+        )
+        db.session.add_all([new_admin,new_customer, new_staff])
         db.session.add(SystemParameters(VAT=20, limitcar=30))
         db.session.commit()

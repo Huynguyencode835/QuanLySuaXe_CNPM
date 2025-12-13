@@ -1,5 +1,6 @@
 from flask import Flask, render_template,Blueprint
 from app.routes.Components import components_bp
+from app.routes.RepairForm import repairform_bp
 from app.routes.Transactions import Transaction_bp
 from app.routes.Site import site_bp
 from app.routes.Signin import signin_bp
@@ -17,6 +18,6 @@ def route_web(app):
     app.register_blueprint(receptions_bp, url_prefix="/receptions")
     app.register_blueprint(create_receipts_bp, url_prefix="/create_receipts")
     app.register_blueprint(site_bp, url_prefix="/")
-
+    app.register_blueprint(repairform_bp, url_prefix="/repairform")
 
 

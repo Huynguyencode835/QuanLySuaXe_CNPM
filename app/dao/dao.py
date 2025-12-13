@@ -50,4 +50,5 @@ def get_user_by_username(username):
 if __name__ == '__main__':
     app = create_app()
     with app.app_context():
-        print(load_component())
+        pass
+
