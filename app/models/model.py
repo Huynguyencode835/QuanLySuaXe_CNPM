@@ -178,6 +178,14 @@ if __name__ == "__main__":
             avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfjno7hGrNNuPZwaFZ8U8Mhr_Yq39rzd_p0YN_HVYk6KFmMETjtgd9bwl0UhU6g4xDDGg&usqp=CAU",
             role=UserRole.STAFF
         )
-        db.session.add_all([new_admin,new_customer, new_staff])
+
+        new_accountant = User(
+            name="Accountant",
+            username="accountant",
+            password=str(hashlib.md5(("1").encode('utf-8')).hexdigest()),
+            avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfjno7hGrNNuPZwaFZ8U8Mhr_Yq39rzd_p0YN_HVYk6KFmMETjtgd9bwl0UhU6g4xDDGg&usqp=CAU",
+            role=UserRole.ACCOUNTANT
+        )
+        db.session.add_all([new_admin,new_customer, new_staff,new_accountant])
         db.session.add(SystemParameters(VAT=20, limitcar=30))
         db.session.commit()
