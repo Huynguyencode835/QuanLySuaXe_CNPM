@@ -557,7 +557,7 @@
 
                                 <!-- Search Container với Dropdown -->
                                 <div class="search-container">
-                                    <input type="text" placeholder="Tìm linh kiện..." class="search-input">
+                                    <input name ="component" type="text" placeholder="Tìm linh kiện..." class="search-input">
                                     <div class="search-dropdown">
                                         <!-- Filter Row -->
                                         <div class="search-filters">
@@ -573,9 +573,9 @@
                                                     <option value="{{ vehicle.id }}">{{ vehicle.name }}</option>
                                                 {% endfor %}
                                             </select>
-                                            <button class="btn-apply-filter">Lọc</button>
+                                            <button type="button" class ="btn-apply-filter">Lọc</button>
                                         </div>
-                                        <div name ="component" class="search-results" ></div>
+                                        <div class="search-results" id=""></div>
                                     </div>
                                 </div>
 
@@ -587,8 +587,8 @@
 
                     <!-- Action Buttons -->
                     <div class="action-buttons">
-                        <button class="btn-primary" id="add-item">Thêm dòng</button>
-                        <button type="submit" class="btn-primary" id="confirm-btn">Xác nhận</button>
+                        <button type="button" class="btn-primary" id="add-items">Thêm dòng</button>
+                        <button class="btn-primary" id="confirm-btn">Xác nhận</button>
                     </div>
                 </div>
                 </form>
@@ -599,6 +599,8 @@
     <script>
         // ==================== DATA FROM BACKEND ====================
         const componentsData = {{ comps | tojson | safe }};
+        const itemsContainer = document.getElementById('items-container');
+        const itemTemplate = itemsContainer.querySelector('.repair-item').cloneNode(true);
 
         // ==================== MODAL CONTROLS ====================
         function closeModal() {
@@ -619,6 +621,7 @@
         document.querySelector('.close').addEventListener('click', function(e) {
             e.preventDefault();
             closeModal();
+            resetItems();
         });
 
         document.getElementById('modal').addEventListener('click', function(e) {
@@ -746,6 +749,7 @@
             if (!e.target.closest('.search-container')) {
                 document.querySelectorAll('.search-dropdown').forEach(dropdown => {
                     dropdown.classList.remove('active');
+                    resetItems();
                 });
             }
         });
@@ -764,8 +768,42 @@
             }
         }
 
+        function resetItems() {
+            const container = document.getElementById('items-container');
+
+            // Xóa hết item hiện tại
+            container.innerHTML = '';
+
+            // Clone lại item gốc
+            const newItem = itemTemplate.cloneNode(true);
+
+            // Reset toàn bộ input
+            newItem.querySelectorAll('input').forEach(input => {
+                input.value = '';
+                input.removeAttribute('data-comp-id');
+            });
+
+            // Reset select
+            newItem.querySelectorAll('select').forEach(select => {
+                select.value = '';
+            });
+
+            // Reset search results
+            const results = newItem.querySelector('.search-results');
+            if (results) results.innerHTML = '';
+
+            // Append lại
+            container.appendChild(newItem);
+
+            // Gắn lại event
+            attachDeleteEvent(newItem);
+            attachSearchEvents(newItem);
+        }
+
+
+
         // Thêm dòng mới
-        document.getElementById('add-item').addEventListener('click', function() {
+        document.getElementById('add-items').addEventListener('click', function() {
             const container = document.getElementById('items-container');
             const newItem = document.createElement('div');
             newItem.className = 'repair-item';
@@ -812,34 +850,6 @@
             attachSearchEvents(item);
         });
 
-        // ==================== CONFIRM & SUBMIT ====================
-        document.getElementById('confirm-btn').addEventListener('click', function() {
-            const items = [];
 
-            document.querySelectorAll('.repair-item').forEach((item, index) => {
-                const searchInput = item.querySelector('.search-input');
-                items.push({
-                    row: index + 1,
-                    error: item.querySelector('.error-input').value,
-                    laborCost: item.querySelector('.labor-input').value,
-                    componentId: searchInput.getAttribute('data-comp-id') || '',
-                    componentName: searchInput.value,
-                    quantity: item.querySelector('.quantity-input').value,
-                    partPrice: item.querySelector('.part-price-input').value
-                });
-            });
-
-            const formData = {
-                customer: {
-                    name: document.getElementById('modal_name').textContent,
-                    phone: document.getElementById('modal_phone').textContent,
-                    carNumber: document.getElementById('modal_car').textContent
-                },
-                items: items
-            };
-
-            console.log('Dữ liệu phiếu sửa xe:', formData);
-            alert('Đã xác nhận phiếu sửa xe! Xem console để xem dữ liệu.');
-        });
     </script>
 {% endblock %}
