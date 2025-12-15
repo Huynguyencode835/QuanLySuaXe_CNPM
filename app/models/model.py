@@ -107,17 +107,12 @@ class SystemParameters(db.Model):
     limitcar=Column(Integer, default=30)
 
 class Receipt(db.Model):
-    __tablename__ = "receipts"
     id = Column(Integer, primary_key=True, autoincrement=True)
     created_date = Column(DateTime, default=datetime.now)
-    status = Column(String(20), default="UNPAID")
     customer_id = Column(Integer, ForeignKey(User.id), nullable=False)
     accountant_id = Column(Integer, ForeignKey(User.id), nullable=False)
-    repair_forms = relationship(
-        'RepairForm',
-        back_populates='receipt',
-        cascade='all, delete-orphan'
-    )
+    repair_forms = relationship('RepairForm', backref='receipt', lazy=True)
+
 
 class RepairForm(db.Model):
     id = Column(Integer, primary_key=True, autoincrement=True)
