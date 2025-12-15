@@ -1,7 +1,12 @@
 <div class="top-header">
     <div class="header-left">
         <i class="fa-solid fa-bars"></i>
-        <span class="text-muted">Trang chủ {{ '' if page == 'Trang chủ' else '> '+page }}</span>
+        <span class="text-muted">
+            Trang chủ
+            {% if page is defined and page != 'Trang chủ' %}
+                > {{ page }}
+            {% endif %}
+        </span>
     </div>
 
     <div class="header-right">
