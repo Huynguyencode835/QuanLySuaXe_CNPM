@@ -11,7 +11,6 @@
                 <ul class="dropdown-menu">
                     {%for a in vehicles%}
                     <li>
-                        {# Tạo URL mới, giữ lại tất cả params cũ, chỉ thay đổi cate_id #}
                         {% set new_args = current_args.copy() %}
                         {% set updated = new_args.update({'vehicle_id': a.id}) %}
                         <a class="dropdown-item" href="/components/?{{ new_args|urlencode }}">{{a.name}}</a>

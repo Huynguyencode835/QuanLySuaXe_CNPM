@@ -7,7 +7,7 @@ from app._init_ import create_app,db
 from datetime import datetime, date
 
 def countLimitVehicle():
-    return ReceptionForm.query.filter(ReceptionForm.status == 3).count()
+    return ReceptionForm.query.filter(ReceptionForm.status.__eq__(Form_status.WAIT_REPAIR)).count()
 
 def limitVehicle():
     return db.session.query(SystemParameters).first().limitcar
@@ -43,6 +43,38 @@ def create_receptionForm(
 
     db.session.add(receptionForm)
     db.session.commit()
+
+def update_appointment(
+    id,
+    name,
+    phone,
+    car,
+    vehicle_type,
+    status,
+    appointment_date,
+    description
+):
+    appointment = ReceptionForm.query.get(id)
+    if appointment:
+        appointment.name = name
+        appointment.phonenumber = phone
+        appointment.carnumber = car
+        appointment.vehicle_type = vehicle_type
+        appointment.status = status
+        appointment.appointment_date = appointment_date
+        appointment.description = description
+        db.session.commit()
+        return True
+    else:
+        return False
+
+def delete_appointment(id):
+    form = ReceptionForm.query.get(id)
+    if form:
+        db.session.delete(form)
+        db.session.commit()
+        return True
+    return False
 
 if __name__ == '__main__':
     app = create_app()

@@ -1,8 +1,51 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, jsonify
+
+from app.dao import appointment_dao,dao
+from app.models.model import Form_status, ReceptionForm
+from app.utils import receptionform_util
 
 
 class ReceptionController():
-
     # [GET] /components
     def index(self):
-        return render_template("receptions.html", page="Phiếu đặt lịch")
+        return render_template("receptions.html",
+                               page="Phiếu đặt lịch",
+                               data = receptionform_util.get_receptionform(request.args.get("status_name")),
+                               state = receptionform_util.parse_state(),
+                               Form_status=Form_status,
+                               vehicleType = dao.load_vehicletype())
+
+    def updata_form(self, id):
+        id = id
+        name=request.json.get("name")
+        phone=request.json.get("phone")
+        car=request.json.get("car")
+        vehicle_type=request.json.get("vehicle_type")
+        status=request.json.get("status")
+        appointment_date=request.json.get("appointment_date")
+        description=request.json.get("description")
+        res =appointment_dao.update_appointment(id,name,phone,car,vehicle_type,status,appointment_date,description)
+        if res:
+            return jsonify({
+                "message": "Cập nhật thông tin thành công",
+                "category": "success"
+            })
+        else:
+            return jsonify({
+                "message": "Cập nhật không thành công",
+                "category": "error"
+            })
+
+    def delete_form(self, id):
+        res = appointment_dao.delete_appointment(id)
+        if res:
+            return jsonify({
+                "message": "Xóa phiếu thành công",
+                "category": "success"
+            })
+        else:
+            return jsonify({
+                "message":  "Xóa thất bại",
+                "category": "error"
+            })
+

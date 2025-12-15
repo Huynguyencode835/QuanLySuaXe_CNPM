@@ -14,9 +14,14 @@
     {% if current_user.is_authenticated %}
         {# ROLE CUSTOMER_STAFF #}
         {% if current_user.role.name in ['CUSTOMER', 'STAFF'] %}
-            <a href="javascript:;" onclick="checkLimitVehicle()" class="nav-item  {{'active' if page == 'Đặt lịch sửa xe' else ''}}">
+            <a href="/appointment" onclick="limitVehicleRender()" class="nav-item  {{'active' if page == 'Đặt lịch sửa xe' else ''}}">
                 <i class="bi bi-arrow-left-right"></i>
                 <span>Đặt lịch sửa xe</span>
+            </a>
+
+            <a href="/receptions" class="nav-item {{'active' if page == 'Phiếu đặt lịch' else ''}}">
+                <i class="bi bi-arrow-left-right"></i>
+                <span>Phiếu đặt lịch</span>
             </a>
         {% endif %}
 
@@ -32,16 +37,12 @@
 
         {# ROLE ADMIN #}
         {% if current_user.role.name == 'ADMIN' %}
-
+            <a href="/admin" class="nav-item {{'active' if request.path.startswith('/admin') else ''}}">
+                <i class="bi bi-gear-fill"></i>
+                <span>Quản trị hệ thống</span>
+            </a>
         {% endif %}
     {% endif %}
-
-
-
-    <a href="/receptions" class="nav-item {{'active' if page == 'Phiếu đặt lịch' else ''}}">
-        <i class="bi bi-arrow-left-right"></i>
-        <span>Phiếu đặt lịch</span>
-    </a>
 
     <a href="#" class="nav-item">
         <i class="bi bi-credit-card"></i>
