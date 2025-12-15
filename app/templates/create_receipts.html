@@ -2,6 +2,7 @@
 {% block title %}Lập hóa đơn{% endblock %}
 <body>
 {% block content %}
+{%if rf_f%}
 <form>
     <div class="row">
         {% for rf in rp_f %}
@@ -20,12 +21,12 @@
                     {% else %}
 
                     {% endif %}
-                     <span class="badge bg-success">
+                    <span class="badge bg-success">
                             <i class="bi bi-check-circle"></i> Đã sửa xong
                      </span>
-<!--                    <span class="badge bg-warning text-dark">-->
-<!--                    <i class="bi bi-tools"></i> Đang sửa-->
-<!--                    </span>-->
+                    <!--                    <span class="badge bg-warning text-dark">-->
+                    <!--                    <i class="bi bi-tools"></i> Đang sửa-->
+                    <!--                    </span>-->
                 </div>
 
                 <!-- BODY -->
@@ -149,12 +150,15 @@
         </div>
 
         {% endfor %}
-    </div>
 
+    </div>
     <button type="submit" class="btn btn-success mt-3">
         Lập hóa đơn
     </button>
 </form>
+{%else%}
+<div>Không có phiếu để lập hóa đơn</div>
+{%endif%}
 <script>
     function toggleDetail(id, btn) {
         const row = document.getElementById("detail-" + id);
