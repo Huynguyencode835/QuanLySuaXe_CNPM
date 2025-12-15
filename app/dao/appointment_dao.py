@@ -79,4 +79,4 @@ def delete_appointment(id):
 if __name__ == '__main__':
     app = create_app()
     with app.app_context():
-        print(countLimitVehicle())
+        print(delete_appointment(1))

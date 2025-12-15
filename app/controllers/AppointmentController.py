@@ -19,7 +19,6 @@ class AppointmentController:
     def is_limit_reached(self):
         count = appointment_dao.countLimitVehicle()
         limit = appointment_dao.limitVehicle()
-        print("DEBUG LIMIT => count:", count, "limit:", limit)
         return count >= limit
 
     # [POST] api/appontment/limit

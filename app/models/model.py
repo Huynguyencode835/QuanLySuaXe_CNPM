@@ -99,7 +99,7 @@ class ReceptionForm(db.Model):
     veType_id = Column(Integer, ForeignKey(Vehicletype.id), nullable=False)
     customer_id = Column(Integer, ForeignKey(User.id), nullable=True)
     staff_id = Column(Integer, ForeignKey(User.id), nullable=True)
-    repair_forms = relationship('RepairForm', backref='reception_form', lazy=True)
+    repair_forms = relationship('RepairForm', backref='reception_form', lazy=True, cascade='all, delete-orphan')
 
 class SystemParameters(db.Model):
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -121,6 +121,7 @@ class Receipt(db.Model):
         back_populates='receipt',
         cascade='all, delete-orphan'
     )
+
 class RepairForm(db.Model):
     __tablename__ = "repair_forms"
     id = Column(Integer, primary_key=True, autoincrement=True)
