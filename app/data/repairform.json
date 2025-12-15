@@ -2,7 +2,7 @@
   {
     "id": 1,
     "technick_id": 5,
-    "reception_form_id": 2,
+    "reception_form_id": 3,
     "actions": [
       {
         "description": "Thay đĩa thắng trước",
@@ -39,7 +39,7 @@
   {
     "id": 2,
     "technick_id": 5,
-    "reception_form_id": 1,
+    "reception_form_id": 4,
     "actions": [
       {
         "description": "Thay bugi đánh lửa",
