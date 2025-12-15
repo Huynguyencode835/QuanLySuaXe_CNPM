@@ -109,9 +109,6 @@ class SystemParameters(db.Model):
 class Receipt(db.Model):
     __tablename__ = "receipts"
     id = Column(Integer, primary_key=True, autoincrement=True)
-    total_labor_cost = Column(Float, nullable=False)
-    total_component_cost = Column(Float, nullable=False)
-    total_amount = Column(Float, nullable=False)
     created_date = Column(DateTime, default=datetime.now)
     status = Column(String(20), default="UNPAID")
     customer_id = Column(Integer, ForeignKey(User.id), nullable=False)
@@ -172,31 +169,31 @@ class RepairActionComponent(db.Model):
 if __name__ == "__main__":
     app = create_app()
     with app.app_context():
-        db.drop_all()
+        # db.drop_all()
         db.create_all()
-        c1 = Vehicletype(name="Moto")
-        c2 = Vehicletype(name="Oto")
-        db.session.add_all([c1, c2])
+        # c1 = Vehicletype(name="Moto")
+        # c2 = Vehicletype(name="Oto")
+        # db.session.add_all([c1, c2])
+        #
+        # b1 = BrandVehicle(name="Honda")
+        # b2 = BrandVehicle(name="Yamaha")
+        # b3 = BrandVehicle(name="Toyota")
+        # b4 = BrandVehicle(name="Mercedes")
+        # db.session.add_all([b1, b2,b3,b4])
+        #
+        # with open("../data/component.json", encoding="utf-8") as f:
+        #     components = json.load(f)
+        #
+        #     for c in components:
+        #         comp = Component(**c)
+        #         db.session.add(comp)
 
-        b1 = BrandVehicle(name="Honda")
-        b2 = BrandVehicle(name="Yamaha")
-        b3 = BrandVehicle(name="Toyota")
-        b4 = BrandVehicle(name="Mercedes")
-        db.session.add_all([b1, b2,b3,b4])
-
-        with open("../data/component.json", encoding="utf-8") as f:
-            components = json.load(f)
-
-            for c in components:
-                comp = Component(**c)
-                db.session.add(comp)
-
-        with open("../data/receptionform.json", encoding="utf-8") as f:
-            receptionforms = json.load(f)
-
-            for r in receptionforms:
-                rec = ReceptionForm(**r)
-                db.session.add(rec)
+        # with open("../data/receptionform.json", encoding="utf-8") as f:
+        #     receptionforms = json.load(f)
+        #
+        #     for r in receptionforms:
+        #         rec = ReceptionForm(**r)
+        #         db.session.add(rec)
 
         with open("../data/repairform.json", encoding="utf-8") as f:
             repairforms = json.load(f)
@@ -222,46 +219,46 @@ if __name__ == "__main__":
                 db.session.add(form)
 
 
-        admin_pass = str(hashlib.md5(("admin").encode('utf-8')).hexdigest())
-        new_admin = User(
-            name="Quản trị viên",
-            username="admin",
-            password=admin_pass,
-            avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfjno7hGrNNuPZwaFZ8U8Mhr_Yq39rzd_p0YN_HVYk6KFmMETjtgd9bwl0UhU6g4xDDGg&usqp=CAU",
-            role=UserRole.ADMIN
-
-        )
-
-        new_customer = User(
-            name="Customer",
-            username="customer",
-            password=str(hashlib.md5(("customer").encode('utf-8')).hexdigest()),
-            avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfjno7hGrNNuPZwaFZ8U8Mhr_Yq39rzd_p0YN_HVYk6KFmMETjtgd9bwl0UhU6g4xDDGg&usqp=CAU",
-            role=UserRole.CUSTOMER
-        )
-        new_technick = User(
-            name="Kỹ thuật viên",
-            username="technick",
-            password=str(hashlib.md5(("1").encode('utf-8')).hexdigest()),
-            avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfjno7hGrNNuPZwaFZ8U8Mhr_Yq39rzd_p0YN_HVYk6KFmMETjtgd9bwl0UhU6g4xDDGg&usqp=CAU",
-            role=UserRole.TECHNICK
-        )
-
-        new_staff = User(
-            name="Staff",
-            username="staff",
-            password=str(hashlib.md5(("staff").encode('utf-8')).hexdigest()),
-            avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfjno7hGrNNuPZwaFZ8U8Mhr_Yq39rzd_p0YN_HVYk6KFmMETjtgd9bwl0UhU6g4xDDGg&usqp=CAU",
-            role=UserRole.STAFF
-        )
-
-        new_accountant = User(
-            name="Accountant",
-            username="accountant",
-            password=str(hashlib.md5(("1").encode('utf-8')).hexdigest()),
-            avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfjno7hGrNNuPZwaFZ8U8Mhr_Yq39rzd_p0YN_HVYk6KFmMETjtgd9bwl0UhU6g4xDDGg&usqp=CAU",
-            role=UserRole.ACCOUNTANT
-        )
-        db.session.add_all([new_admin,new_customer, new_staff,new_accountant,new_technick])
-        db.session.add(SystemParameters(VAT=20, limitcar=30))
+        # admin_pass = str(hashlib.md5(("admin").encode('utf-8')).hexdigest())
+        # new_admin = User(
+        #     name="Quản trị viên",
+        #     username="admin",
+        #     password=admin_pass,
+        #     avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfjno7hGrNNuPZwaFZ8U8Mhr_Yq39rzd_p0YN_HVYk6KFmMETjtgd9bwl0UhU6g4xDDGg&usqp=CAU",
+        #     role=UserRole.ADMIN
+        #
+        # )
+        #
+        # new_customer = User(
+        #     name="Customer",
+        #     username="customer",
+        #     password=str(hashlib.md5(("customer").encode('utf-8')).hexdigest()),
+        #     avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfjno7hGrNNuPZwaFZ8U8Mhr_Yq39rzd_p0YN_HVYk6KFmMETjtgd9bwl0UhU6g4xDDGg&usqp=CAU",
+        #     role=UserRole.CUSTOMER
+        # )
+        # new_technick = User(
+        #     name="Kỹ thuật viên",
+        #     username="technick",
+        #     password=str(hashlib.md5(("1").encode('utf-8')).hexdigest()),
+        #     avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfjno7hGrNNuPZwaFZ8U8Mhr_Yq39rzd_p0YN_HVYk6KFmMETjtgd9bwl0UhU6g4xDDGg&usqp=CAU",
+        #     role=UserRole.TECHNICK
+        # )
+        #
+        # new_staff = User(
+        #     name="Staff",
+        #     username="staff",
+        #     password=str(hashlib.md5(("staff").encode('utf-8')).hexdigest()),
+        #     avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfjno7hGrNNuPZwaFZ8U8Mhr_Yq39rzd_p0YN_HVYk6KFmMETjtgd9bwl0UhU6g4xDDGg&usqp=CAU",
+        #     role=UserRole.STAFF
+        # )
+        #
+        # new_accountant = User(
+        #     name="Accountant",
+        #     username="accountant",
+        #     password=str(hashlib.md5(("1").encode('utf-8')).hexdigest()),
+        #     avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfjno7hGrNNuPZwaFZ8U8Mhr_Yq39rzd_p0YN_HVYk6KFmMETjtgd9bwl0UhU6g4xDDGg&usqp=CAU",
+        #     role=UserRole.ACCOUNTANT
+        # )
+        # db.session.add_all([new_admin,new_customer, new_staff,new_accountant,new_technick])
+        # db.session.add(SystemParameters(VAT=20, limitcar=30))
         db.session.commit()

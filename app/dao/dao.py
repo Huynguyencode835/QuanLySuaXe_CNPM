@@ -1,6 +1,7 @@
 import hashlib, json
-from app.models.model import Vehicletype, BrandVehicle, User, Component, UserRole, RepairForm
+from app.models.model import Vehicletype, BrandVehicle, User, Component, UserRole, RepairForm, ReceptionForm
 from app._init_ import create_app,db
+from sqlalchemy import or_
 
 def load_vehicletype():
     # with open("data/category.json", 'r', encoding='utf-8') as f:
@@ -49,16 +50,23 @@ def get_user_by_username(username):
 def get_repair_form():
     return RepairForm.query.all()
 
-# #Tổng tiền linh kiện, công sửa
-# def totallaborcost():
-#     rf = RepairForm()
-#     for r in rf:
-#         sum+=
+# Lấy phiếu tiếp nhận
+def get_reception_form():
+    return ReceptionForm.query.all()
+
+
+def load_repairform_receptionform(q=None):
+    query = RepairForm.query.join(ReceptionForm)
+    if q:
+        query = query.filter(or_(ReceptionForm.name.contains(q),
+                                 ReceptionForm.phonenumber.contains(q),
+                                 ReceptionForm.carnumber.contains(q)))
+    return query.all()
 
 
 if __name__ == '__main__':
     app = create_app()
     with app.app_context():
         print(get_repair_form())
-        # print(totallaborcost())
+        print(get_reception_form())
 
