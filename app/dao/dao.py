@@ -1,5 +1,5 @@
 import hashlib, json
-from app.models.model import Vehicletype,BrandVehicle,User,Component,UserRole
+from app.models.model import Vehicletype, BrandVehicle, User, Component, UserRole, RepairForm
 from app._init_ import create_app,db
 
 def load_vehicletype():
@@ -45,10 +45,20 @@ def add_user(name, phonenumber,username, password, **kwargs):
 def get_user_by_username(username):
     return User.query.filter_by(username=username).first()
 
+# lấy phiếu sửa chữa
+def get_repair_form():
+    return RepairForm.query.all()
+
+# #Tổng tiền linh kiện, công sửa
+# def totallaborcost():
+#     rf = RepairForm()
+#     for r in rf:
+#         sum+=
 
 
 if __name__ == '__main__':
     app = create_app()
     with app.app_context():
-        pass
+        print(get_repair_form())
+        # print(totallaborcost())
 

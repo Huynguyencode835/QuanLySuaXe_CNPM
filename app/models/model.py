@@ -6,6 +6,8 @@ from sqlalchemy.orm import relationship
 from flask_login import UserMixin
 from enum import Enum as RoleEnum
 
+
+
 class UserRole(RoleEnum):
     CUSTOMER = 2
     STAFF = 3
@@ -70,7 +72,7 @@ class BrandVehicle(Base):
     reception_forms = relationship('Component', backref="brandvehicle", lazy=True)
 
 class Component(Base):
-    __tablename__ = "Component"
+    __tablename__ = "component"
     name = Column(String(150), nullable=False)
     price = Column(Float, default=0.0)
     image = Column(String(300), default="")
@@ -105,31 +107,66 @@ class SystemParameters(db.Model):
     limitcar=Column(Integer, default=30)
 
 class Receipt(db.Model):
+    __tablename__ = "receipts"
     id = Column(Integer, primary_key=True, autoincrement=True)
+    total_labor_cost = Column(Float, nullable=False)
+    total_component_cost = Column(Float, nullable=False)
+    total_amount = Column(Float, nullable=False)
     created_date = Column(DateTime, default=datetime.now)
+    status = Column(String(20), default="UNPAID")
     customer_id = Column(Integer, ForeignKey(User.id), nullable=False)
     accountant_id = Column(Integer, ForeignKey(User.id), nullable=False)
-    repair_forms = relationship('RepairForm', backref='receipt', lazy=True)
-
+    repair_forms = relationship(
+        'RepairForm',
+        back_populates='receipt',
+        cascade='all, delete-orphan'
+    )
 class RepairForm(db.Model):
+    __tablename__ = "repair_forms"
     id = Column(Integer, primary_key=True, autoincrement=True)
-    action = Column(Text)
     technick_id = Column(Integer, ForeignKey(User.id), nullable=False)
-    receipt_id = Column(Integer, ForeignKey(Receipt.id), nullable=False)
+    receipt_id = Column(Integer, ForeignKey(Receipt.id), nullable=True)
     reception_form_id = Column(Integer, ForeignKey(ReceptionForm.id), nullable=False)
-    components = relationship(
-        'Component',
-        secondary='repair_forms_components',
-        backref='repair_forms',
-        lazy=True
+
+    receipt = relationship(
+        'Receipt',
+        back_populates='repair_forms'
     )
 
-class RepairForms_Components(db.Model):
-    __tablename__ = "repair_forms_components"
-    id_repair_form = Column(Integer, ForeignKey(RepairForm.id), nullable=False,primary_key=True)
-    id_component = Column(Integer, ForeignKey(Component.id), nullable=False,primary_key=True)
-    quantity = Column(Integer, default=1)
-    cost = Column(Float, default=0.0)
+    actions = relationship(
+        'RepairAction',
+        back_populates='repair_form',
+        cascade='all, delete-orphan'
+    )
+
+class RepairAction(db.Model):
+    __tablename__ = "repair_actions"
+
+    id = Column(Integer, primary_key=True)
+    description = Column(Text, nullable=False)
+    labor_cost = Column(Float, nullable=False)
+
+    repair_form_id = Column(Integer, ForeignKey('repair_forms.id'), nullable=False)
+    repair_form = relationship("RepairForm", back_populates="actions")
+
+    components = relationship(
+        "RepairActionComponent",
+        back_populates="repair_action",
+        cascade="all, delete-orphan"
+    )
+
+
+class RepairActionComponent(db.Model):
+    __tablename__ = "repair_action_components"
+
+    repair_action_id = Column(Integer, ForeignKey('repair_actions.id'), primary_key=True)
+    component_id = Column(Integer, ForeignKey('component.id'), primary_key=True)
+
+    quantity = Column(Integer, nullable=False, default=1)
+
+    repair_action = relationship("RepairAction", back_populates="components")
+    component = relationship("Component")
+
 
 if __name__ == "__main__":
     app = create_app()
@@ -153,6 +190,37 @@ if __name__ == "__main__":
                 comp = Component(**c)
                 db.session.add(comp)
 
+        with open("../data/receptionform.json", encoding="utf-8") as f:
+            receptionforms = json.load(f)
+
+            for r in receptionforms:
+                rec = ReceptionForm(**r)
+                db.session.add(rec)
+
+        with open("../data/repairform.json", encoding="utf-8") as f:
+            repairforms = json.load(f)
+            for r in repairforms:
+                form = RepairForm(
+                    technick_id=r["technick_id"],
+                    reception_form_id=r["reception_form_id"]
+                )
+                for act in r["actions"]:
+                    action = RepairAction(
+                        description=act["description"],
+                        labor_cost=act["labor_cost"]
+                    )
+
+                    for c in act["components"]:
+                        action.components.append(
+                            RepairActionComponent(
+                                component_id=c["component_id"],
+                                quantity=c["quantity"]
+                            )
+                        )
+                    form.actions.append(action)
+                db.session.add(form)
+
+
         admin_pass = str(hashlib.md5(("admin").encode('utf-8')).hexdigest())
         new_admin = User(
             name="Quản trị viên",
@@ -170,6 +238,13 @@ if __name__ == "__main__":
             avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfjno7hGrNNuPZwaFZ8U8Mhr_Yq39rzd_p0YN_HVYk6KFmMETjtgd9bwl0UhU6g4xDDGg&usqp=CAU",
             role=UserRole.CUSTOMER
         )
+        new_technick = User(
+            name="Kỹ thuật viên",
+            username="technick",
+            password=str(hashlib.md5(("1").encode('utf-8')).hexdigest()),
+            avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfjno7hGrNNuPZwaFZ8U8Mhr_Yq39rzd_p0YN_HVYk6KFmMETjtgd9bwl0UhU6g4xDDGg&usqp=CAU",
+            role=UserRole.TECHNICK
+        )
 
         new_staff = User(
             name="Staff",
@@ -186,6 +261,6 @@ if __name__ == "__main__":
             avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfjno7hGrNNuPZwaFZ8U8Mhr_Yq39rzd_p0YN_HVYk6KFmMETjtgd9bwl0UhU6g4xDDGg&usqp=CAU",
             role=UserRole.ACCOUNTANT
         )
-        db.session.add_all([new_admin,new_customer, new_staff,new_accountant])
+        db.session.add_all([new_admin,new_customer, new_staff,new_accountant,new_technick])
         db.session.add(SystemParameters(VAT=20, limitcar=30))
         db.session.commit()

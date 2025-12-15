@@ -2,6 +2,129 @@
 {% block title %}Lập hóa đơn{% endblock %}
 <body>
 {% block content %}
+<form>
+    <table class="table table-bordered">
+        <colgroup>
+            <col style="width: 6%">
+            <col style="width: 7%">
+            <col style="width: 15%">
+            <col style="width: 20%">
+            <col style="width: 15%">
+            <col style="width: 15%">
+            <col style="width: 15%">
+            <col style="width: 7%">
+        </colgroup>
+        <thead>
+        <tr>
+            <th class="text-center">Chọn</th>
+            <th class="text-center">Mã phiếu</th>
+            <th class="text-center">Khách hàng</th>
+            <th class="text-center">Kỹ thuật viên tiếp nhận</th>
+            <th class="text-center">Tổng công sửa</th>
+            <th class="text-center">Tổng linh kiện</th>
+            <th class="text-center">Tổng tạm tính</th>
+            <th class="text-center">Chi tiết</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for rf in repair_forms %}
+        <tr>
+            <td class="text-center">
+                <input type="checkbox"
+                       name="repair_form_ids"
+                       value="{{ rf.id }}">
+            </td>
+
+            <td class="text-center">{{ rf.id }}</td>
+            <td class="text-center">{{ rf.reception_form.name }}</td>
+            <td class="text-center">{{ rf.technick.name }}</td>
+
+            <td class="text-end">
+                {{ rf.total_labor_cost}}
+            </td>
+
+            <td class="text-end">
+                {{ rf.total_component_cost }}
+            </td>
+
+            <td class="text-end">
+                <strong>
+                    {{ rf.total_cost }}
+                </strong>
+            </td>
+            <td class="text-center">
+                <button type="button" class="btn btn-sm btn-info"
+                        onclick="toggleDetail({{ rf.id }},this)">
+                    Xem
+                </button>
+            </td>
+
+        </tr>
+        <tr id="detail-{{ rf.id }}" style="display: none;">
+            <td colspan="8">
+                {% for action in rf.actions %}
+                <div class="border p-2 mb-2">
+                    <strong>{{ action.description }}</strong>
+                    <span>(Tiền công: {{ action.labor_cost }})</span>
+
+                    <table class="table table-sm table-bordered mt-2">
+                        <colgroup>
+                            <col style="width: 40%">
+                            <col style="width: 20%">
+                            <col style="width: 20%">
+                            <col style="width: 20%">
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th class="text-center">Linh kiện</th>
+                            <th class="text-center">Giá</th>
+                            <th class="text-center">Số lượng</th>
+                            <th class="text-center">Thành tiền</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for ac in action.components %}
+                        <tr>
+                            <td class="text-center">{{ ac.component.name }}</td>
+                            <td class="text-end">{{ ac.component.price }}</td>
+                            <td class="text-end">{{ ac.quantity }}</td>
+                            <td class="text-end">{{ ac.component.price * ac.quantity }}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% endfor %}
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <button type="submit" class="btn btn-success">
+        Lập hóa đơn
+    </button>
+
+</form>
+<script>
+    function toggleDetail(id, btn) {
+        const row = document.getElementById("detail-" + id);
+
+        if (row.style.display === "none" || row.style.display === "") {
+            row.style.display = "table-row";
+            btn.innerText = "Ẩn";
+            btn.classList.remove("btn-info");
+            btn.classList.add("btn-secondary");
+        } else {
+            row.style.display = "none";
+            btn.innerText = "Xem";
+            btn.classList.remove("btn-secondary");
+            btn.classList.add("btn-info");
+        }
+    }
+
+</script>
 
 {% endblock %}
 </body>

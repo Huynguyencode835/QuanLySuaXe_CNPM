@@ -1,113 +1,65 @@
 [
   {
-    "id": 101,
-    "action": "Thay nhớt + vệ sinh lọc gió",
-    "cost": 150000,
+    "id": 1,
     "technick_id": 5,
-    "receipt_id": null,
-    "reception_form_id": 20,
-    "components": [
+    "reception_form_id": 2,
+    "actions": [
       {
-        "component_id": 1,
-        "name": "Nhớt Castrol 10W40",
-        "price": 120000,
-        "quantity": 1
+        "description": "Thay đĩa thắng trước",
+        "labor_cost": 150,
+        "components": [
+          {
+            "component_id": 1,
+            "quantity": 1
+          }
+        ]
       },
       {
-        "component_id": 5,
-        "name": "Lọc gió AirBlade",
-        "price": 90000,
-        "quantity": 1
+        "description": "Thay bộ thắng sau",
+        "labor_cost": 120,
+        "components": [
+          {
+            "component_id": 2,
+            "quantity": 1
+          }
+        ]
+      },
+      {
+        "description": "Vệ sinh và thay lọc gió",
+        "labor_cost": 80,
+        "components": [
+          {
+            "component_id": 4,
+            "quantity": 1
+          }
+        ]
       }
     ]
   },
   {
-    "id": 102,
-    "action": "Thay bố thắng + căng xích + thay bugi",
-    "cost": 200000,
-    "technick_id": 7,
-    "receipt_id": null,
-    "reception_form_id": 22,
-    "components": [
+    "id": 2,
+    "technick_id": 5,
+    "reception_form_id": 1,
+    "actions": [
       {
-        "component_id": 12,
-        "name": "Bố thắng đĩa",
-        "price": 180000,
-        "quantity": 1
+        "description": "Thay bugi đánh lửa",
+        "labor_cost": 200,
+        "components": [
+          {
+            "component_id": 12,
+            "quantity": 4
+          }
+        ]
       },
       {
-        "component_id": 18,
-        "name": "Bugi NGK",
-        "price": 75000,
-        "quantity": 1
-      },
-      {
-        "component_id": 25,
-        "name": "Dầu bôi trơn xích",
-        "price": 45000,
-        "quantity": 1
-      }
-    ]
-  },
-  {
-    "id": 103,
-    "action": "Thay vỏ xe trước + sau",
-    "cost": 100000,
-    "technick_id": 6,
-    "receipt_id": null,
-    "reception_form_id": 24,
-    "components": [
-      {
-        "component_id": 30,
-        "name": "Lốp Michelin 70/90",
-        "price": 650000,
-        "quantity": 1
-      },
-      {
-        "component_id": 31,
-        "name": "Lốp Michelin 80/90",
-        "price": 700000,
-        "quantity": 1
-      },
-      {
-        "component_id": 40,
-        "name": "Ruột xe",
-        "price": 50000,
-        "quantity": 2
-      }
-    ]
-  },
-  {
-    "id": 104,
-    "action": "Đại tu động cơ + thay phụ tùng",
-    "cost": 800000,
-    "technick_id": 8,
-    "receipt_id": null,
-    "reception_form_id": 30,
-    "components": [
-      {
-        "component_id": 50,
-        "name": "Bộ piston",
-        "price": 450000,
-        "quantity": 1
-      },
-      {
-        "component_id": 54,
-        "name": "Bộ xéc-măng cao cấp",
-        "price": 380000,
-        "quantity": 1
-      },
-      {
-        "component_id": 58,
-        "name": "Nhớt Repsol Racing",
-        "price": 180000,
-        "quantity": 1
-      },
-      {
-        "component_id": 60,
-        "name": "Ron máy đại tu",
-        "price": 90000,
-        "quantity": 1
+        "description": "Lắp camera 3 mắt",
+        "labor_cost": 300,
+        "components": [
+          {
+            "component_id": 8,
+            "quantity": 1
+          }
+        ]
       }
     ]
   }
