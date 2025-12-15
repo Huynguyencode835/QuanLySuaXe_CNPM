@@ -107,64 +107,25 @@ class SystemParameters(db.Model):
     limitcar=Column(Integer, default=30)
 
 class Receipt(db.Model):
-    __tablename__ = "receipts"
     id = Column(Integer, primary_key=True, autoincrement=True)
     created_date = Column(DateTime, default=datetime.now)
-    status = Column(String(20), default="UNPAID")
     customer_id = Column(Integer, ForeignKey(User.id), nullable=False)
     accountant_id = Column(Integer, ForeignKey(User.id), nullable=False)
-    repair_forms = relationship(
-        'RepairForm',
-        back_populates='receipt',
-        cascade='all, delete-orphan'
-    )
+    repair_forms = relationship('RepairForm', backref='receipt', lazy=True)
+
 
 class RepairForm(db.Model):
-    __tablename__ = "repair_forms"
     id = Column(Integer, primary_key=True, autoincrement=True)
     technick_id = Column(Integer, ForeignKey(User.id), nullable=False)
-    receipt_id = Column(Integer, ForeignKey(Receipt.id), nullable=True)
+    receipt_id = Column(Integer, ForeignKey(Receipt.id), nullable=False)
     reception_form_id = Column(Integer, ForeignKey(ReceptionForm.id), nullable=False)
 
-    receipt = relationship(
-        'Receipt',
-        back_populates='repair_forms'
-    )
-
-    actions = relationship(
-        'RepairAction',
-        back_populates='repair_form',
-        cascade='all, delete-orphan'
-    )
-
-class RepairAction(db.Model):
-    __tablename__ = "repair_actions"
-
-    id = Column(Integer, primary_key=True)
-    description = Column(Text, nullable=False)
-    labor_cost = Column(Float, nullable=False)
-
-    repair_form_id = Column(Integer, ForeignKey('repair_forms.id'), nullable=False)
-    repair_form = relationship("RepairForm", back_populates="actions")
-
-    components = relationship(
-        "RepairActionComponent",
-        back_populates="repair_action",
-        cascade="all, delete-orphan"
-    )
-
-
-class RepairActionComponent(db.Model):
-    __tablename__ = "repair_action_components"
-
-    repair_action_id = Column(Integer, ForeignKey('repair_actions.id'), primary_key=True)
-    component_id = Column(Integer, ForeignKey('component.id'), primary_key=True)
-
-    quantity = Column(Integer, nullable=False, default=1)
-
-    repair_action = relationship("RepairAction", back_populates="components")
-    component = relationship("Component")
-
+class RepairForms_Components(db.Model):
+    id_repair_form = Column(Integer, ForeignKey(RepairForm.id), nullable=False,primary_key=True)
+    id_component = Column(Integer, ForeignKey(Component.id), nullable=False,primary_key=True)
+    quantity = Column(Integer, default=1)
+    cost = Column(Float, default=0.0)
+    action = Column(Text)
 
 if __name__ == "__main__":
     app = create_app()
