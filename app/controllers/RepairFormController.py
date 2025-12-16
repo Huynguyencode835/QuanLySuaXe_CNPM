@@ -1,6 +1,7 @@
 from flask import render_template, request, jsonify
 
-from app.dao import dao
+from app.models.model import Form_status
+from app.utils import receptionform_util
 from app.utils.component_util import get_components_data
 
 
@@ -11,6 +12,8 @@ class RepairFormController:
         # sử lý chỗ này cho bố
         # viết hàm nhận res trả về true false là xong
         #
+
+
         print(res)
         if res:
             return jsonify({
@@ -22,7 +25,6 @@ class RepairFormController:
                 "message": "thất bại",
                 "category": "error"
             })
-
 
     def index(self):
         args = request.args.to_dict()
@@ -53,4 +55,8 @@ class RepairFormController:
         return render_template("repairform.html", page="Phiếu sửa xe",
                                comps=comps_data, vehicles=vehicles_data, brands=brands_data, current_args=args,
                                selected_vehicle_name=selected_vehicle_name,
-                               selected_brand_name=selected_brand_name)
+                               selected_brand_name=selected_brand_name,
+                               data=receptionform_util.get_receptionform(Form_status.WAIT_REPAIR),
+                               state=receptionform_util.parse_state(),
+                               Form_status=Form_status
+                               )
