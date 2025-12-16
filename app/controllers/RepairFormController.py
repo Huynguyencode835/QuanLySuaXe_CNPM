@@ -1,10 +1,29 @@
-from flask import render_template, request
+from flask import render_template, request, jsonify
 
 from app.dao import dao
 from app.utils.component_util import get_components_data
 
 
 class RepairFormController:
+
+    def createform(self):
+        res = request.form.to_dict()
+        # sử lý chỗ này cho bố
+        # viết hàm nhận res trả về true false là xong
+        #
+        print(res)
+        if res:
+            return jsonify({
+                "message": "Tạo phiếu sửa chửa thành thành công",
+                "category": "success"
+            })
+        else:
+            return jsonify({
+                "message": "thất bại",
+                "category": "error"
+            })
+
+
     def index(self):
         args = request.args.to_dict()
         comps, vehicles, brands, selected_vehicle_name, selected_brand_name = get_components_data(args)

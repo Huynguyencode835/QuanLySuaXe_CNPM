@@ -428,27 +428,27 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-<!--                                <tr>-->
-<!--                                    <td class="info">-->
-<!--                                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">-->
-<!--                                        <a href="#" class="user-link">Mila Kunis</a>-->
-<!--                                        <span class="user-subhead">Admin</span>-->
-<!--                                    </td>-->
-<!--                                    <td class="date">2013/08/08</td>-->
-<!--                                    <td class="state text-center">-->
-<!--                                        <span class="label label-default">Inactive</span>-->
-<!--                                    </td>-->
-<!--                                    <td class="phone_number">0935345345</td>-->
-<!--                                    <td class="car_number">72-F0993945</td>-->
-<!--                                    <td style="width: 20%;">-->
-<!--                                        <a href="#" class="open-modal table-link">-->
-<!--                                            <span class="button button__link fa-stack">-->
-<!--                                                <i class="fa fa-square fa-stack-2x"></i>-->
-<!--                                                <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>-->
-<!--                                            </span>-->
-<!--                                        </a>-->
-<!--                                    </td>-->
-<!--                                </tr>-->
+                                <tr data-receptionform-id="1">
+                                    <td class="info">
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                                        <a href="#" class="user-link">Mila Kunis</a>
+                                        <span class="user-subhead">Admin</span>
+                                    </td>
+                                    <td class="date">2013/08/08</td>
+                                    <td class="state text-center">
+                                        <span class="label label-default">Inactive</span>
+                                    </td>
+                                    <td class="phone_number">0935345345</td>
+                                    <td class="car_number">72-F0993945</td>
+                                    <td style="width: 20%;">
+                                        <a href="#" class="open-modal table-link">
+                                            <span class="button button__link fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                    </td>
+                                </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -482,54 +482,57 @@
                     <strong>Biển số xe:</strong> <span id="modal_car"></span>
                 </div>
 
-                <form action="" method="POST">
-                    <input type="hidden" id="hidden_user_id" name="user_id">
-                    <input type="hidden" id="hidden_vehicle_id" name="vehicle_id">
+                <form id="repair-form" method="POST">
+                    <!-- Hidden input cho receptionform_id -->
+                    <input type="hidden" id="receptionform_id" name="receptionform_id">
+
                     <div class="modal-content">
-                    <!-- Items Container -->
-                    <div class="items-container" id="items-container">
-                        <!-- Dòng đầu tiên -->
-                        <div class="repair-item">
-                            <div class="item-row">
-                                <input name= "action" type="text" placeholder="Lỗi" class="error-input">
-                                <input name= "cost" type="text" placeholder="Tiền công" class="labor-input">
+                        <!-- Items Container -->
+                        <div class="items-container" id="items-container">
+                            <!-- Dòng đầu tiên -->
+                            <div class="repair-item">
+                                <div class="item-row">
+                                    <input name="items[0][action]" type="text" placeholder="Lỗi" class="error-input" required>
+                                    <input name="items[0][cost]" type="text" placeholder="Tiền công" class="labor-input" required>
 
-                                <!-- Search Container với Dropdown -->
-                                <div class="search-container">
-                                    <input name ="component" type="text" placeholder="Tìm linh kiện..." class="search-input">
-                                    <div class="search-dropdown">
-                                        <!-- Filter Row -->
-                                        <div class="search-filters">
-                                            <select class="vehicle-brand">
-                                                <option value="">Hãng xe</option>
-                                                {% for brand in brands %}
-                                                    <option value="{{ brand.id }}">{{ brand.name }}</option>
-                                                {% endfor %}
-                                            </select>
-                                            <select class="vehicle-type">
-                                                <option value="">Loại xe</option>
-                                                {% for vehicle in vehicles %}
-                                                    <option value="{{ vehicle.id }}">{{ vehicle.name }}</option>
-                                                {% endfor %}
-                                            </select>
-                                            <button type="button" class ="btn-apply-filter">Lọc</button>
+                                    <!-- Search Container với Dropdown -->
+                                    <div class="search-container">
+                                        <input type="text" placeholder="Tìm linh kiện..." class="search-input" required>
+                                        <!-- Hidden input cho component_id -->
+                                        <input type="hidden" name="items[0][component_id]" class="component-id-input" required>
+                                        <div class="search-dropdown">
+                                            <!-- Filter Row -->
+                                            <div class="search-filters">
+                                                <select class="vehicle-brand">
+                                                    <option value="">Hãng xe</option>
+                                                    {% for brand in brands %}
+                                                        <option value="{{ brand.id }}">{{ brand.name }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                                <select class="vehicle-type">
+                                                    <option value="">Loại xe</option>
+                                                    {% for vehicle in vehicles %}
+                                                        <option value="{{ vehicle.id }}">{{ vehicle.name }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                                <button type="button" class="btn-apply-filter">Lọc</button>
+                                            </div>
+                                            <div class="search-results"></div>
                                         </div>
-                                        <div class="search-results" id=""></div>
                                     </div>
-                                </div>
 
-                                <input name ="quantity" type="text" placeholder="Số lượng" class="quantity-input">
-                                <input type="text" placeholder="Tiền linh kiện" class="part-price-input" readonly>
+                                    <input name="items[0][quantity]" type="text" placeholder="Số lượng" class="quantity-input" required>
+                                    <input type="text" placeholder="Tiền linh kiện" class="part-price-input" readonly required>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Action Buttons -->
-                    <div class="action-buttons">
-                        <button type="button" class="btn-primary" id="add-items">Thêm dòng</button>
-                        <button class="btn-primary" id="confirm-btn">Xác nhận</button>
+                        <!-- Action Buttons -->
+                        <div class="action-buttons">
+                            <button type="button" class="btn-primary" id="add-items">Thêm dòng</button>
+                            <button type="submit" class="btn-primary" id="confirm-btn">Xác nhận</button>
+                        </div>
                     </div>
-                </div>
                 </form>
             </div>
         </div>
@@ -550,9 +553,17 @@
             btn.addEventListener('click', function (e) {
                 e.preventDefault();
                 const tr = this.closest('tr');
+
+                // Hiển thị thông tin
                 document.getElementById('modal_name').textContent = tr.querySelector('.user-link').textContent;
                 document.getElementById('modal_phone').textContent = tr.querySelector('.phone_number').textContent;
                 document.getElementById('modal_car').textContent = tr.querySelector('.car_number').textContent;
+
+                // Lấy receptionform_id từ data attribute
+                const receptionformId = tr.getAttribute('data-receptionform-id');
+                document.getElementById('receptionform_id').value = receptionformId;
+
+                // Bật modal
                 document.getElementById('modal').classList.add('active');
             });
         });
@@ -585,6 +596,7 @@
             const vehicleBrand = item.querySelector('.vehicle-brand');
             const vehicleType = item.querySelector('.vehicle-type');
             const applyFilterBtn = item.querySelector('.btn-apply-filter');
+            const componentIdInput = item.querySelector('.component-id-input');
 
             let currentFilter = {
                 brand_id: '',
@@ -623,7 +635,7 @@
             // Thực hiện tìm kiếm
             function performSearch() {
                 const searchTerm = searchInput.value.toLowerCase().trim();
-                let results = [...componentsData]; // Clone array
+                let results = [...componentsData];
 
                 // Filter by brand_id
                 if (currentFilter.brand_id) {
@@ -673,7 +685,12 @@
                     // Click để chọn
                     resultItem.addEventListener('click', function() {
                         searchInput.value = comp.name;
-                        searchInput.setAttribute('data-comp-id', comp.id);
+
+                        // Lưu component_id vào hidden input
+                        if (componentIdInput) {
+                            componentIdInput.value = comp.id;
+                        }
+
                         item.querySelector('.part-price-input').value = price;
                         dropdown.classList.remove('active');
                     });
@@ -688,7 +705,6 @@
             if (!e.target.closest('.search-container')) {
                 document.querySelectorAll('.search-dropdown').forEach(dropdown => {
                     dropdown.classList.remove('active');
-                    resetItems();
                 });
             }
         });
@@ -709,51 +725,43 @@
 
         function resetItems() {
             const container = document.getElementById('items-container');
-
-            // Xóa hết item hiện tại
             container.innerHTML = '';
 
-            // Clone lại item gốc
             const newItem = itemTemplate.cloneNode(true);
 
-            // Reset toàn bộ input
             newItem.querySelectorAll('input').forEach(input => {
                 input.value = '';
                 input.removeAttribute('data-comp-id');
             });
 
-            // Reset select
             newItem.querySelectorAll('select').forEach(select => {
                 select.value = '';
             });
 
-            // Reset search results
             const results = newItem.querySelector('.search-results');
             if (results) results.innerHTML = '';
 
-            // Append lại
             container.appendChild(newItem);
 
-            // Gắn lại event
             attachDeleteEvent(newItem);
             attachSearchEvents(newItem);
         }
 
-
-
         // Thêm dòng mới
         document.getElementById('add-items').addEventListener('click', function() {
             const container = document.getElementById('items-container');
+            const currentItemCount = container.querySelectorAll('.repair-item').length;
             const newItem = document.createElement('div');
             newItem.className = 'repair-item';
 
             newItem.innerHTML = `
-                <button class="delete-item">×</button>
+                <button type="button" class="delete-item">×</button>
                 <div class="item-row">
-                    <input type="text" placeholder="Lỗi" class="error-input">
-                    <input type="text" placeholder="Tiền công" class="labor-input">
+                    <input name="items[${currentItemCount}][action]" type="text" placeholder="Lỗi" class="error-input" required>
+                    <input name="items[${currentItemCount}][cost]" type="text" placeholder="Tiền công" class="labor-input" required>
                     <div class="search-container">
-                        <input type="text" placeholder="Tìm linh kiện..." class="search-input">
+                        <input type="text" placeholder="Tìm linh kiện..." class="search-input" required>
+                        <input type="hidden" name="items[${currentItemCount}][component_id]" class="component-id-input" required>
                         <div class="search-dropdown">
                             <div class="search-filters">
                                 <select class="vehicle-brand">
@@ -768,13 +776,13 @@
                                         <option value="{{ vehicle.id }}">{{ vehicle.name }}</option>
                                     {% endfor %}
                                 </select>
-                                <button class="btn-apply-filter">Lọc</button>
+                                <button type="button" class="btn-apply-filter">Lọc</button>
                             </div>
                             <div class="search-results"></div>
                         </div>
                     </div>
-                    <input type="text" placeholder="Số lượng" class="quantity-input">
-                    <input type="text" placeholder="Tiền linh kiện" class="part-price-input" readonly>
+                    <input name="items[${currentItemCount}][quantity]" type="text" placeholder="Số lượng" class="quantity-input" required>
+                    <input type="text" placeholder="Tiền linh kiện" class="part-price-input" readonly required>
                 </div>
             `;
 
@@ -788,5 +796,8 @@
             attachDeleteEvent(item);
             attachSearchEvents(item);
         });
+
+        // ==================== FORM SUBMISSION ====================
+
     </script>
 {% endblock %}
