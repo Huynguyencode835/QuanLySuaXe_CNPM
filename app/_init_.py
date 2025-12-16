@@ -19,11 +19,11 @@ def create_app():
     app.secret_key = "asjdahjgưGƯEGgG4252#adsd"
     app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:Abc123@localhost/app?charset=utf8mb4"
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+    app.config["PAGE_SIZE"] = 4;
 
     db.init_app(app)
 
     login_manager.init_app(app)
-
 
     @app.before_request
     def check_maintenance():

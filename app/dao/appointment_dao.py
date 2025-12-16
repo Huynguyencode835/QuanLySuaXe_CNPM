@@ -63,6 +63,8 @@ def update_appointment(
         appointment.status = status
         appointment.appointment_date = appointment_date
         appointment.description = description
+        if (current_user.role.name == 'STAFF'):
+            appointment.staff_id = current_user.id
         db.session.commit()
         return True
     else:

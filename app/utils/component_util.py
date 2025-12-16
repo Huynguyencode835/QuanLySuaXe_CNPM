@@ -1,12 +1,12 @@
 from app.dao import dao
 
 
-def get_components_data(args):
+def get_components_data(args,  page=None):
     q = args.get('q')
     vehicle_id = args.get("vehicle_id")
     brand_id = args.get("brand_id")
 
-    comps = dao.load_component(q=q, vehicle_id=vehicle_id, brand_id=brand_id)
+    comps = dao.load_component(q=q, vehicle_id=vehicle_id, brand_id=brand_id, page = page)
     vehicles = dao.load_vehicletype()
     brands = dao.load_brandveghicle()
 
