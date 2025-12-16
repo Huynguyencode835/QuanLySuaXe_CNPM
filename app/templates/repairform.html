@@ -546,6 +546,8 @@
                 </div>
 
                 <form action="" method="POST">
+                    <input type="hidden" id="hidden_user_id" name="user_id">
+                    <input type="hidden" id="hidden_vehicle_id" name="vehicle_id">
                     <div class="modal-content">
                     <!-- Items Container -->
                     <div class="items-container" id="items-container">
@@ -849,7 +851,5 @@
             attachDeleteEvent(item);
             attachSearchEvents(item);
         });
-
-
     </script>
 {% endblock %}
