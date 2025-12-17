@@ -438,20 +438,7 @@
                                 </tr>
                             {% else %}
                                 {% for d in data %}
-                                    <tr data-receptionform-id="1"
-                                        data-id="{{ d.id }}"
-                                        data-name="{{ d.name }}"
-                                        data-date-create="{{ d.appointment_date.strftime('%d/%m/%Y %H:%M') }}"
-                                        data-status="{{ state[d.status] }}"
-                                        data-state="{{ d.status.name }}"
-                                        data-phone="{{ d.phonenumber }}"
-                                        data-car="{{ d.carnumber }}"
-                                        data-type-vehicle="
-                                                {% if d.vehicletype %}{{ d.vehicletype.name }}{% else %}Chưa có{% endif %}"
-                                        data-customer-type="{% if d.customer_id is none %}Trực tiếp{% else %}Trực tuyến{% endif %}"
-                                        data-avatar="
-                                                {% if d.customer_id is not none %}{{ d.customer.avatar }}{% endif %}"
-                                        data-description="{{ d.description }}">
+                                    <tr data-receptionform-id="{{ d.id }}">
 
                                     <td class="info">
                                         {% if d.customer_id is not none %}
@@ -480,7 +467,6 @@
                                     </td>
                                 {% endfor %}
                             {% endif %}
-                            {#data-receptionform-id="1"#}
                             </tbody>
                         </table>
                     </div>
