@@ -82,15 +82,31 @@ def load_repairform_receptionform(q=None):
 
 
 #Lấy hóa đơn
-def get_unpaid_receipt(receipt_id):
+def get_receipt_by_id(receipt_id):
+    return Receipt.query.get(receipt_id)
+
+def get_receipt_succes():
+    return Receipt.query.filter(
+        Receipt.status == Form_status.SUCCESS
+    ).all()
+
+
+def get_unpaid_receipt(receipt_id, customer_id):
     return Receipt.query.filter(
         Receipt.id == receipt_id,
+        Receipt.customer_id == customer_id,
         Receipt.status == Form_status.WAIT_PAY
     ).first()
+
+def get_my_unpaid_receipt(customer_id):
+    return Receipt.query.filter(
+        Receipt.customer_id == customer_id,
+        Receipt.status == Form_status.WAIT_PAY
+    ).order_by(Receipt.created_date.desc()).first()
 
 
 if __name__ == '__main__':
     app = create_app()
     with app.app_context():
-        print(get_unpaid_receipt(2))
+        print(get_receipt_by_id(1))
 

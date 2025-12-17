@@ -114,6 +114,7 @@ class Receipt(db.Model):
     total_component_cost=Column(Float, default=0.0)
     total_cost=Column(Float, default=0.0)
     status = Column(Enum(Form_status), default=Form_status.WAIT_PAY)
+    paid_by=Column(String(150), default="")
     created_date = Column(DateTime, default=datetime.now)
     customer_id = Column(Integer, ForeignKey(User.id), nullable=False)
     accountant_id = Column(Integer, ForeignKey(User.id), nullable=False)
@@ -155,7 +156,7 @@ if __name__ == "__main__":
         # b3 = BrandVehicle(name="Toyota")
         # b4 = BrandVehicle(name="Mercedes")
         # db.session.add_all([b1, b2,b3,b4])
-        #
+
         # with open("../data/component.json", encoding="utf-8") as f:
         #     components = json.load(f)
         #

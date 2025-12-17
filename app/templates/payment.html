@@ -3,6 +3,7 @@
 <body>
 {% block content %}
 <h3 class="text-center mb-3">HÓA ĐƠN SỬA CHỮA</h3>
+{% if receipt %}
 <form>
     <p><strong>Hóa đơn #:</strong> {{ receipt.id }}</p>
     <p><strong>Ngày:</strong> {{ receipt.created_date.strftime('%d/%m/%Y') }}</p>
@@ -57,12 +58,16 @@
 </form>
 
 <form method="post"
-      action=""
+      action="{{ url_for('payments_bp.index') }}"
       class="text-center mt-4">
     <button class="btn btn-success btn-lg">
-        Xác nhận đã thanh toán
+        Xác nhận thanh toán
     </button>
 </form>
-
+<br>
+<br>
+{% else %}
+<p class="text-danger">Hóa đơn không tồn tại</p>
+{% endif %}
 {% endblock%}
 </body>
