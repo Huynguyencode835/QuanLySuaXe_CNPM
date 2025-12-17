@@ -101,7 +101,7 @@ def get_unpaid_receipt(receipt_id, customer_id):
 def get_my_unpaid_receipt(customer_id):
     return Receipt.query.filter(
         Receipt.customer_id == customer_id,
-        Receipt.status == Form_status.WAIT_PAY
+        Receipt.status == Form_status.REPAIRED_WAIT_PAY
     ).order_by(Receipt.created_date.desc()).first()
 
 

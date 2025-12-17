@@ -6,7 +6,7 @@
 <form>
     <div class="row">
         {% for rf in rp_f %}
-        {%if rf.status.name == 'UNDER_REPAIR'%}
+        {%if rf.status.name == 'REPAIRED_WAIT_PAY'%}
         <div class="col-md-6 mb-4">
             <div class="card repair-card">
                 <!-- HEADER -->
@@ -17,7 +17,7 @@
                     </div>
 
 
-                    {%if rf.status.name == 'UNDER_REPAIR'%}
+                    {%if rf.status.name == 'REPAIRED_WAIT_PAY'%}
                     <span class="badge bg-warning text-dark">
                         <i class="bi bi-tools"></i> {{state[rf.status]}}
                     </span>
