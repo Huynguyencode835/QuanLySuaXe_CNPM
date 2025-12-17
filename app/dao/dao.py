@@ -1,5 +1,8 @@
 import hashlib, json
+
 from app.models.model import Vehicletype, BrandVehicle, User, Component, UserRole, RepairForm, ReceptionForm,Receipt,Form_status
+
+from flask import current_app
 from app._init_ import create_app,db
 from sqlalchemy import or_
 
@@ -11,7 +14,10 @@ def load_vehicletype():
 def load_brandveghicle():
     return BrandVehicle.query.all()
 
-def load_component(q=None, vehicle_id=None, brand_id=None):
+def count_product():
+    return Component.query.count()
+
+def load_component(q=None, vehicle_id=None, brand_id=None,page=None):
     # with open("data/component.json", 'r', encoding='utf-8') as f:
     #     component = json.load(f)
     #     if q:
@@ -30,6 +36,11 @@ def load_component(q=None, vehicle_id=None, brand_id=None):
 
     if brand_id:
         query = query.filter(Component.brand_id.__eq__(int(brand_id)))
+
+    if page:
+        size = current_app.config["PAGE_SIZE"]
+        start = (int(page) - 1) * size
+        query = query.slice(start, (start + size))
 
     return query.all()
 

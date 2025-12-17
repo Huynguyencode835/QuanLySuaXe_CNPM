@@ -4,7 +4,9 @@ function update_form() {
     const phone = document.getElementById('modal_phone2').value;
     const car = document.getElementById('modal_car2').value;
     const vehicle_type = document.getElementById('modal_typeVehicle2').value;
-    const status = document.getElementById('modal_state2').value;
+
+    const status = document.getElementById('modal_state2')?.value || document.getElementById('modal_state2_1')?.value;
+
     const appointment_date = document.getElementById('modal_date_book2').value;
     const description = document.getElementById('modal_description2').value;
 

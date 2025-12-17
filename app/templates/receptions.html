@@ -595,7 +595,6 @@
     font-weight: 600;
 }
     </style>
-
     <div class="form_receptions">
         <div class="container">
             <div class="row">
@@ -706,12 +705,14 @@
                                                         </span>
                                                     </a>
                                                 {% endif %}
-                                                <a href="javascript:;" onclick="deleteForm({{d.id}})" class="table-link danger">
-                                                    <span class="fa-stack">
-                                                        <i class="fa fa-square fa-stack-2x"></i>
-                                                        <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
-                                                    </span>
-                                                </a>
+                                                {% if (d.status.name == 'REFUSE' and current_user.role.name == 'STAFF') or ((d.status.name == 'WAIT_APPROVAL' or d.status.name == 'REFUSE') and current_user.role.name == 'CUSTOMER') %}
+                                                    <a href="javascript:;" onclick="deleteForm({{d.id}})" class="table-link danger">
+                                                        <span class="fa-stack">
+                                                            <i class="fa fa-square fa-stack-2x"></i>
+                                                            <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                                        </span>
+                                                    </a>
+                                                {% endif %}
                                             </td>
                                         </tr>
                                         {%endfor%}
@@ -721,15 +722,13 @@
                             </table>
                         </div>
                         <nav>
-                            <ul class="pagination">
-                                <li class="page-item"><a class="page-link" href="#"><i class="fa fa-chevron-left"></i></a></li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                <li class="page-item"><a class="page-link" href="#"><i class="fa fa-chevron-right"></i></a></li>
-                            </ul>
+                            {%if pages>1%}
+                                <ul class="pagination mt-3 justify-content-center">
+                                    {%for i in range(1, (pages+1))%}
+                                    <li class="page-item"><a class="page-link" href="/receptions/?page={{i}}">{{i}}</a></li>
+                                    {%endfor%}
+                                </ul>
+                            {%endif%}
                         </nav>
                     </div>
                 </div>
@@ -791,15 +790,17 @@
                             </select>
                         </p>
                     </div>
-
+                    {%if current_user.role.name == 'STAFF'%}
                     <p>
                         <strong>Trạng thái:</strong>
                         <select id="modal_state2" class="modal-input">
-                            {% for status in Form_status %}
-                                <option value="{{ status.name }}">{{ state[status] }}</option>
-                            {% endfor %}
+                                <option value="WAIT_REPAIR">Chấp nhận</option>
+                                <option value="REFUSE">Từ chối</option>
                         </select>
                     </p>
+                    {%else%}
+                        <input type="hidden" id="modal_state2_1" name="modal_state2_1">
+                    {%endif%}
                     <div class="d-flex justify-content-between gap-3">
                         <p>
                             <strong>Ngày tạo:</strong>
@@ -867,7 +868,6 @@
             });
         });
 
-        // ========== MODAL 2 (Edit) - Code mới thêm vào ==========
         // Open edit modal
         document.querySelectorAll('.edit-modal').forEach(btn => {
             btn.addEventListener('click', function(e) {
@@ -889,13 +889,16 @@
                     description: row.dataset.description
                 };
 
-                console.log('Edit data:', data);
-
                 document.getElementById('modal_id2').value = data.id;
                 document.getElementById('modal_name2').value = data.name;
                 document.getElementById('modal_phone2').value = data.phone;
                 document.getElementById('modal_car2').value = data.car;
-                document.getElementById('modal_state2').value = data.state;
+
+                const modalStateElement = document.getElementById('modal_state2')?.value || document.getElementById('modal_state2_1')?.value;
+                if(modalStateElement){
+                    modalStateElement.value = data.state;
+                }
+
                 document.getElementById('modal_date_create2').value = data.dateCreate;
                 document.getElementById('modal_description2').value = data.description;
                 document.getElementById('modal_typeVehicle2').value = data.type;
@@ -904,6 +907,17 @@
                     const [date, time] = data.dateBook.split(' ');
                     const [day, month, year] = date.split('/');
                     document.getElementById('modal_date_book2').value = `${year}-${month}-${day}T${time}`;
+                }
+
+                const staffDropdown = document.getElementById('modal_state2');
+                if (staffDropdown) {
+                    staffDropdown.value = data.state;
+                }
+
+                // Nếu là CUSTOMER: set giá trị cho hidden input
+                const customerHidden = document.getElementById('modal_state2_1');
+                if (customerHidden) {
+                    customerHidden.value = data.state;
                 }
 
                 // Show modal

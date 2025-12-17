@@ -1,10 +1,26 @@
-from flask import render_template, request
+from flask import render_template, request, jsonify
 
-from app.dao import dao
+from app.models.model import Form_status
+from app.utils import receptionform_util
 from app.utils.component_util import get_components_data
 
 
 class RepairFormController:
+
+    def createform(self):
+        res = request.form.to_dict()
+
+        if res:
+            return jsonify({
+                "message": "Tạo phiếu sửa chửa thành thành công",
+                "category": "success"
+            })
+        else:
+            return jsonify({
+                "message": "thất bại",
+                "category": "error"
+            })
+
     def index(self):
         args = request.args.to_dict()
         comps, vehicles, brands, selected_vehicle_name, selected_brand_name = get_components_data(args)
@@ -34,4 +50,8 @@ class RepairFormController:
         return render_template("repairform.html", page="Phiếu sửa xe",
                                comps=comps_data, vehicles=vehicles_data, brands=brands_data, current_args=args,
                                selected_vehicle_name=selected_vehicle_name,
-                               selected_brand_name=selected_brand_name)
+                               selected_brand_name=selected_brand_name,
+                               data=receptionform_util.get_receptionform(Form_status.WAIT_REPAIR),
+                               state=receptionform_util.parse_state(),
+                               Form_status=Form_status
+                               )
