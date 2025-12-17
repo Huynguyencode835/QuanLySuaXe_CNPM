@@ -111,7 +111,6 @@ class Receipt(db.Model):
     total_labor_cost=Column(Float, default=0.0)
     total_component_cost=Column(Float, default=0.0)
     total_cost=Column(Float, default=0.0)
-    status = Column(Enum(Form_status), default=Form_status.REPAIRED_WAIT_PAY)
     paid_by=Column(String(150), default="")
     created_date = Column(DateTime, default=datetime.now)
     customer_id = Column(Integer, ForeignKey(User.id), nullable=False)
@@ -122,7 +121,6 @@ class Receipt(db.Model):
 class RepairForm(db.Model):
     id = Column(Integer, primary_key=True, autoincrement=True)
     technick_id = Column(Integer, ForeignKey(User.id), nullable=False)
-    status = Column(Enum(Form_status), default=Form_status.WAIT_REPAIR)
     receipt_id = Column(Integer, ForeignKey(Receipt.id), nullable=True)
     reception_form_id = Column(Integer, ForeignKey(ReceptionForm.id), nullable=False)
     components = relationship(
@@ -149,19 +147,6 @@ if __name__ == "__main__":
         c2 = Vehicletype(name="Oto")
         db.session.add_all([c1, c2])
 
-        # b1 = BrandVehicle(name="Honda")
-        # b2 = BrandVehicle(name="Yamaha")
-        # b3 = BrandVehicle(name="Toyota")
-        # b4 = BrandVehicle(name="Mercedes")
-        # db.session.add_all([b1, b2,b3,b4])
-
-        # with open("../data/component.json", encoding="utf-8") as f:
-        #     components = json.load(f)
-        #
-        #     for c in components:
-        #         comp = Component(**c)
-        #         db.session.add(comp)
-
         b1 = BrandVehicle(name="Honda")
         b2 = BrandVehicle(name="Yamaha")
         b3 = BrandVehicle(name="Toyota")
@@ -174,14 +159,7 @@ if __name__ == "__main__":
             for c in components:
                 comp = Component(**c)
                 db.session.add(comp)
-        #
-        # with open("../data/receptionform.json", encoding="utf-8") as f:
-        #     receptionforms = json.load(f)
-        #
-        #     for r in receptionforms:
-        #         rec = ReceptionForm(**r)
-        #         db.session.add(rec)
-        #
+
         # with open("../data/repairform.json", encoding="utf-8") as f:
         #     data = json.load(f)
         #     # 1. RepairForm

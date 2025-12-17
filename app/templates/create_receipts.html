@@ -6,7 +6,7 @@
 <form>
     <div class="row">
         {% for rf in rp_f %}
-        {%if rf.status.name == 'UNDER_REPAIR'%}
+        {%if rf.status.name == 'REPAIRED_WAIT_PAY'%}
         <div class="col-md-6 mb-4">
             <div class="card repair-card">
                 <!-- HEADER -->
@@ -17,7 +17,7 @@
                     </div>
 
 
-                    {%if rf.status.name == 'UNDER_REPAIR'%}
+                    {%if rf.status.name == 'REPAIRED_WAIT_PAY'%}
                     <span class="badge bg-warning text-dark">
                         <i class="bi bi-tools"></i> {{state[rf.status]}}
                     </span>
@@ -162,39 +162,38 @@
 
 
     document.getElementById("btnCreateReceipt").addEventListener("click", function(e) {
-    e.preventDefault(); // chặn reload page
+        e.preventDefault();
 
-    const checked = document.querySelectorAll("input[name='repair_form_ids']:checked");
-    const ids = Array.from(checked).map(cb => parseInt(cb.value));
+        const checked = document.querySelectorAll("input[name='repair_form_ids']:checked");
+        const ids = Array.from(checked).map(cb => parseInt(cb.value));
 
-    if (ids.length === 0) {
-        alert("Vui lòng chọn ít nhất 1 phiếu sửa");
-        return;
-    }
-
-    fetch("/create_receipts/api-createreceipt", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ repair_form_ids: ids })
-    })
-    .then(res => res.json())
-    .then(data => {
-        if (data.receipt_id) {
-            document.getElementById("receiptInfo").innerText =
-`HÓA ĐƠN SỬA CHỮA
------------------------
-Hóa đơn #:            ${data.receipt_id}
-Tổng tiền công:       ${data.total_labor_cost.toLocaleString()} VNĐ
-Tổng tiền phụ tùng:   ${data.total_component_cost.toLocaleString()} VNĐ
------------------------
-TỔNG CỘNG:            ${(data.total_labor_cost + data.total_component_cost).toLocaleString()} VNĐ`;
-
-            document.getElementById("receiptModal").style.display = "flex";
-        } else {
-            alert(data.error || "Có lỗi xảy ra");
+        if (ids.length === 0) {
+            alert("Vui lòng chọn ít nhất 1 phiếu sửa");
+            return;
         }
+        fetch("/create_receipts/api-createreceipt", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ repair_form_ids: ids })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.receipt_id) {
+                document.getElementById("receiptInfo").innerText =
+    `HÓA ĐƠN SỬA CHỮA
+    -----------------------
+    Hóa đơn #:            ${data.receipt_id}
+    Tổng tiền công:       ${data.total_labor_cost.toLocaleString()} VNĐ
+    Tổng tiền phụ tùng:   ${data.total_component_cost.toLocaleString()} VNĐ
+    -----------------------
+    TỔNG CỘNG:            ${(data.total_labor_cost + data.total_component_cost).toLocaleString()} VNĐ`;
+
+                document.getElementById("receiptModal").style.display = "flex";
+            } else {
+                alert(data.error || "Có lỗi xảy ra");
+            }
+        });
     });
-});
 
 function closeModal() {
     document.getElementById("receiptModal").style.display = "none";
