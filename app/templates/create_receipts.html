@@ -2,13 +2,12 @@
 {% block title %}Lập hóa đơn{% endblock %}
 <body>
 {% block content %}
-{%if rf_f%}
+{% if rp_f is not none %}
 <form>
     <div class="row">
         {% for rf in rp_f %}
         <div class="col-md-6 mb-4">
             <div class="card repair-card">
-
                 <!-- HEADER -->
                 <div class="card-header d-flex justify-content-between align-items-center bg-light">
                     <div>
@@ -16,17 +15,12 @@
                         <strong class="ms-1">Phiếu sửa #{{ rf.id }}</strong>
                     </div>
 
-                    {% if rf.status == 'DONE' %}
-
-                    {% else %}
-
-                    {% endif %}
-                    <span class="badge bg-success">
-                            <i class="bi bi-check-circle"></i> Đã sửa xong
-                     </span>
-                    <!--                    <span class="badge bg-warning text-dark">-->
-                    <!--                    <i class="bi bi-tools"></i> Đang sửa-->
-                    <!--                    </span>-->
+<!--                    <span class="badge bg-success">-->
+<!--                            <i class="bi bi-check-circle"></i> Đã sửa xong-->
+<!--                     </span>-->
+                    <span class="badge bg-warning text-dark">
+                        <i class="bi bi-tools"></i> {{state[rf.status]}}
+                    </span>
                 </div>
 
                 <!-- BODY -->
@@ -61,32 +55,6 @@
                             </p>
                         </div>
                     </div>
-
-                    <hr>
-
-                    <!-- MONEY -->
-                    <div class="row g-2">
-                        <div class="col-4">
-                            <div class="money-box">
-                                <div class="text-muted small">Công sửa</div>
-                                <strong>{{ rf.total_labor_cost }}</strong>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="money-box">
-                                <div class="text-muted small">Linh kiện</div>
-                                <strong>{{ rf.total_component_cost }}</strong>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="money-box total">
-                                <div class="text-muted small">Tổng</div>
-                                <strong class="text-danger fs-5">
-                                    {{ rf.total_cost }}
-                                </strong>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
                 <!-- FOOTER -->
@@ -107,59 +75,65 @@
 
                 <!-- DETAIL -->
                 <div id="detail-{{ rf.id }}" class="card-body border-top" style="display: none;">
-                    {% for action in rf.actions %}
                     <div class="mb-3">
-                        <div class="fw-bold text-primary">
-                            {{ action.description }}
-                            <span class="text-muted small">(Công: {{ action.labor_cost }})</span>
-                        </div>
-
                         <table class="table table-sm table-bordered mt-2">
                             <colgroup>
-                                <col style="width: 40%">
-                                <col style="width: 20%">
-                                <col style="width: 20%">
-                                <col style="width: 20%">
+                                <col style="width: 30%">
+                                <col style="width: 10%">
+                                <col style="width: 30%">
+                                <col style="width: 10%">
+                                <col style="width: 10%">
                             </colgroup>
                             <thead class="table-light">
                             <tr>
+                                <th>Hạng mục</th>
+                                <th>Chi phí</th>
                                 <th>Linh kiện</th>
-                                <th class="text-end">Giá</th>
+                                <th class="text-end">Giá LK</th>
                                 <th class="text-end">SL</th>
-                                <th class="text-end">Thành tiền</th>
                             </tr>
                             </thead>
                             <tbody>
-                            {% for ac in action.components %}
+                            {% for c in rf.components %}
                             <tr>
-                                <td>{{ ac.component.name }}</td>
-                                <td class="text-end">{{ ac.component.price }}</td>
-                                <td class="text-end">{{ ac.quantity }}</td>
-                                <td class="text-end">
-                                    {{ ac.component.price * ac.quantity }}
-                                </td>
+                                <td>{{ c.action }}</td>
+                                <td>{{ c.cost }}</td>
+                                <td>{{ c.component.name }}</td>
+                                <td class="text-end">{{ c.component.price }}</td>
+                                <td class="text-end">{{ c.quantity }}</td>
                             </tr>
                             {% endfor %}
                             </tbody>
                         </table>
                     </div>
-                    {% endfor %}
+
                 </div>
 
             </div>
         </div>
-
         {% endfor %}
-
     </div>
-    <button type="submit" class="btn btn-success mt-3">
+    <button type="submit" class="btn btn-success mt-3" id="btnCreateReceipt">
         Lập hóa đơn
     </button>
+
+
+    <!-- Modal -->
+    <div id="receiptModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h3> HÓA ĐƠN SỬA CHỮA</h3>
+            <pre id="receiptInfo"></pre>
+        </div>
+    </div>
+
+
 </form>
 {%else%}
 <div>Không có phiếu để lập hóa đơn</div>
 {%endif%}
 <script>
+
     function toggleDetail(id, btn) {
         const row = document.getElementById("detail-" + id);
 
@@ -175,6 +149,47 @@
             btn.classList.add("btn-info");
         }
     }
+
+
+    document.getElementById("btnCreateReceipt").addEventListener("click", function(e) {
+    e.preventDefault(); // chặn reload page
+
+    const checked = document.querySelectorAll("input[name='repair_form_ids']:checked");
+    const ids = Array.from(checked).map(cb => parseInt(cb.value));
+
+    if (ids.length === 0) {
+        alert("Vui lòng chọn ít nhất 1 phiếu sửa");
+        return;
+    }
+
+    fetch("/create_receipts/api-createreceipt", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ repair_form_ids: ids })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.receipt_id) {
+            document.getElementById("receiptInfo").innerText =
+`HÓA ĐƠN SỬA CHỮA
+-----------------------
+Hóa đơn #:            ${data.receipt_id}
+Tổng tiền công:       ${data.total_labor_cost.toLocaleString()} VNĐ
+Tổng tiền phụ tùng:   ${data.total_component_cost.toLocaleString()} VNĐ
+-----------------------
+TỔNG CỘNG:            ${(data.total_labor_cost + data.total_component_cost).toLocaleString()} VNĐ`;
+
+            document.getElementById("receiptModal").style.display = "flex";
+        } else {
+            alert(data.error || "Có lỗi xảy ra");
+        }
+    });
+});
+
+function closeModal() {
+    document.getElementById("receiptModal").style.display = "none";
+}
+
 
 </script>
 {% endblock %}

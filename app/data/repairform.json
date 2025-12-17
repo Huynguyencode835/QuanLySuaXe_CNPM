@@ -1,66 +1,37 @@
-[
-  {
-    "id": 1,
+{
+  "repair_form": {
+    "id": 3,
     "technick_id": 5,
-    "reception_form_id": 3,
-    "actions": [
-      {
-        "description": "Thay đĩa thắng trước",
-        "labor_cost": 150,
-        "components": [
-          {
-            "component_id": 1,
-            "quantity": 1
-          }
-        ]
-      },
-      {
-        "description": "Thay bộ thắng sau",
-        "labor_cost": 120,
-        "components": [
-          {
-            "component_id": 2,
-            "quantity": 1
-          }
-        ]
-      },
-      {
-        "description": "Vệ sinh và thay lọc gió",
-        "labor_cost": 80,
-        "components": [
-          {
-            "component_id": 4,
-            "quantity": 1
-          }
-        ]
-      }
-    ]
+    "receipt_id": null,
+    "reception_form_id": 1
   },
-  {
-    "id": 2,
-    "technick_id": 5,
-    "reception_form_id": 4,
-    "actions": [
-      {
-        "description": "Thay bugi đánh lửa",
-        "labor_cost": 200,
-        "components": [
-          {
-            "component_id": 12,
-            "quantity": 4
-          }
-        ]
-      },
-      {
-        "description": "Lắp camera 3 mắt",
-        "labor_cost": 300,
-        "components": [
-          {
-            "component_id": 8,
-            "quantity": 1
-          }
-        ]
-      }
-    ]
-  }
-]
+  "repair_components": [
+    {
+      "id_repair_form": 1,
+      "id_component": 3,
+      "component_name": "Phuộc sau AB125",
+      "quantity": 1,
+      "unit_price": 1000,
+      "cost": 2000,
+      "action": "Thay phuộc sau"
+    },
+    {
+      "id_repair_form": 1,
+      "id_component": 5,
+      "component_name": "Bánh mâm sau",
+      "quantity": 1,
+      "unit_price": 29000,
+      "cost": 10050,
+      "action": "Thay bánh mâm sau"
+    },
+    {
+      "id_repair_form": 1,
+      "id_component": 6,
+      "component_name": "Bộ nồi AB125",
+      "quantity": 1,
+      "unit_price": 29095,
+      "cost": 15042,
+      "action": "Thay bộ nồi xe"
+    }
+  ]
+}

@@ -1,12 +1,16 @@
-def calc_labor_cost(repair_form):
-    return sum(a.labor_cost for a in repair_form.actions)
-
-def calc_component_cost(repair_form):
+def calc_labor_cost(repairform):
     total=0
-    for a in repair_form.actions:
-        for a_comp in a.components:
-            total+= a_comp.quantity * a_comp.component.price
+    for rf in repairform:
+        for c in rf.components:
+            total+= c.cost
     return total
 
-def calc_total_cost(repair_form):
-    return calc_component_cost(repair_form) + calc_labor_cost(repair_form)
+def calc_total_component(repairform):
+    total=0
+    for rf in repairform:
+        for c in rf.components:
+            total+= c.quantity * c.component.price
+    return total
+
+def calc_total_receipt(repairform):
+    return calc_labor_cost(repairform) + calc_total_component(repairform)

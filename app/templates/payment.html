@@ -1,0 +1,68 @@
+{% extends 'layout/base.html' %}
+{% block title %}Thanh toán{% endblock %}
+<body>
+{% block content %}
+<h3 class="text-center mb-3">HÓA ĐƠN SỬA CHỮA</h3>
+<form>
+    <p><strong>Hóa đơn #:</strong> {{ receipt.id }}</p>
+    <p><strong>Ngày:</strong> {{ receipt.created_date.strftime('%d/%m/%Y') }}</p>
+
+    <hr>
+
+    {% for rf in receipt.repair_forms %}
+    <h5>Phiếu sửa #{{ rf.id }}</h5>
+
+    <p>
+        <strong>Khách :</strong> {{ rf.reception_form.name }} <br>
+        <strong>SĐT :</strong> {{ rf.reception_form.phonenumber }} <br>
+        <strong>Biển số :</strong> {{ rf.reception_form.carnumber }} <br>
+        <strong>KTV :</strong> {{ rf.technick.name }}<br>
+        <strong>Lỗi :</strong> {{ rf.reception_form.description }}
+    </p>
+
+    <table class="table table-bordered table-sm">
+        <thead class="table-light">
+        <tr>
+            <th>Hạng mục</th>
+            <th>Tiền công</th>
+            <th>Linh kiện</th>
+            <th>Đơn giá</th>
+            <th class="text-center">SL</th>
+            <th class="text-end">Thành tiền</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for c in rf.components %}
+        <tr>
+            <td>{{ c.action }}</td>
+            <td>{{ c.cost }}</td>
+            <td>{{ c.component.name }}</td>
+            <td>{{ c.component.price }}</td>
+            <td class="text-center">{{ c.quantity }}</td>
+            <td class="text-end">
+                {{ (c.component.price * c.quantity) }}
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <hr>
+    {% endfor %}
+
+    <h4 class="text-end">
+        TỔNG THANH TOÁN:
+        {{ (receipt.total_labor_cost + receipt.total_component_cost) }}
+    </h4>
+
+</form>
+
+<form method="post"
+      action=""
+      class="text-center mt-4">
+    <button class="btn btn-success btn-lg">
+        Xác nhận đã thanh toán
+    </button>
+</form>
+
+{% endblock%}
+</body>

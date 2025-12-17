@@ -85,7 +85,9 @@ class Form_status(RoleEnum):
     REFUSE = 2
     WAIT_REPAIR = 3
     UNDER_REPAIR = 4
-    SUCCESS = 5
+    REPAIRED = 5
+    WAIT_PAY = 6
+    SUCCESS = 7
 
 class ReceptionForm(db.Model):
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -108,6 +110,10 @@ class SystemParameters(db.Model):
 
 class Receipt(db.Model):
     id = Column(Integer, primary_key=True, autoincrement=True)
+    total_labor_cost=Column(Float, default=0.0)
+    total_component_cost=Column(Float, default=0.0)
+    total_cost=Column(Float, default=0.0)
+    status = Column(Enum(Form_status), default=Form_status.WAIT_PAY)
     created_date = Column(DateTime, default=datetime.now)
     customer_id = Column(Integer, ForeignKey(User.id), nullable=False)
     accountant_id = Column(Integer, ForeignKey(User.id), nullable=False)
@@ -117,8 +123,14 @@ class Receipt(db.Model):
 class RepairForm(db.Model):
     id = Column(Integer, primary_key=True, autoincrement=True)
     technick_id = Column(Integer, ForeignKey(User.id), nullable=False)
-    receipt_id = Column(Integer, ForeignKey(Receipt.id), nullable=False)
+    status = Column(Enum(Form_status), default=Form_status.UNDER_REPAIR)
+    receipt_id = Column(Integer, ForeignKey(Receipt.id), nullable=True)
     reception_form_id = Column(Integer, ForeignKey(ReceptionForm.id), nullable=False)
+    components = relationship(
+        "RepairForms_Components",
+        backref="repair_form",
+        lazy=True
+    )
 
 class RepairForms_Components(db.Model):
     id_repair_form = Column(Integer, ForeignKey(RepairForm.id), nullable=False,primary_key=True)
@@ -126,100 +138,104 @@ class RepairForms_Components(db.Model):
     quantity = Column(Integer, default=1)
     cost = Column(Float, default=0.0)
     action = Column(Text)
+    component = relationship("Component", lazy=True)
+
 
 if __name__ == "__main__":
     app = create_app()
     with app.app_context():
         # db.drop_all()
         db.create_all()
-        c1 = Vehicletype(name="Moto")
-        c2 = Vehicletype(name="Oto")
-        db.session.add_all([c1, c2])
-
-        b1 = BrandVehicle(name="Honda")
-        b2 = BrandVehicle(name="Yamaha")
-        b3 = BrandVehicle(name="Toyota")
-        b4 = BrandVehicle(name="Mercedes")
-        db.session.add_all([b1, b2,b3,b4])
-
-        with open("../data/component.json", encoding="utf-8") as f:
-            components = json.load(f)
-
-            for c in components:
-                comp = Component(**c)
-                db.session.add(comp)
-
-        with open("../data/receptionform.json", encoding="utf-8") as f:
-            receptionforms = json.load(f)
-
-            for r in receptionforms:
-                rec = ReceptionForm(**r)
-                db.session.add(rec)
-
-        # with open("../data/repairform.json", encoding="utf-8") as f:
-        #     repairforms = json.load(f)
-        #     for r in repairforms:
-        #         form = RepairForm(
-        #             technick_id=r["technick_id"],
-        #             reception_form_id=r["reception_form_id"]
-        #         )
-        #         for act in r["actions"]:
-        #             action = RepairAction(
-        #                 description=act["description"],
-        #                 labor_cost=act["labor_cost"]
-        #             )
+        # c1 = Vehicletype(name="Moto")
+        # c2 = Vehicletype(name="Oto")
+        # db.session.add_all([c1, c2])
         #
-        #             for c in act["components"]:
-        #                 action.components.append(
-        #                     RepairActionComponent(
-        #                         component_id=c["component_id"],
-        #                         quantity=c["quantity"]
-        #                     )
-        #                 )
-        #             form.actions.append(action)
-        #         db.session.add(form)
+        # b1 = BrandVehicle(name="Honda")
+        # b2 = BrandVehicle(name="Yamaha")
+        # b3 = BrandVehicle(name="Toyota")
+        # b4 = BrandVehicle(name="Mercedes")
+        # db.session.add_all([b1, b2,b3,b4])
+        #
+        # with open("../data/component.json", encoding="utf-8") as f:
+        #     components = json.load(f)
+        #
+        #     for c in components:
+        #         comp = Component(**c)
+        #         db.session.add(comp)
+
+        # with open("../data/receptionform.json", encoding="utf-8") as f:
+        #     receptionforms = json.load(f)
+        #
+        #     for r in receptionforms:
+        #         rec = ReceptionForm(**r)
+        #         db.session.add(rec)
+
+        with open("../data/repairform.json", encoding="utf-8") as f:
+            data = json.load(f)
+            # 1. RepairForm
+            rf = data["repair_form"]
+
+            repair_form = RepairForm(
+                technick_id=rf["technick_id"],
+                reception_form_id=rf["reception_form_id"]
+            )
+            db.session.add(repair_form)
+            db.session.commit()
+
+            # 2. RepairForms_Components
+            for item in data["repair_components"]:
+                rf_comp = RepairForms_Components(
+                    id_repair_form=repair_form.id,
+                    id_component=item["id_component"],
+                    quantity=item["quantity"],
+                    cost=item["cost"],
+                    action=item["action"]
+                )
+                db.session.add(rf_comp)
+
+            # db.session.commit()
 
 
-        admin_pass = str(hashlib.md5(("admin").encode('utf-8')).hexdigest())
-        new_admin = User(
-            name="Quản trị viên",
-            username="admin",
-            password=admin_pass,
-            avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfjno7hGrNNuPZwaFZ8U8Mhr_Yq39rzd_p0YN_HVYk6KFmMETjtgd9bwl0UhU6g4xDDGg&usqp=CAU",
-            role=UserRole.ADMIN
-
-        )
-
-        new_customer = User(
-            name="Customer",
-            username="customer",
-            password=str(hashlib.md5(("customer").encode('utf-8')).hexdigest()),
-            avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfjno7hGrNNuPZwaFZ8U8Mhr_Yq39rzd_p0YN_HVYk6KFmMETjtgd9bwl0UhU6g4xDDGg&usqp=CAU",
-            role=UserRole.CUSTOMER
-        )
-        new_technick = User(
-            name="Kỹ thuật viên",
-            username="technick",
-            password=str(hashlib.md5(("1").encode('utf-8')).hexdigest()),
-            avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfjno7hGrNNuPZwaFZ8U8Mhr_Yq39rzd_p0YN_HVYk6KFmMETjtgd9bwl0UhU6g4xDDGg&usqp=CAU",
-            role=UserRole.TECHNICK
-        )
-
-        new_staff = User(
-            name="Staff",
-            username="staff",
-            password=str(hashlib.md5(("staff").encode('utf-8')).hexdigest()),
-            avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfjno7hGrNNuPZwaFZ8U8Mhr_Yq39rzd_p0YN_HVYk6KFmMETjtgd9bwl0UhU6g4xDDGg&usqp=CAU",
-            role=UserRole.STAFF
-        )
-
-        new_accountant = User(
-            name="Accountant",
-            username="accountant",
-            password=str(hashlib.md5(("1").encode('utf-8')).hexdigest()),
-            avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfjno7hGrNNuPZwaFZ8U8Mhr_Yq39rzd_p0YN_HVYk6KFmMETjtgd9bwl0UhU6g4xDDGg&usqp=CAU",
-            role=UserRole.ACCOUNTANT
-        )
-        db.session.add_all([new_admin,new_customer, new_staff,new_accountant,new_technick])
-        db.session.add(SystemParameters(VAT=20, limitcar=30))
+        # admin_pass = str(hashlib.md5(("admin").encode('utf-8')).hexdigest())
+        # new_admin = User(
+        #     name="Quản trị viên",
+        #     username="admin",
+        #     password=admin_pass,
+        #     avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfjno7hGrNNuPZwaFZ8U8Mhr_Yq39rzd_p0YN_HVYk6KFmMETjtgd9bwl0UhU6g4xDDGg&usqp=CAU",
+        #     role=UserRole.ADMIN
+        #
+        # )
+        #
+        # new_customer = User(
+        #     name="Customer",
+        #     username="customer",
+        #     password=str(hashlib.md5(("customer").encode('utf-8')).hexdigest()),
+        #     avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfjno7hGrNNuPZwaFZ8U8Mhr_Yq39rzd_p0YN_HVYk6KFmMETjtgd9bwl0UhU6g4xDDGg&usqp=CAU",
+        #     role=UserRole.CUSTOMER
+        # )
+        # new_technick = User(
+        #     name="Kỹ thuật viên",
+        #     username="technick",
+        #     password=str(hashlib.md5(("1").encode('utf-8')).hexdigest()),
+        #     avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfjno7hGrNNuPZwaFZ8U8Mhr_Yq39rzd_p0YN_HVYk6KFmMETjtgd9bwl0UhU6g4xDDGg&usqp=CAU",
+        #     role=UserRole.TECHNICK
+        # )
+        #
+        # new_staff = User(
+        #     name="Staff",
+        #     username="staff",
+        #     password=str(hashlib.md5(("staff").encode('utf-8')).hexdigest()),
+        #     avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfjno7hGrNNuPZwaFZ8U8Mhr_Yq39rzd_p0YN_HVYk6KFmMETjtgd9bwl0UhU6g4xDDGg&usqp=CAU",
+        #     role=UserRole.STAFF
+        # )
+        #
+        # new_accountant = User(
+        #     name="Accountant",
+        #     username="accountant",
+        #     password=str(hashlib.md5(("1").encode('utf-8')).hexdigest()),
+        #     avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfjno7hGrNNuPZwaFZ8U8Mhr_Yq39rzd_p0YN_HVYk6KFmMETjtgd9bwl0UhU6g4xDDGg&usqp=CAU",
+        #     role=UserRole.ACCOUNTANT
+        # )
+        # db.session.add_all([new_admin,new_customer, new_staff,new_accountant,new_technick])
+        # db.session.add(SystemParameters(VAT=20, limitcar=30))
         db.session.commit()

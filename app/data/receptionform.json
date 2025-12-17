@@ -7,7 +7,6 @@
     "created_date": "2025-12-15T09:00:00",
     "appointment_date": "2025-12-16T10:00:00",
     "description": "Xe bị hỏng thắng, cần kiểm tra nhanh",
-    "status": "WAIT_APPROVAL",
     "veType_id": 1,
     "customer_id": 2,
     "staff_id": 3
@@ -20,7 +19,6 @@
     "created_date": "2025-12-15T09:30:00",
     "appointment_date": "2025-12-16T11:00:00",
     "description": "Bảo dưỡng định kỳ, thay nhớt",
-    "status": "WAIT_APPROVAL",
     "veType_id": 2,
     "customer_id": 2,
     "staff_id": 3

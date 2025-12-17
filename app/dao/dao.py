@@ -1,5 +1,5 @@
 import hashlib, json
-from app.models.model import Vehicletype, BrandVehicle, User, Component, UserRole, RepairForm, ReceptionForm
+from app.models.model import Vehicletype, BrandVehicle, User, Component, UserRole, RepairForm, ReceptionForm,Receipt,Form_status
 from app._init_ import create_app,db
 from sqlalchemy import or_
 
@@ -56,17 +56,30 @@ def get_reception_form():
 
 
 def load_repairform_receptionform(q=None):
-    query = RepairForm.query.join(ReceptionForm)
+    query = RepairForm.query.join(RepairForm.reception_form)
+
     if q:
-        query = query.filter(or_(ReceptionForm.name.contains(q),
-                                 ReceptionForm.phonenumber.contains(q),
-                                 ReceptionForm.carnumber.contains(q)))
+        query = query.filter(
+            or_(
+                ReceptionForm.name.contains(q),
+                ReceptionForm.phonenumber.contains(q),
+                ReceptionForm.carnumber.contains(q)
+            )
+        )
+
     return query.all()
+
+
+#Lấy hóa đơn
+def get_unpaid_receipt(receipt_id):
+    return Receipt.query.filter(
+        Receipt.id == receipt_id,
+        Receipt.status == Form_status.WAIT_PAY
+    ).first()
 
 
 if __name__ == '__main__':
     app = create_app()
     with app.app_context():
-        print(get_repair_form())
-        print(get_reception_form())
+        print(get_unpaid_receipt(2))
 
