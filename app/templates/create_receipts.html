@@ -174,15 +174,7 @@
         .then(res => res.json())
         .then(data => {
             if (data.receipt_id) {
-                document.getElementById("receiptInfo").innerText =
-    `HÓA ĐƠN SỬA CHỮA
-    -----------------------
-    Hóa đơn #:            ${data.receipt_id}
-    Tổng tiền công:       ${data.total_labor_cost.toLocaleString()} VNĐ
-    Tổng tiền phụ tùng:   ${data.total_component_cost.toLocaleString()} VNĐ
-    -----------------------
-    TỔNG CỘNG:            ${(data.total_labor_cost + data.total_component_cost).toLocaleString()} VNĐ`;
-
+                document.getElementById("receiptInfo").innerText =`Tạo hoá đơn thành công`;
                 document.getElementById("receiptModal").style.display = "flex";
             } else {
                 alert(data.error || "Có lỗi xảy ra");

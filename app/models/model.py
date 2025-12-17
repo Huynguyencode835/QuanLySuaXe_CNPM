@@ -113,7 +113,7 @@ class Receipt(db.Model):
     total_cost=Column(Float, default=0.0)
     paid_by=Column(String(150), default="")
     created_date = Column(DateTime, default=datetime.now)
-    customer_id = Column(Integer, ForeignKey(User.id), nullable=False)
+    customer_id = Column(Integer, ForeignKey(User.id), nullable=True)
     accountant_id = Column(Integer, ForeignKey(User.id), nullable=False)
     repair_forms = relationship('RepairForm', backref='receipt', lazy=True)
 

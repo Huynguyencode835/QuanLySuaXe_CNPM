@@ -51,8 +51,8 @@
     {% endfor %}
 
     <h4 class="text-end">
-        TỔNG THANH TOÁN:
-        {{ (receipt.total_labor_cost + receipt.total_component_cost) }}
+        TỔNG THANH TOÁN ({{vat.VAT}}%) :
+        {{ (receipt.total_cost) }}
     </h4>
 
 </form>

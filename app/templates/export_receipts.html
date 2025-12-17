@@ -48,9 +48,11 @@
 </table>
 {% endfor %}
 <br>
-
 <h5 style="text-align: right">
-    TỔNG THANH TOÁN (VAT : {{vat[0].VAT}}%) :
+    TỔNG : {{ rc.total_labor_cost+rc.total_component_cost}} VNĐ
+</h5>
+<h5 style="text-align: right">
+    TỔNG THANH TOÁN (VAT : {{vat.VAT}}%) :
     {{ rc.total_cost}} VNĐ
 </h5>
 <br>

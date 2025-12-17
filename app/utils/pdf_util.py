@@ -5,6 +5,8 @@ from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.pagesizes import A4
 from reportlab.lib import colors
 from flask import current_app
+from app.utils.calc_total_repairform import calc_total_VAT
+import app.dao.dao as dao
 import os
 
 def export_receipt_pdf(receipt):
@@ -64,7 +66,7 @@ def export_receipt_pdf(receipt):
     table_data = [[
         "Hạng mục", "Tiền công", "Linh kiện", "Đơn giá", "SL", "Thành tiền"
     ]]
-
+    vat=dao.get_VAT()
     total = 0
 
     for rf in receipt.repair_forms:
@@ -102,10 +104,21 @@ def export_receipt_pdf(receipt):
     # ===== TỔNG TIỀN =====
     elements.append(
         Paragraph(
-            f"<b>TỔNG THANH TOÁN: {total:,.0f} VND</b>",
+            f"<b>TỔNG : {total:,.0f} VND</b>",
             ParagraphStyle(
                 name="Total",
-                fontSize=13,
+                fontSize=12,
+                alignment=2  # right
+            )
+        )
+    )
+    total=calc_total_VAT(receipt.repair_forms)
+    elements.append(
+        Paragraph(
+            f"<b>TỔNG THANH TOÁN (VAT:{vat.VAT}%) : {total:,.0f} VND</b>",
+            ParagraphStyle(
+                name="Total",
+                fontSize=14,
                 alignment=2  # right
             )
         )

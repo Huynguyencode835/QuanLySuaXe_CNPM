@@ -80,7 +80,7 @@ def load_repairform_receptionform(q=None):
     return query.all()
 #lấy vat
 def get_VAT():
-    return SystemParameters.query.all()
+    return SystemParameters.query.first()
 
 #Lấy hóa đơn
 def get_receipt_by_id(receipt_id):
@@ -104,14 +104,19 @@ def get_unpaid_receipt(receipt_id, customer_id):
     ).first()
 
 def get_my_unpaid_receipt(customer_id):
-    return Receipt.query.filter(
-        Receipt.customer_id == customer_id,
-        Receipt.status == Form_status.REPAIRED_WAIT_PAY
-    ).order_by(Receipt.created_date.desc()).first()
+    return (
+        Receipt.query
+        .join(Receipt.repair_forms)
+        .join(RepairForm.reception_form)
+        .filter(
+            ReceptionForm.status == Form_status.REPAIRED_WAIT_PAY,
+            Receipt.customer_id == customer_id
+        ).first()
+    )
 
 
 if __name__ == '__main__':
     app = create_app()
     with app.app_context():
-        print(get_VAT())
+        print(get_my_unpaid_receipt(1))
 
