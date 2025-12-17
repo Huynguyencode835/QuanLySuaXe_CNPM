@@ -4,8 +4,9 @@ from app.utils.pdf_util import export_receipt_pdf
 
 class Export_receiptsController:
     def index(self):
-        receipt=dao.get_receipt_succes()
-        return render_template("export_receipts.html",page="Xuất hóa đơn",receipt=receipt)
+        receipt=dao.get_receipt_success()
+        vat=dao.get_VAT()
+        return render_template("export_receipts.html",page="Xuất hóa đơn",receipt=receipt,vat=vat)
 
     def export(self,receipt_id):
         receipt=dao.get_receipt_by_id(receipt_id)

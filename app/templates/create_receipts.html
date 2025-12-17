@@ -6,7 +6,6 @@
 <form>
     <div class="row">
         {% for rf in rp_f %}
-        {%if rf.status.name == 'REPAIRED_WAIT_PAY'%}
         <div class="col-md-6 mb-4">
             <div class="card repair-card">
                 <!-- HEADER -->
@@ -17,15 +16,14 @@
                     </div>
 
 
-                    {%if rf.status.name == 'REPAIRED_WAIT_PAY'%}
                     <span class="badge bg-warning text-dark">
-                        <i class="bi bi-tools"></i> {{state[rf.status]}}
+                        <i class="bi bi-tools"></i> {{state[rf.reception_form.status]}}
                     </span>
-                    {%endif%}
 
-                    {%if rf.status.name == 'SUCCESS'%}
+
+                    {%if rf.reception_form.status == 'SUCCESS'%}
                     <span class="badge bg-success">
-                        <i class="bi bi-check-circle"></i> {{state[rf.status]}}
+                        <i class="bi bi-check-circle"></i> {{state[rf.reception_form.status]}}
                     </span>
                     {%endif%}
                 </div>
@@ -118,7 +116,6 @@
 
             </div>
         </div>
-        {%endif%}
         {% endfor %}
     </div>
     <button type="submit" class="btn btn-success mt-3" id="btnCreateReceipt">
@@ -136,8 +133,6 @@
             <pre id="receiptInfo"></pre>
         </div>
     </div>
-
-
 </form>
 {%else%}
 <div>Không có phiếu để lập hóa đơn</div>

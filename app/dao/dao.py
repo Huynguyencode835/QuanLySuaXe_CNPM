@@ -1,7 +1,6 @@
 import hashlib, json
 
-from app.models.model import Vehicletype, BrandVehicle, User, Component, UserRole, RepairForm, ReceptionForm,Receipt,Form_status
-
+from app.models.model import Vehicletype, BrandVehicle, User, Component, UserRole, RepairForm, ReceptionForm,Receipt,Form_status,SystemParameters
 from flask import current_app
 from app._init_ import create_app,db
 from sqlalchemy import or_
@@ -79,16 +78,22 @@ def load_repairform_receptionform(q=None):
         )
 
     return query.all()
-
+#lấy vat
+def get_VAT():
+    return SystemParameters.query.all()
 
 #Lấy hóa đơn
 def get_receipt_by_id(receipt_id):
     return Receipt.query.get(receipt_id)
 
-def get_receipt_succes():
-    return Receipt.query.filter(
-        Receipt.status == Form_status.SUCCESS
-    ).all()
+def get_receipt_success():
+    return (
+        Receipt.query
+        .join(Receipt.repair_forms)
+        .join(RepairForm.reception_form)
+        .filter(ReceptionForm.status == Form_status.SUCCESS)
+        .all()
+    )
 
 
 def get_unpaid_receipt(receipt_id, customer_id):
@@ -108,5 +113,5 @@ def get_my_unpaid_receipt(customer_id):
 if __name__ == '__main__':
     app = create_app()
     with app.app_context():
-        print(get_receipt_by_id(1))
+        print(get_VAT())
 

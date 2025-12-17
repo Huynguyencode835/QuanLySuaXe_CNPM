@@ -103,7 +103,7 @@ class ReceptionForm(db.Model):
 
 class SystemParameters(db.Model):
     id = Column(Integer, primary_key=True, autoincrement=True)
-    VAT = Column(Float, default=0.0)
+    VAT = Column(Integer, default=0)
     limitcar=Column(Integer, default=30)
 
 class Receipt(db.Model):

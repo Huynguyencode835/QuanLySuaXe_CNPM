@@ -50,8 +50,8 @@
 <br>
 
 <h5 style="text-align: right">
-    TỔNG THANH TOÁN:
-    {{ rc.total_labor_cost + rc.total_component_cost }} VNĐ
+    TỔNG THANH TOÁN (VAT : {{vat[0].VAT}}%) :
+    {{ rc.total_cost}} VNĐ
 </h5>
 <br>
 <a href="{{ url_for('export_receipts_bp.export', receipt_id=rc.id) }}"

@@ -25,6 +25,9 @@ def export_receipt_pdf(receipt):
     styles = getSampleStyleSheet()
     elements = []
 
+    rf = receipt.repair_forms[0]
+    reception = rf.reception_form
+
     # ===== TIÊU ĐỀ =====
     title = Paragraph(
         f"<b>HÓA ĐƠN SỬA CHỮA #{receipt.id}</b>",
@@ -41,6 +44,18 @@ def export_receipt_pdf(receipt):
     elements.append(Paragraph(f"<b>Phiếu #:</b> {receipt.id}", styles["Normal"]))
     elements.append(Paragraph(
         f"<b>Ngày:</b> {receipt.created_date.strftime('%d/%m/%Y')}",
+        styles["Normal"]
+    ))
+    elements.append(Paragraph(
+        f"<b>Khách hàng :</b> {reception.name}",
+        styles["Normal"]
+    ))
+    elements.append(Paragraph(
+        f"<b>Biển số :</b> {reception.carnumber}",
+        styles["Normal"]
+    ))
+    elements.append(Paragraph(
+        f"<b>Lỗi :</b> {reception.description}",
         styles["Normal"]
     ))
     elements.append(Spacer(1, 12))
