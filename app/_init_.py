@@ -2,9 +2,12 @@ from flask import Flask,session
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 import cloudinary
+from authlib.integrations.flask_client import OAuth
+
 
 db = SQLAlchemy()
 login_manager = LoginManager()
+
 
 
 cloudinary.config(
@@ -13,6 +16,8 @@ cloudinary.config(
     api_secret= 'oNIu8AMfcmwLlkhANlyCYXI40B0'
 )
 
+
+
 def create_app():
     app = Flask(__name__)
 
@@ -20,6 +25,8 @@ def create_app():
     app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:Abc123@localhost/app?charset=utf8mb4"
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     app.config["PAGE_SIZE"] = 4;
+
+
 
     db.init_app(app)
 
@@ -33,3 +40,13 @@ def create_app():
 
 
     return app
+
+oauth = OAuth(create_app())
+
+google = oauth.register(
+    name='google',
+    client_id='675493875346-lcqd545p7lo818gvkssf24ojvo74dt9t.apps.googleusercontent.com',
+    client_secret='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',
+    server_metadata_url='https://accounts.google.com/.well-known/openid-configuration',
+    client_kwargs={'scope': 'openid email profile'}
+)

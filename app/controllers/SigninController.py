@@ -1,12 +1,30 @@
 import cloudinary.uploader
 
-from flask import render_template,request,redirect,url_for
+from flask import render_template, request, redirect, url_for, session
 from app.dao import dao
 from flask_login import login_user, logout_user
 from app.middleware.authenticate import check_login
+from app._init_ import google
 
 
 class SigninController:
+
+    def login_google(self):
+        redirect_uri = url_for('signin.auth_callback', _external=True)
+        return google.authorize_redirect(redirect_uri)
+
+    def auth_callback(self):
+        token = google.authorize_access_token()
+        user = token.get('userinfo')
+
+        session['user'] = {
+            'email': user['email'],
+            'name': user['name'],
+            'picture': user['picture']
+        }
+        dao.add_user(name=user['name'],avatar=user['picture'])
+        return redirect('/')
+
     # [GET] /signin
     def index(self):
         return render_template("registerLogin.html", page="Tài khoản")

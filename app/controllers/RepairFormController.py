@@ -1,5 +1,5 @@
 from flask import render_template, request, jsonify
-
+from app.utils import repairform_util
 from app.models.model import Form_status
 from app.utils import receptionform_util
 from app.utils.component_util import get_components_data
@@ -8,8 +8,9 @@ from app.utils.component_util import get_components_data
 class RepairFormController:
 
     def createform(self):
-        res = request.form.to_dict()
+        data = request.get_json()
 
+        res = repairform_util.createRepairform(data)
         if res:
             return jsonify({
                 "message": "Tạo phiếu sửa chửa thành thành công",

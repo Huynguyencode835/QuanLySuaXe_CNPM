@@ -85,7 +85,7 @@ def load_repairform_receptionform(q=None):
 def get_unpaid_receipt(receipt_id):
     return Receipt.query.filter(
         Receipt.id == receipt_id,
-        Receipt.status == Form_status.WAIT_PAY
+        Receipt.status == Form_status.REPAIRED_WAIT_PAY
     ).first()
 
 

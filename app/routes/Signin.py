@@ -13,5 +13,9 @@ signin_bp.add_url_rule("/signin", view_func=controller.signin, methods=["GET","P
 # POST /signin/signup
 signin_bp.add_url_rule("/signup", view_func=controller.signup, methods=["GET","POST"],endpoint="signup_post")
 
+signin_bp.add_url_rule("/signin-google", view_func=controller.auth_callback)
+
+signin_bp.add_url_rule("/auth-google", view_func=controller.login_google)
+
 # GET logout
 signin_bp.add_url_rule("/signout", view_func=controller.signout, methods=["GET"], endpoint="signout")
