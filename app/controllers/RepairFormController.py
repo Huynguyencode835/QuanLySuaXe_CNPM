@@ -9,12 +9,7 @@ class RepairFormController:
 
     def createform(self):
         res = request.form.to_dict()
-        # sử lý chỗ này cho bố
-        # viết hàm nhận res trả về true false là xong
-        #
 
-
-        print(res)
         if res:
             return jsonify({
                 "message": "Tạo phiếu sửa chửa thành thành công",
