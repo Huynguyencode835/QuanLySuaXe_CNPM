@@ -84,8 +84,7 @@ class Form_status(RoleEnum):
     WAIT_APPROVAL = 1
     REFUSE = 2
     WAIT_REPAIR = 3
-    UNDER_REPAIR = 4
-    SUCCESS = 5
+    SUCCESS = 4
 
 class ReceptionForm(db.Model):
     id = Column(Integer, primary_key=True, autoincrement=True)

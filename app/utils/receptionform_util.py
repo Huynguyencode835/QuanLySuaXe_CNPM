@@ -25,7 +25,6 @@ def parse_state():
         Form_status.WAIT_APPROVAL: "Chờ duyệt",
         Form_status.REFUSE: "Từ chối",
         Form_status.WAIT_REPAIR: "Chờ sửa chữa",
-        Form_status.UNDER_REPAIR: "Đang sửa chữa",
         Form_status.SUCCESS: "Hoàn thành"
     }
     return FORM_STATUS_VI
