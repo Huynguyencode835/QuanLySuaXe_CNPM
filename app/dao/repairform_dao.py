@@ -8,7 +8,6 @@ def create_repair_form(reception_form_id):
         repair_form = RepairForm(
             technick_id=current_user.id,
             reception_form_id=reception_form_id,
-            status=Form_status.REPAIRED_WAIT_PAY,
             receipt_id=None
         )
 

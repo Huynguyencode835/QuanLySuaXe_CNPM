@@ -160,14 +160,6 @@ if __name__ == "__main__":
                 comp = Component(**c)
                 db.session.add(comp)
 
-        #
-        # with open("../data/receptionform.json", encoding="utf-8") as f:
-        #     receptionforms = json.load(f)
-        #
-        #     for r in receptionforms:
-        #         rec = ReceptionForm(**r)
-        #         db.session.add(rec)
-        #
         # with open("../data/repairform.json", encoding="utf-8") as f:
         #     data = json.load(f)
         #     # 1. RepairForm
