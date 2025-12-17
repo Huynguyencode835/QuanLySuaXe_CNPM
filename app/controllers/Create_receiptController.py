@@ -1,10 +1,10 @@
-from flask import Flask, render_template,request,jsonify
+from flask import Flask, render_template,request,jsonify,abort,send_file
 from datetime import datetime
 import app.dao.dao as dao
 from app.models.model import RepairForm,Receipt
-from flask_login import current_user
+from flask_login import current_user, login_required
 from app._init_ import db
-from app.utils import receptionform_util,calc_total_repairform
+from app.utils import receptionform_util,calc_total_repairform,pdf_util
 
 class Create_receiptController:
     def index(self):
@@ -53,3 +53,8 @@ class Create_receiptController:
             "total_labor_cost": total_labor_cost,
             "total_component_cost": total_component_cost
         })
+
+
+
+
+

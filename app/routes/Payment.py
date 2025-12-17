@@ -6,4 +6,6 @@ payments = PaymentController()
 payments_bp = Blueprint('payments_bp', __name__)
 
 
-payments_bp.add_url_rule('/', view_func=payments.index)
+payments_bp.add_url_rule('/',view_func=payments.index,methods=['GET', 'POST'])
+#
+# payments_bp.add_url_rule('/<int:receipt_id>',view_func=payments.index,methods=['GET', 'POST'])

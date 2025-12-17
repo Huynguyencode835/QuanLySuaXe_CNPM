@@ -2,10 +2,11 @@
 {% block title %}Lập hóa đơn{% endblock %}
 <body>
 {% block content %}
-{% if rp_f is not none %}
+{% if rp_f %}
 <form>
     <div class="row">
         {% for rf in rp_f %}
+        {%if rf.status.name == 'UNDER_REPAIR'%}
         <div class="col-md-6 mb-4">
             <div class="card repair-card">
                 <!-- HEADER -->
@@ -15,12 +16,18 @@
                         <strong class="ms-1">Phiếu sửa #{{ rf.id }}</strong>
                     </div>
 
-<!--                    <span class="badge bg-success">-->
-<!--                            <i class="bi bi-check-circle"></i> Đã sửa xong-->
-<!--                     </span>-->
+
+                    {%if rf.status.name == 'UNDER_REPAIR'%}
                     <span class="badge bg-warning text-dark">
                         <i class="bi bi-tools"></i> {{state[rf.status]}}
                     </span>
+                    {%endif%}
+
+                    {%if rf.status.name == 'SUCCESS'%}
+                    <span class="badge bg-success">
+                        <i class="bi bi-check-circle"></i> {{state[rf.status]}}
+                    </span>
+                    {%endif%}
                 </div>
 
                 <!-- BODY -->
@@ -59,13 +66,13 @@
 
                 <!-- FOOTER -->
                 <div class="card-footer d-flex justify-content-between align-items-center">
+
                     <div>
                         <input type="checkbox"
                                name="repair_form_ids"
                                value="{{ rf.id }}">
                         <span class="ms-1">Lập hóa đơn</span>
                     </div>
-
                     <button type="button"
                             class="btn btn-sm btn-info"
                             onclick="toggleDetail({{ rf.id }}, this)">
@@ -111,18 +118,21 @@
 
             </div>
         </div>
+        {%endif%}
         {% endfor %}
     </div>
     <button type="submit" class="btn btn-success mt-3" id="btnCreateReceipt">
         Lập hóa đơn
     </button>
+    <br>
+    <br>
 
 
     <!-- Modal -->
     <div id="receiptModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal()">&times;</span>
-            <h3> HÓA ĐƠN SỬA CHỮA</h3>
+            <h3> LẬP HÓA ĐƠN THÀNH CÔNG</h3>
             <pre id="receiptInfo"></pre>
         </div>
     </div>

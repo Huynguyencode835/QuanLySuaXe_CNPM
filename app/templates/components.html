@@ -18,7 +18,7 @@
                     {%endfor%}
                     <li>
                         {% set new_args_clear = current_args.copy() %}
-                        {% set removed = new_args_clear.pop('cate_id', None) %}
+                        {% set removed = new_args_clear.pop('vehicle_id', None) %}
                         <a class="dropdown-item" href="/components/?{{ new_args_clear|urlencode }}"
                            style="font-weight: bold; color: #e3342f;">— Bỏ lọc —</a>
                     </li>
