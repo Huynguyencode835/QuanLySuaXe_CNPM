@@ -14,18 +14,18 @@
                         <i class="bi bi-receipt"></i>
                         <strong class="ms-1">Phiếu sửa #{{ rf.id }}</strong>
                     </div>
-
-
-                    <span class="badge bg-warning text-dark">
-                        <i class="bi bi-tools"></i> {{state[rf.reception_form.status]}}
-                    </span>
-
-
-                    {%if rf.reception_form.status == 'SUCCESS'%}
+                    {% if rf.reception_form and rf.reception_form.status.__eq__("SUCCESS") %}
                     <span class="badge bg-success">
-                        <i class="bi bi-check-circle"></i> {{state[rf.reception_form.status]}}
+                        <i class="bi bi-check-circle"></i>
+                            {{ state.get(rf.reception_form.status) }}
                     </span>
-                    {%endif%}
+                    {% else%}
+                    <span class="badge bg-warning text-dark">
+                            <i class="bi bi-tools"></i>
+                                {{ state.get(rf.reception_form.status) }}
+                        </span>
+                    {% endif %}
+
                 </div>
 
                 <!-- BODY -->

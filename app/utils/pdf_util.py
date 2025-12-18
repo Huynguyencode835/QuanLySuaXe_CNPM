@@ -4,12 +4,16 @@ from reportlab.platypus import (
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.pagesizes import A4
 from reportlab.lib import colors
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
 from flask import current_app
 from app.utils.calc_total_repairform import calc_total_VAT
 import app.dao.dao as dao
 import os
 
 def export_receipt_pdf(receipt):
+    font_bath=os.path.join(current_app.root_path,"fonts","DejaVuSans.ttf")
+    pdfmetrics.registerFont(TTFont("DejaVuSans", font_bath))
     folder = os.path.join(current_app.root_path, "static/invoices")
     os.makedirs(folder, exist_ok=True)
 
@@ -36,29 +40,36 @@ def export_receipt_pdf(receipt):
         ParagraphStyle(
             name="Title",
             fontSize=16,
+            fontName="DejaVuSans",
             alignment=1,  # center
             spaceAfter=20
         )
     )
+
+    info_style = ParagraphStyle(
+        name="Normal",
+        fontName="DejaVuSans"
+    )
+
     elements.append(title)
 
     # ===== THÔNG TIN CHUNG =====
-    elements.append(Paragraph(f"<b>Phiếu #:</b> {receipt.id}", styles["Normal"]))
+    elements.append(Paragraph(f"<b>Phiếu #:</b> {receipt.id}", info_style))
     elements.append(Paragraph(
         f"<b>Ngày:</b> {receipt.created_date.strftime('%d/%m/%Y')}",
-        styles["Normal"]
+        info_style
     ))
     elements.append(Paragraph(
         f"<b>Khách hàng :</b> {reception.name}",
-        styles["Normal"]
+        info_style
     ))
     elements.append(Paragraph(
         f"<b>Biển số :</b> {reception.carnumber}",
-        styles["Normal"]
+        info_style
     ))
     elements.append(Paragraph(
         f"<b>Lỗi :</b> {reception.description}",
-        styles["Normal"]
+        info_style
     ))
     elements.append(Spacer(1, 12))
 
@@ -75,12 +86,12 @@ def export_receipt_pdf(receipt):
             total += thanh_tien + comp.cost
 
             table_data.append([
-                comp.action,
-                f"{comp.cost:,.0f}",
-                comp.component.name,
-                f"{comp.component.price:,.0f}",
-                comp.quantity,
-                f"{thanh_tien:,.0f}"
+                Paragraph(str(comp.action),info_style),
+                Paragraph( str(f"{comp.cost:,.0f}"), info_style),
+                Paragraph(str(comp.component.name), info_style),
+                Paragraph(str(f"{comp.component.price:,.0f}"), info_style),
+                Paragraph(str(comp.quantity), info_style),
+                Paragraph(str(f"{thanh_tien:,.0f}"), info_style)
             ])
 
     table = Table(
@@ -93,7 +104,7 @@ def export_receipt_pdf(receipt):
         ("BACKGROUND", (0, 0), (-1, 0), colors.lightgrey),
         ("ALIGN", (1, 1), (-1, -1), "RIGHT"),
         ("ALIGN", (0, 0), (-1, 0), "CENTER"),
-        ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
+        ("FONTNAME", (0, 0), (-1, 0), "DejaVuSans"),
         ("BOTTOMPADDING", (0, 0), (-1, 0), 8),
         ("TOPPADDING", (0, 0), (-1, 0), 8),
     ]))
@@ -104,10 +115,11 @@ def export_receipt_pdf(receipt):
     # ===== TỔNG TIỀN =====
     elements.append(
         Paragraph(
-            f"<b>TỔNG : {total:,.0f} VND</b>",
+            f"<b>TỔNG : {total:,.0f} VNĐ</b>",
             ParagraphStyle(
                 name="Total",
                 fontSize=12,
+                fontName="DejaVuSans",
                 alignment=2  # right
             )
         )
@@ -115,10 +127,11 @@ def export_receipt_pdf(receipt):
     total=calc_total_VAT(receipt.repair_forms)
     elements.append(
         Paragraph(
-            f"<b>TỔNG THANH TOÁN (VAT:{vat.VAT}%) : {total:,.0f} VND</b>",
+            f"<b>TỔNG THANH TOÁN (VAT:{vat.VAT}%) : {total:,.0f} VNĐ</b>",
             ParagraphStyle(
                 name="Total",
                 fontSize=14,
+                fontName="DejaVuSans",
                 alignment=2  # right
             )
         )
