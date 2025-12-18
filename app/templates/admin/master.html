@@ -1,5 +1,9 @@
 {% extends 'layout/base.html' %}
-
+{% block head %}
+    {{ super() }}
+    <!-- Thêm dòng này -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin_custom.css') }}">
+{% endblock %}
 {% block content %}
 <div class="admin-wrapper">
     <!-- Admin Header -->
@@ -15,11 +19,6 @@
 
         <!-- Navigation Tabs - Tự động từ Flask-Admin -->
         <div class="admin-nav-tabs">
-            <a href="/admin" class="nav-tab {{'active' if request.path == '/admin/' or request.path == '/admin' else ''}}">
-                <i class="bi bi-house-door-fill"></i>
-                <span>Trang chủ</span>
-            </a>
-
             {% for item in admin_view.admin._menu %}
                 {% if item.is_accessible() %}
                 <a href="{{ item.get_url() }}" class="nav-tab {{'active' if item.is_active(admin_view) else ''}}">

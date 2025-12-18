@@ -4,27 +4,6 @@
 <div class="admin-dashboard">
     <h2>Trang quản trị hệ thống</h2>
     <p class="lead">Chào mừng <strong>{{ current_user.name }}</strong> đến với trang quản trị!</p>
-    
-    <div class="row mt-4">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <h5><i class="bi bi-list-ul"></i> Menu quản lý</h5>
-                </div>
-                <div class="card-body">
-                    <div class="list-group">
-                        {% for item in admin_view.admin._menu %}
-                            {% if item.is_accessible() %}
-                            <a href="{{ item.get_url() }}" class="list-group-item list-group-item-action">
-                                <i class="bi bi-arrow-right-circle"></i> {{ item.name }}
-                            </a>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 <style>

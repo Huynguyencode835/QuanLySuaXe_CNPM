@@ -1,5 +1,9 @@
+from calendar import monthrange
+
 from app._init_ import db
-from app.dao import repairform_dao
+from app.dao import repairform_dao,appointment_dao
+from app.models.model import Form_status
+
 
 def createRepairform(data):
     try:
@@ -14,10 +18,19 @@ def createRepairform(data):
                 action=item['action'],
                 cost=item['cost']
             )
-        db.session.commit()
-        return True
+        return appointment_dao.update_status(receptionform_id,status=Form_status.REPAIRED_WAIT_PAY)
 
     except Exception as e:
         print(f"Error: {e}")
         db.session.rollback()
         return False
+
+def get_month_range(year_month):
+    year, month = map(int, year_month.split('-'))
+
+    first_day = f"{year}-{month:02d}-01"
+
+    last_day_num = monthrange(year, month)[1]
+    last_day = f"{year}-{month:02d}-{last_day_num}"
+
+    return first_day, last_day

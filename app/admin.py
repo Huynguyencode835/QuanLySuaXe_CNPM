@@ -54,8 +54,6 @@ class ComponentAdminView(AdminSecureView):
     }
 
     column_searchable_list = ['name']
-    column_filters = ['vehicletype', 'brandvehicle', 'name']
-    can_export = True
 
 
 class UserAdminView(AdminSecureView):
@@ -74,19 +72,13 @@ class UserAdminView(AdminSecureView):
     }
 
     column_searchable_list = ['name', 'username', 'phonenumber']
-    column_filters = ['role', 'active', 'joined']
-
     # Không cho edit password trực tiếp
     form_excluded_columns = ['password', 'reception_forms_as_customer',
                              'reception_forms_as_staff', 'repair_form',
                              'receipts_as_customer', 'receipts_as_accountant']
 
-    # Chỉ hiển thị các field cần thiết
     column_exclude_list = ['password']
 
-    can_export = True
-
-    # Format datetime
     column_formatters = {
         'joined': lambda v, c, m, p: m.joined.strftime('%d/%m/%Y %H:%M') if m.joined else ''
     }
@@ -100,7 +92,6 @@ class SystemParametersAdminView(AdminSecureView):
         'limitcar': 'Giới hạn xe'
     }
 
-    # Chỉ cho phép edit, không cho create/delete
     can_create = False
     can_delete = False
 
@@ -109,10 +100,6 @@ class SystemParametersAdminView(AdminSecureView):
         'limitcar': 'Số lượng xe tối đa cho phép tiếp nhận trong ngày'
     }
 
-
-# =====================
-# Init admin
-# =====================
 def init_admin(app, db):
     from flask_admin.theme import Bootstrap4Theme
 
