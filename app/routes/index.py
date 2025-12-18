@@ -10,6 +10,7 @@ from app.routes.Create_receipt import create_receipts_bp
 from app.routes.Export_receipts import export_receipts_bp
 from app.routes.Payment import payments_bp
 from app.routes.Receptions import receptions_bp
+from app.routes.Statistical import statistical_bp
 
 def route_web(app):
     app.register_blueprint(components_bp, url_prefix="/components")
@@ -21,7 +22,8 @@ def route_web(app):
     app.register_blueprint(create_receipts_bp, url_prefix="/create_receipts")
     app.register_blueprint(export_receipts_bp, url_prefix="/export_receipts")
     app.register_blueprint(payments_bp, url_prefix="/payment")
-    app.register_blueprint(site_bp, url_prefix="/")
+    app.register_blueprint(statistical_bp, url_prefix="/statistical")
     app.register_blueprint(repairform_bp, url_prefix="/repairform")
+    app.register_blueprint(site_bp, url_prefix="/")
 
 
