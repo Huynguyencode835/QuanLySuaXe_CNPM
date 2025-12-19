@@ -14,7 +14,7 @@
                         <i class="bi bi-receipt"></i>
                         <strong class="ms-1">Phiếu sửa #{{ rf.id }}</strong>
                     </div>
-                    {% if rf.reception_form and rf.reception_form.status.__eq__("SUCCESS") %}
+                    {% if rf.reception_form.status.value == 5 %}
                     <span class="badge bg-success">
                         <i class="bi bi-check-circle"></i>
                             {{ state.get(rf.reception_form.status) }}
@@ -64,13 +64,14 @@
 
                 <!-- FOOTER -->
                 <div class="card-footer d-flex justify-content-between align-items-center">
-
+                    {% if rf.reception_form.status.value != 5 %}
                     <div>
                         <input type="checkbox"
                                name="repair_form_ids"
                                value="{{ rf.id }}">
                         <span class="ms-1">Lập hóa đơn</span>
                     </div>
+                    {%endif%}
                     <button type="button"
                             class="btn btn-sm btn-info"
                             onclick="toggleDetail({{ rf.id }}, this)">

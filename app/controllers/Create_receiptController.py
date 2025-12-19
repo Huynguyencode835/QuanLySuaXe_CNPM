@@ -11,7 +11,8 @@ class Create_receiptController:
 
     @role_required(UserRole.ACCOUNTANT)
     def index(self):
-        rp_f=dao.get_repair_form()
+        q = request.args.get("q")
+        rp_f=dao.get_repair_form(q=q)
         vat=dao.get_VAT()
         return render_template("create_receipts.html",
                                page="Lập hóa đơn",rp_f=rp_f,
