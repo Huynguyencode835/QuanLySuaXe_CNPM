@@ -3,11 +3,13 @@ from flask_login import current_user, login_required
 
 import app.dao.dao as dao
 from app.utils.receptionform_util import Form_status
-from app.utils.pdf_util import export_receipt_pdf
 from app._init_ import db
+from app.middleware.authenticate import role_required
+from app.models.model import UserRole
 
 
 class PaymentController():
+    @role_required(UserRole.CUSTOMER)
     @login_required
     def index(self):
         receipt = dao.get_my_unpaid_receipt(current_user.id)
