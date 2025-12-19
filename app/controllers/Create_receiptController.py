@@ -8,7 +8,8 @@ from app.utils import receptionform_util,calc_total_repairform
 
 class Create_receiptController:
     def index(self):
-        rp_f=dao.get_repair_form()
+        q = request.args.get("q")
+        rp_f=dao.get_repair_form(q=q)
         vat=dao.get_VAT()
         return render_template("create_receipts.html",
                                page="Lập hóa đơn",rp_f=rp_f,

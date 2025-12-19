@@ -57,8 +57,13 @@ def get_user_by_username(username):
     return User.query.filter_by(username=username).first()
 
 # lấy phiếu sửa chữa
-def get_repair_form():
-    return RepairForm.query.all()
+def get_repair_form(q=None):
+    query = RepairForm.query.join(RepairForm.reception_form)
+
+    if q:
+        query = query.filter(ReceptionForm.name.ilike(f"%{q}%"))
+
+    return query.all()
 
 # Lấy phiếu tiếp nhận
 def get_reception_form():
@@ -86,14 +91,21 @@ def get_VAT():
 def get_receipt_by_id(receipt_id):
     return Receipt.query.get(receipt_id)
 
-def get_receipt_success():
-    return (
+def get_receipt_success(q=None):
+    query = (
         Receipt.query
         .join(Receipt.repair_forms)
         .join(RepairForm.reception_form)
         .filter(ReceptionForm.status == Form_status.SUCCESS)
-        .all()
     )
+
+    if q:
+        query = query.filter(
+            ReceptionForm.name.ilike(f"%{q}%")
+        )
+
+    return query.all()
+
 
 
 def get_unpaid_receipt(receipt_id, customer_id):

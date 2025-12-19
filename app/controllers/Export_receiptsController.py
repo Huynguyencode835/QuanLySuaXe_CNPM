@@ -1,10 +1,11 @@
-from flask import render_template,send_file
+from flask import render_template,send_file,request
 import app.dao.dao as dao
 from app.utils.pdf_util import export_receipt_pdf
 
 class Export_receiptsController:
     def index(self):
-        receipt=dao.get_receipt_success()
+        q = request.args.get("q")
+        receipt=dao.get_receipt_success(q=q)
         vat=dao.get_VAT()
         return render_template("export_receipts.html",page="Xuất hóa đơn",receipt=receipt,vat=vat)
 
