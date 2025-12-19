@@ -30,7 +30,7 @@ Swal.fire({
             <form method="post" action="/signin/signup" enctype="multipart/form-data">
                 <h1>Create Account</h1>
                 <input type="text" id="name" name="name" placeholder="Họ và tên" required/>
-                <input type="text" id="phonenumber" name="phonenumber" placeholder="Số điện thoại" required/>
+                <input type="text" id="phonenumber" name="phonenumber" placeholder="Số điện thoại"/>
 
                 <input type="text" id="username" name="username" placeholder="Username" required/>
                 <input type="password" id="password" name="password" placeholder="Password" required/>
@@ -38,7 +38,7 @@ Swal.fire({
                        required/>
                 <input type="file" class="form-control" id="avatar" name="avatar">
                 <button type="submit">Sign Up</button>
-                <a href="/signup/auth-google">google</a>
+                <a href="/signin/auth-google">google</a>
             </form>
 
         </div>
@@ -49,7 +49,7 @@ Swal.fire({
                 <input type="password" name="password" placeholder="Password" required/>
                 <a href="#">Forgot your password?</a>
                 <button type="submit">Sign In</button>
-                <a href="/signin/signin-google">google</a>
+                <a href="/signin/auth-google">google</a>
             </form>
         </div>
         <div class="overlay-container">
@@ -68,7 +68,6 @@ Swal.fire({
         </div>
     </div>
 </div>
-
 <script>
     const signUpButton = document.getElementById('signUp');
     const signInButton = document.getElementById('signIn');

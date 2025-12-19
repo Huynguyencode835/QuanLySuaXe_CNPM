@@ -5,12 +5,15 @@ from flask_login import current_user
 
 from app._init_ import create_app
 from app.dao import appointment_dao,dao, receptionform_dao
-from app.models.model import Form_status
+from app.middleware.authenticate import role_required
+from app.models.model import Form_status, UserRole
 from app.utils import receptionform_util
 
 
 class ReceptionController():
-    # [GET] /components
+
+    # [GET] /receptions
+    @role_required(UserRole.CUSTOMER,UserRole.STAFF)
     def index(self):
         page = request.args.get("page")
         pages = math.ceil(receptionform_dao.count_form() / current_app.config["PAGE_SIZE"])

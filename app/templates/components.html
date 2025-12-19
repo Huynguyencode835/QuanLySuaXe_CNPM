@@ -94,10 +94,10 @@
                             </div>
                             <div class="bottom">
                                 <div class="price">
-                                    <span class="old">$2,499</span>
-                                    <span class="new">${{c.price}}</span>
+
+                                    <span class="new">{{ "{:,.0f}".format(c.price).replace(',', '.') }} vnđ</span>
                                 </div>
-                                <button class="btn" onclick="addToCart({{c.id}},'{{ c.name }}',{{ c.price }},'{{ c.image }}')">
+                                <button class="btn d-none" onclick="addToCart({{c.id}},'{{ c.name }}',{{ c.price }},'{{ c.image }}')">
                                     <span>Add to Cart</span>
                                     <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
                                          stroke="currentColor" stroke-width="2">

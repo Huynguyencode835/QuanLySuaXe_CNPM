@@ -24,11 +24,12 @@ class Base(db.Model):
         return self.name
 
 class User(Base, UserMixin):
-    username = Column(String(150), unique=True, nullable=False)
-    password = Column(String(150), nullable=False)
+    username = Column(String(150), unique=True, nullable=True)
+    password = Column(String(150), nullable=True)
     phonenumber = Column(String(150), nullable=True)
     avatar = Column(String(300), default="https://res.cloudinary.com/dy1unykph/image/upload/v1740037805/apple-iphone-16-pro-natural-titanium_lcnlu2.webp")
     role = Column(Enum(UserRole), default=UserRole.CUSTOMER)
+    email = Column(String(150), unique=True, nullable=True)
     joined = Column(DateTime, default=datetime.now)
     active = Column(Boolean, default=True)
     reception_forms_as_customer = relationship(

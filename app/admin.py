@@ -1,46 +1,31 @@
 from flask_admin import Admin, AdminIndexView, expose
 from flask_admin.contrib.sqla import ModelView
 from flask_login import current_user
-from flask import redirect, url_for
+from flask import redirect, url_for, flash
 
+from app.middleware.authenticate import role_required
 from app.models.model import Component, Vehicletype, BrandVehicle, UserRole, User, SystemParameters
 
 
-# =====================
-# Admin index
-# =====================
-class MyAdminIndexView(AdminIndexView):
+class AdminBaseView:
+    def is_accessible(self):
+        return (
+            current_user.is_authenticated
+            and current_user.role == UserRole.ADMIN
+        )
+
+    def inaccessible_callback(self, name, **kwargs):
+        flash("Bạn không phải ADMIN", "error")
+        return redirect("/")
+
+class MyAdminIndexView(AdminBaseView, AdminIndexView):
     @expose('/')
     def index(self):
         return self.render('admin/index.html')
 
-    def is_accessible(self):
-        return (
-                current_user.is_authenticated
-                and current_user.role == UserRole.ADMIN
-        )
-
-    def inaccessible_callback(self, name, **kwargs):
-        return redirect(url_for('signin.signin'))
-
-
-# =====================
-# Base secure view
-# =====================
 class AdminSecureView(ModelView):
-    def is_accessible(self):
-        return (
-                current_user.is_authenticated
-                and current_user.role == UserRole.ADMIN  # <-- SỬA ĐÂY
-        )
+    pass
 
-    def inaccessible_callback(self, name, **kwargs):
-        return redirect(url_for('signin.signin'))
-
-
-# =====================
-# Component admin view
-# =====================
 class ComponentAdminView(AdminSecureView):
     # Giống file mẫu - KHÔNG dùng column_formatters
     column_list = ['id', 'name', 'price', 'vehicletype', 'brandvehicle']
@@ -72,7 +57,6 @@ class UserAdminView(AdminSecureView):
     }
 
     column_searchable_list = ['name', 'username', 'phonenumber']
-    # Không cho edit password trực tiếp
     form_excluded_columns = ['password', 'reception_forms_as_customer',
                              'reception_forms_as_staff', 'repair_form',
                              'receipts_as_customer', 'receipts_as_accountant']

@@ -5,6 +5,7 @@ from app.dao import dao
 from flask_login import login_user, logout_user
 from app.middleware.authenticate import check_login
 from app._init_ import google
+from app.models.model import User
 
 
 class SigninController:
@@ -15,15 +16,24 @@ class SigninController:
 
     def auth_callback(self):
         token = google.authorize_access_token()
-        user = token.get('userinfo')
+        user_info = token.get('userinfo')
 
-        session['user'] = {
-            'email': user['email'],
-            'name': user['name'],
-            'picture': user['picture']
-        }
-        dao.add_user(name=user['name'],avatar=user['picture'])
-        return redirect('/')
+        email = user_info['email']
+        name = user_info['name']
+        avatar = user_info['picture']
+
+        user = dao.check_userEmail(email)
+
+        if not user:
+            user = dao.add_user(
+                email=email,
+                name=name,
+                avatar=avatar
+            )
+
+        login_user(user)
+
+        return redirect("/")
 
     # [GET] /signin
     def index(self):

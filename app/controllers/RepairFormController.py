@@ -1,6 +1,8 @@
 from flask import render_template, request, jsonify
+
+from app.middleware.authenticate import role_required
 from app.utils import repairform_util
-from app.models.model import Form_status
+from app.models.model import Form_status, UserRole
 from app.utils import receptionform_util
 from app.utils.component_util import get_components_data
 
@@ -22,6 +24,7 @@ class RepairFormController:
                 "category": "error"
             })
 
+    @role_required(UserRole.TECHNICK)
     def index(self):
         args = request.args.to_dict()
         comps, vehicles, brands, selected_vehicle_name, selected_brand_name = get_components_data(args)

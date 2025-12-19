@@ -1,12 +1,15 @@
 from flask import Flask, render_template,request,jsonify,abort,send_file
 from datetime import datetime
 import app.dao.dao as dao
-from app.models.model import RepairForm,Receipt,SystemParameters
+from app.middleware.authenticate import role_required
+from app.models.model import RepairForm, Receipt, SystemParameters, UserRole
 from flask_login import current_user, login_required
 from app._init_ import db
 from app.utils import receptionform_util,calc_total_repairform
 
 class Create_receiptController:
+
+    @role_required(UserRole.ACCOUNTANT)
     def index(self):
         rp_f=dao.get_repair_form()
         vat=dao.get_VAT()

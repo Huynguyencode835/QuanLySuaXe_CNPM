@@ -118,7 +118,7 @@ def get_dataStatisticalByTime(date_from, date_to):
             Component.id == RepairForms_Components.id_component
         ).filter(
             Receipt.created_date >= date_from,
-            Receipt.created_date < date_to
+            Receipt.created_date <= date_to
         ).group_by(
             func.date(Receipt.created_date)).all()
 

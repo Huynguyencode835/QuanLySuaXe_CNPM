@@ -290,7 +290,7 @@
 
 .stats-dashboard-wrapper .stat-value {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 48px;
+    font-size: 37px;
     color: var(--text-primary);
     line-height: 1;
     margin-bottom: 8px;
@@ -500,7 +500,7 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
-        
+
         .button-statistical {
             padding: 7px 9px;
             background: linear-gradient(135deg, #B50000, #8B0000);

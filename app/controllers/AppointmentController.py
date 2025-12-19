@@ -28,7 +28,6 @@ class AppointmentController:
                 "message": "Hôm nay đã đủ số lượng xe tiếp nhận!",
                 "category": "error"
             }), 403
-
         return jsonify({
             "category": "success"
         }), 200

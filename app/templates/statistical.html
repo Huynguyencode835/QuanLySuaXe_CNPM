@@ -33,21 +33,21 @@
                                         <!-- Single Day -->
                                         <div class="input-group" id="dayInput" style="display: none;">
                                             <label class="input-label">Chọn ngày</label>
-                                            <input type="date" class="filter-input" name="date_day" />
+                                            <input type="date" class="filter-input" name="date_day" max="{{ maxday }}"/>
                                         </div>
 
                                         <!-- Month -->
                                         <div class="input-group" id="monthInput" style="display: none;">
                                             <label class="input-label">Chọn tháng</label>
-                                            <input type="month" class="filter-input" name="date_month" />
+                                            <input type="month" class="filter-input" name="date_month" max="{{maxday[:7]}}"/>
                                         </div>
 
                                         <!-- Date Range -->
                                         <div class="input-group" id="rangeInput" style="display: none;">
                                             <label class="input-label">Từ ngày</label>
-                                            <input type="date" class="filter-input" name="date_from" />
+                                            <input type="date" class="filter-input" name="date_from" max="{{maxday}}"/>
                                             <label class="input-label" style="margin-top: 8px;">Đến ngày</label>
-                                            <input type="date" class="filter-input" name="date_to" />
+                                            <input type="date" class="filter-input" name="date_to" max="{{maxday}}"/>
                                         </div>
                                     </div>
                                 </div>
@@ -108,7 +108,7 @@
                                         {% for r in res %}
                                             <tr>
                                                 <td>{{ r[0] }}</td>
-                                                <td>{{ r[1] }}</td>
+                                                <td>{{ "{:,.0f}".format(r[1]).replace(',', '.') }} vnđ</td>
                                             </tr>
                                         {% endfor %}
                                     {% endif %}
@@ -118,12 +118,12 @@
                         {%if type == 'time'%}
                             <div class="stat-card">
                                 <div class="stat-label">Tổng Doanh Thu</div>
-                                <div class="stat-value">{{total}}</div>
+                                <div class="stat-value">{{ "{:,.0f}".format(total).replace(',', '.') }} vnđ</div>
                             </div>
                         {%else%}
                             <div class="stat-card">
                                 <div class="stat-label">Tổng Số xe</div>
-                                <div class="stat-value">{{total}}</div>
+                                <div class="stat-value">{{total}} chiếc</div>
                             </div>
                         {%endif%}
                     </div>

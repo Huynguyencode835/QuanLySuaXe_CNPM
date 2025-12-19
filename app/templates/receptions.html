@@ -205,7 +205,7 @@
             color: #fff;
         }
 
-        .form_receptions .label-UNDER_REPAIR {
+        .form_receptions .label-REPAIRED_WAIT_PAY {
             background-color: #fd7e14; /* cam */
             color: #fff;
         }
@@ -345,7 +345,7 @@
 
 /* Modal Header */
 .modal-receptionform .modal-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: var(--active-color);
     padding: 24px 28px;
     display: flex;
     justify-content: space-between;
@@ -525,7 +525,7 @@
 }
 
 .modal-receptionform .btn-save {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: var(--active-color);;
     color: white;
     box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
@@ -613,7 +613,6 @@
                                         <th>
                                             <div class="w-full sm:w-half formbold-px-3">
                                                 <label class="formbold-form-label">Lọc theo tình trạng</label>
-
                                                 <div class="filter-dropdown">
                                                     <button type="button" class="filter-btn" id="filterBtn">
                                                         {% if request.args.get('status_name') %}
@@ -721,6 +720,7 @@
                                 </tbody>
                             </table>
                         </div>
+                        <!--pages-->
                         <nav>
                             {%if pages>1%}
                                 <ul class="pagination mt-3 justify-content-center">

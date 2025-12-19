@@ -43,15 +43,21 @@ def load_component(q=None, vehicle_id=None, brand_id=None,page=None):
 
     return query.all()
 
-def add_user(name, phonenumber,username, password, **kwargs):
-    password = str(hashlib.md5(password.strip().encode('utf-8')).hexdigest())
-    user = User(name=name.strip(),
-                phonenumber=phonenumber.strip(),
-                username=username.strip(),
-                password=password,
-                avatar=kwargs.get('avatar'))
+def add_user(name, phonenumber =None ,username =None, password =None, email = None, **kwargs):
+    if password: password = str(hashlib.md5(password.strip().encode('utf-8')).hexdigest())
+    user = User(
+        name=name.strip(),
+        phonenumber=phonenumber.strip() if phonenumber else None,
+        username=username.strip() if username else None,
+        password=password if password else None,
+        email=email.strip() if email else None,
+        avatar=kwargs.get("avatar")
+    )
     db.session.add(user)
     db.session.commit()
+
+def check_userEmail(email):
+    return User.query.filter(User.email == email).first()
 
 def get_user_by_username(username):
     return User.query.filter_by(username=username).first()

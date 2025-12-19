@@ -1,4 +1,7 @@
+import os
+
 from flask import Flask,session
+from flask.cli import load_dotenv
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 import cloudinary
@@ -38,12 +41,12 @@ def create_app():
 
 
     return app
-
+load_dotenv()
 oauth = OAuth(create_app())
 
 google = oauth.register(
     name='google',
-    client_id='675493875346-lcqd545p7lo818gvkssf24ojvo74dt9t.apps.googleusercontent.com',
+    client_id= '675493875346-lcqd545p7lo818gvkssf24ojvo74dt9t.apps.googleusercontent.com',
     client_secret='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',
     server_metadata_url='https://accounts.google.com/.well-known/openid-configuration',
     client_kwargs={'scope': 'openid email profile'}

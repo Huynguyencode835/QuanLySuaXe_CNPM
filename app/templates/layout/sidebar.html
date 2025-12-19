@@ -8,53 +8,54 @@
     </a>
     <a href="/components" class="nav-item ">
         <i class="bi bi-arrow-left-right"></i>
-        <span>Linh kiện</span>
+        <span>Linh kiện sửa xe</span>
     </a>
 
     {% if current_user.is_authenticated %}
         {# ROLE CUSTOMER_STAFF #}
         {% if current_user.role.name in ['CUSTOMER', 'STAFF'] %}
-        <a href="/appointment" onclick="limitVehicleRender()"
-           class="nav-item  {{ 'active' if page == 'Đặt lịch sửa xe' else '' }}">
-            <i class="bi bi-arrow-left-right"></i>
-            <span>Đặt lịch sửa xe</span>
-        </a>
+            <a href="/appointment" onclick="limitVehicleRender()"
+               class="nav-item  {{ 'active' if page == 'Đặt lịch sửa xe' else '' }}">
+                <i class="bi bi-calendar-plus"></i>
+                {%if current_user.role.name == 'CUSTOMER'%}
+                    <span>Đặt phiếu sửa xe</span>
+                {%else%}
+                    <span>Tạo phiếu tiếp nhận</span>
+                {%endif%}
+            </a>
 
-        <a href="/receptions" class="nav-item {{ 'active' if page == 'Phiếu đặt lịch' else '' }}">
-            <i class="bi bi-arrow-left-right"></i>
-            <span>Phiếu đặt lịch</span>
-        </a>
+            <a href="/receptions" class="nav-item {{ 'active' if page == 'Phiếu đặt lịch' else '' }}">
+                <i class="bi bi-file-text"></i>
+                {%if current_user.role.name == 'CUSTOMER'%}
+                    <span>Phiếu đã đặt</span>
+                {%else%}
+                    <span>Phiếu tiếp nhận</span>
+                {%endif%}
+            </a>
 
-        <a href="/payment" class="nav-item">
-            <i class="bi bi-credit-card"></i>
-            <span>Thanh Toán</span>
-        </a>
-
+            <a href="/payment" class="nav-item">
+                <i class="bi bi-wallet2"></i>
+                <span>Thanh Toán</span>
+            </a>
         {% endif %}
-
         {# ROLE ACCOUNTANT #}
         {% if current_user.role.name == 'ACCOUNTANT' %}
-        <a href="/create_receipts" class="nav-item">
-            <i class="bi bi-cash-coin"></i>
-            <span>Lập hóa đơn</span>
-        </a>
+            <a href="/create_receipts" class="nav-item">
+                <i class="bi bi-receipt"></i>
+                <span>Lập hóa đơn</span>
+            </a>
 
-        <a href="/export_receipts" class="nav-item">
-            <i class="bi bi-cash-coin"></i>
-            <span>Xuất hóa đơn</span>
-        </a>
-
-        <a href="#" class="nav-item">
-            <i class="bi bi-graph-up"></i>
-            <span>Báo Cáo</span>
-        </a>
+            <a href="/export_receipts" class="nav-item">
+                <i class="bi bi-cash-coin"></i>
+                <span>Xuất hóa đơn</span>
+            </a>
         {% endif %}
 
         {# ROLE TECHNICK #}
         {% if current_user.role.name == 'TECHNICK' %}
             <a href="/repairform" class="nav-item {{ 'active' if page == 'Phiếu sửa xe' else '' }}">
-                <i class="bi bi-grid-3x3-gap"></i>
-                <span>Phiếu sửa xe</span>
+                <i class="bi bi-wrench-adjustable"></i>
+                <span>Lập hiếu sửa xe</span>
             </a>
         {% endif %}
 
@@ -65,12 +66,15 @@
             <span>Quản trị hệ thống</span>
         </a>
         {% endif %}
-    {% endif %}
 
-    <a href="/statistical" class="nav-item">
-        <i class="bi bi-cash-coin"></i>
-        <span>Xem báo cáo</span>
-    </a>
+        {# ROLE ADMIN #}
+        {% if current_user.role.name in ['ADMIN', 'ACCOUNTANT'] %}
+            <a href="/statistical" class="nav-item">
+                <i class="bi bi-bar-chart"></i>
+                <span>Xem báo cáo</span>
+            </a>
+        {% endif %}
+    {% endif %}
 
     {% if current_user.is_authenticated %}
         <a href="/" class="nav-item">
