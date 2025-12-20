@@ -7,7 +7,6 @@ from flask_login import UserMixin
 from enum import Enum as RoleEnum
 
 
-
 class UserRole(RoleEnum):
     CUSTOMER = 2
     STAFF = 3
