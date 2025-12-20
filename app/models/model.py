@@ -113,6 +113,7 @@ class Receipt(db.Model):
     total_component_cost=Column(Float, default=0.0)
     total_cost=Column(Float, default=0.0)
     paid_by=Column(String(150), default="")
+    momo_order_id = Column(String(100), nullable=True)
     created_date = Column(DateTime, default=datetime.now)
     customer_id = Column(Integer, ForeignKey(User.id), nullable=True)
     accountant_id = Column(Integer, ForeignKey(User.id), nullable=False)

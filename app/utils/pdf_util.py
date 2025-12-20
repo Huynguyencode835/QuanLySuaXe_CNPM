@@ -96,7 +96,7 @@ def export_receipt_pdf(receipt):
 
     table = Table(
         table_data,
-        colWidths=[140, 60, 120, 60, 30, 80]
+        colWidths=[140, 60, 120, 80, 30, 80]
     )
 
     table.setStyle(TableStyle([

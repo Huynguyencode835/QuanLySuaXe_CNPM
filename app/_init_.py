@@ -6,6 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 import cloudinary
 from authlib.integrations.flask_client import OAuth
+from app.utils.vnd import vnd
 
 
 db = SQLAlchemy()
@@ -24,6 +25,7 @@ cloudinary.config(
 def create_app():
     app = Flask(__name__)
 
+    app.jinja_env.filters['vnd'] = vnd
     app.secret_key = "asjdahjgưGƯEGgG4252#adsd"
     app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:123456@localhost/app?charset=utf8mb4"
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False

@@ -103,9 +103,9 @@
                             {% for c in rf.components %}
                             <tr>
                                 <td>{{ c.action }}</td>
-                                <td>{{ c.cost }}</td>
+                                <td>{{ c.cost | vnd}}</td>
                                 <td>{{ c.component.name }}</td>
-                                <td class="text-end">{{ c.component.price }}</td>
+                                <td class="text-end">{{ c.component.price | vnd}}</td>
                                 <td class="text-end">{{ c.quantity }}</td>
                             </tr>
                             {% endfor %}

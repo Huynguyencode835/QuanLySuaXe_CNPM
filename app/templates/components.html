@@ -95,7 +95,7 @@
                             <div class="bottom">
                                 <div class="price">
 
-                                    <span class="new">{{ "{:,.0f}".format(c.price).replace(',', '.') }} vnđ</span>
+                                    <span class="new">{{ c.price | vnd }} VNĐ</span>
                                 </div>
                                 <button class="btn d-none" onclick="addToCart({{c.id}},'{{ c.name }}',{{ c.price }},'{{ c.image }}')">
                                     <span>Add to Cart</span>

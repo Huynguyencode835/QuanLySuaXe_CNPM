@@ -15,27 +15,27 @@ class PaymentController():
         receipt = dao.get_my_unpaid_receipt(current_user.id)
         vat = dao.get_VAT()
         # POST = xác nhận thanh toán
-        if request.method == 'POST':
-            try:
-                receipt.paid_by = "CUSTOMER"
+        # if request.method == 'POST':
+        #     try:
+        #         receipt.paid_by = "CUSTOMER"
+        #
+        #         updated_receptions = set()
+        #
+        #         for rf in receipt.repair_forms:
+        #             reception = rf.reception_form
+        #             if reception and reception.id not in updated_receptions:
+        #                 reception.status = Form_status.SUCCESS
+        #                 updated_receptions.add(reception.id)
+        #
+        #         db.session.commit()
+        #
+        #         flash("Thanh toán thành công!", "success")
+        #         return redirect(url_for(
+        #             'payments_bp.index',
+        #             receipt_id=receipt.id,
+        #         ))
+        #     except Exception as e:
+        #         db.session.rollback()
+        #         flash("Lỗi khi thanh toán, vui lòng thử lại", "danger")
 
-                updated_receptions = set()
-
-                for rf in receipt.repair_forms:
-                    reception = rf.reception_form
-                    if reception and reception.id not in updated_receptions:
-                        reception.status = Form_status.SUCCESS
-                        updated_receptions.add(reception.id)
-
-                db.session.commit()
-
-                flash("Thanh toán thành công!", "success")
-                return redirect(url_for(
-                    'payments_bp.index',
-                    receipt_id=receipt.id,
-                ))
-            except Exception as e:
-                db.session.rollback()
-                flash("Lỗi khi thanh toán, vui lòng thử lại", "danger")
         return render_template("payment.html", page="Thanh toán", receipt=receipt,vat=vat)
-
