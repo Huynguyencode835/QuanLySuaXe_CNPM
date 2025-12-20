@@ -5,7 +5,6 @@ body .auth-page {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: linear-gradient(90deg,#e2e2e2,#f9cba5);
 }
 
 .toast {
