@@ -1,8 +1,11 @@
 from flask import render_template,send_file,request
 import app.dao.dao as dao
+from app.middleware.authenticate import role_required
 from app.utils.pdf_util import export_receipt_pdf
+from app.models.model import UserRole
 
 class Export_receiptsController:
+    @role_required(UserRole.ACCOUNTANT)
     def index(self):
         q = request.args.get("q")
         receipt=dao.get_receipt_success(q=q)

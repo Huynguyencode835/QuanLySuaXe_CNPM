@@ -35,7 +35,8 @@
                     <span>Phiếu tiếp nhận</span>
                 {%endif%}
             </a>
-
+        {% endif %}
+        {% if current_user.role.name == 'CUSTOMER' %}
             <a href="/payment" class="nav-item">
                 <i class="bi bi-wallet2"></i>
                 <span>Thanh Toán</span>

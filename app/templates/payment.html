@@ -2,8 +2,8 @@
 {% block title %}Thanh toán{% endblock %}
 <body>
 {% block content %}
-<h3 class="text-center mb-3">HÓA ĐƠN SỬA CHỮA</h3>
 {% if receipt %}
+<h3 class="text-center mb-3">HÓA ĐƠN SỬA CHỮA</h3>
 <form>
     <p><strong>Hóa đơn #:</strong> {{ receipt.id }}</p>
     <p><strong>Ngày:</strong> {{ receipt.created_date.strftime('%d/%m/%Y') }}</p>
