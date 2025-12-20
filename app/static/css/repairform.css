@@ -207,6 +207,7 @@
     padding: 24px;
     background: #ffffff;
     width: 100% !important;
+    min-height: 417px;
 }
 
 /* ==================== ITEMS ==================== */

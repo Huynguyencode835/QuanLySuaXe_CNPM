@@ -67,7 +67,22 @@
 <br>
 <br>
 {% else %}
-<p class="text-danger">Hóa đơn không tồn tại</p>
+    <tr>
+        <td colspan="7" class="text-center ">
+            <div class="d-flex flex-column align-items-center gap-2 py-5">
+                <i class="fa fa-inbox fa-4x text-secondary opacity-50 py-2"></i>
+
+                <h5 class="fw-semibold text-secondary mb-0 py-2">
+                    Không có hóa đơn để thanh toán
+                </h5>
+
+                <p class="text-muted mb-0 py-2">
+                    Chưa có dữ liệu để hiển thị
+                </p>
+            </div>
+        </td>
+    </tr>
+
 {% endif %}
 {% endblock%}
 </body>
