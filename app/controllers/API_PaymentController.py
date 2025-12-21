@@ -8,7 +8,6 @@ from app._init_ import db
 
 class API_PaymentController():
 
-    @role_required(UserRole.CUSTOMER)
     @staticmethod
     def momo_pay(receipt_id):
         receipt = Receipt.query.get(receipt_id)

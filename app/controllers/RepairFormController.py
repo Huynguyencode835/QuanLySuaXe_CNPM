@@ -11,16 +11,16 @@ class RepairFormController:
 
     def createform(self):
         data = request.get_json()
-
-        res = repairform_util.createRepairform(data)
-        if res:
+        try:
+            res = repairform_util.createRepairform(data)
+            if res:
+                return jsonify({
+                    "message": "Tạo phiếu sửa chửa thành thành công",
+                    "category": "success"
+                })
+        except:
             return jsonify({
-                "message": "Tạo phiếu sửa chửa thành thành công",
-                "category": "success"
-            })
-        else:
-            return jsonify({
-                "message": "thất bại",
+                "message": "Tạo phiếu thất bại vui lòng không chọn cùng 1 linh kiện trên cùng 1 phiếu",
                 "category": "error"
             })
 

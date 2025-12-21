@@ -9,7 +9,7 @@
         <i class="bi bi-house-door-fill"></i>
         <span>Trang chủ</span>
     </a>
-    <a href="/components" class="nav-item ">
+    <a href="/components" class="nav-item {{ 'active' if page == 'Linh kiện' else '' }}">
         <i class="bi bi-arrow-left-right"></i>
         <span>Linh kiện sửa xe</span>
     </a>
@@ -37,19 +37,19 @@
             </a>
         {% endif %}
         {% if current_user.role.name == 'CUSTOMER' %}
-            <a href="/payment" class="nav-item">
+            <a href="/payment" class="nav-item {{ 'active' if page == 'Thanh toán' else '' }}">
                 <i class="bi bi-wallet2"></i>
                 <span>Thanh Toán</span>
             </a>
         {% endif %}
         {# ROLE ACCOUNTANT #}
         {% if current_user.role.name == 'ACCOUNTANT' %}
-            <a href="/create_receipts" class="nav-item">
+            <a href="/create_receipts" class="nav-item {{ 'active' if page == 'Lập hóa đơn' else '' }}">
                 <i class="bi bi-receipt"></i>
                 <span>Lập hóa đơn</span>
             </a>
 
-            <a href="/export_receipts" class="nav-item">
+            <a href="/export_receipts" class="nav-item {{ 'active' if page == 'Xuất hóa đơn' else '' }}">
                 <i class="bi bi-cash-coin"></i>
                 <span>Xuất hóa đơn</span>
             </a>
@@ -73,9 +73,9 @@
 
         {# ROLE ADMIN #}
         {% if current_user.role.name in ['ADMIN', 'ACCOUNTANT'] %}
-            <a href="/statistical" class="nav-item">
+            <a href="/statistical" class="nav-item {{ 'active' if page == 'Báo cáo thống kê' else '' }}">
                 <i class="bi bi-bar-chart"></i>
-                <span>Xem báo cáo</span>
+                <span>Báo cáo thống kê</span>
             </a>
         {% endif %}
     {% endif %}

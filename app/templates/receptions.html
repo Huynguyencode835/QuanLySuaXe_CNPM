@@ -708,8 +708,7 @@
                                                 {% if (d.status.name == 'REFUSE' and current_user.role.name == 'STAFF') or ((d.status.name == 'WAIT_APPROVAL' or d.status.name == 'REFUSE') and current_user.role.name == 'CUSTOMER') %}
                                                     <a href="javascript:;" onclick="deleteForm({{d.id}})" class="table-link danger">
                                                         <span class="fa-stack">
-                                                            <i class="fa fa-square fa-stack-2x"></i>
-                                                            <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                                                <i class="bi bi-x-square-fill fa-stack-2x"></i>
                                                         </span>
                                                     </a>
                                                 {% endif %}
@@ -792,7 +791,7 @@
                         </p>
                     </div>
                     {%if current_user.role.name == 'STAFF'%}
-                    <p>
+                    <p id="status-select-container">
                         <strong>Trạng thái:</strong>
                         <select id="modal_state2" class="modal-input">
                                 <option value="WAIT_REPAIR">Chấp nhận</option>
@@ -894,15 +893,10 @@
                 document.getElementById('modal_name2').value = data.name;
                 document.getElementById('modal_phone2').value = data.phone;
                 document.getElementById('modal_car2').value = data.car;
-
-                const modalStateElement = document.getElementById('modal_state2')?.value || document.getElementById('modal_state2_1')?.value;
-                if(modalStateElement){
-                    modalStateElement.value = data.state;
-                }
-
                 document.getElementById('modal_date_create2').value = data.dateCreate;
                 document.getElementById('modal_description2').value = data.description;
                 document.getElementById('modal_typeVehicle2').value = data.type;
+
 
                 if (data.dateBook) {
                     const [date, time] = data.dateBook.split(' ');
@@ -915,13 +909,22 @@
                     staffDropdown.value = data.state;
                 }
 
-                // Nếu là CUSTOMER: set giá trị cho hidden input
                 const customerHidden = document.getElementById('modal_state2_1');
                 if (customerHidden) {
                     customerHidden.value = data.state;
                 }
 
-                // Show modal
+                const statusContainer = document.getElementById('status-select-container');
+
+                if (staffDropdown && statusContainer) {
+                    if (data.state === 'WAIT_APPROVAL') {
+                        statusContainer.style.display = 'block';
+                        staffDropdown.value = data.state;
+                    } else {
+                        statusContainer.style.display = 'none';
+                    }
+                }
+
                 modal.classList.add('active');
             });
         });
