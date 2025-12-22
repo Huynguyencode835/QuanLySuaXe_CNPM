@@ -4,12 +4,13 @@ from flask import Flask, render_template, request, jsonify, current_app
 from flask_login import current_user
 
 from app._init_ import create_app
+from app.controllers.AppointmentController import AppointmentController
 from app.dao import appointment_dao,dao, receptionform_dao
 from app.middleware.authenticate import role_required
 from app.models.model import Form_status, UserRole
 from app.utils import receptionform_util
 
-
+appointment_controller = AppointmentController()
 class ReceptionController():
 
     # [GET] /receptions
@@ -34,6 +35,12 @@ class ReceptionController():
         status=request.json.get("status")
         appointment_date=request.json.get("appointment_date")
         description=request.json.get("description")
+        if status == "WAIT_REPAIR":
+            if appointment_controller.is_limit_reached():
+                return jsonify({
+                    "message": "Duyệt không thành công do số lượng đã đạt giới hạn",
+                    "category": "error"
+                })
         res =appointment_dao.update_appointment(id,name,phone,car,vehicle_type,status,appointment_date,description)
         if res:
             return jsonify({
