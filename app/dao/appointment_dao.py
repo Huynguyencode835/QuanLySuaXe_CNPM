@@ -5,7 +5,8 @@ from app._init_ import create_app,db
 from datetime import datetime, date
 
 def countLimitVehicle():
-    return ReceptionForm.query.filter(ReceptionForm.status.__eq__(Form_status.WAIT_REPAIR)).count()
+    return ReceptionForm.query.filter(ReceptionForm.status.__eq__(Form_status.WAIT_REPAIR),
+                                      db.func.date(ReceptionForm.created_date) == datetime.today().date()).count()
 
 def limitVehicle():
     return db.session.query(SystemParameters).first().limitcar

@@ -20,4 +20,4 @@ def calc_total_receipt(repairform):
 def calc_total_VAT(repairform):
     params=SystemParameters.query.first()
     vat=params.VAT/100
-    return calc_total_receipt(repairform)-calc_total_receipt(repairform)*vat
+    return calc_total_receipt(repairform)+calc_total_receipt(repairform)*vat
