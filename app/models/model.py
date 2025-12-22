@@ -62,6 +62,10 @@ class User(Base, UserMixin):
         lazy=True
     )
 
+    @property
+    def is_active(self):
+        return self.active == 1
+
 class Vehicletype(Base):
     __tablename__ = "Vehicletype"
     components = relationship('Component', backref="vehicletype", lazy=True)
